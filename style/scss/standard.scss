@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+.group {
+    display: flow-root;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
+  }
+
+:root {
+    --secondary-color: purple;
+    --text-color: rgb(255, 255, 255);
+    --separator: rgb(71, 71, 71);
+    --background-color: black;
+  }
+
+a{
+    text-decoration: none;
+    font-weight: normal;
+    color: var(--text-color);
+}
