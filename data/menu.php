@@ -1,22 +1,46 @@
 
 <?php
 if (basename($_SERVER["PHP_SELF"]) == 'index.php') {
-    //links
-    echo '<header>
+    //linksù
+    if(isset($email)){
+        echo '<header>
             <div class="menu">
-                <a href="./index.php" class="menu_voice">Home</a>
-                <a href="./pages/library.php" class="menu_voice">La tua Libreria</a>
-                <a href="./pages/shop.php" class="menu_voice">Negozio</a>
+                <a href="./index.php" class="menu_voice backglow">Home</a>
+                <a href="./pages/library.php" class="menu_voice backglow">La tua Libreria</a>
+                <a href="./pages/explore.php" class="menu_voice backglow">esplora</a>
+                <a href="./pages/shop.php" class="menu_voice backglow">Negozio</a>
             </div>
         </header>';
+    }else{
+        echo '<header>
+            <div class="menu">
+                <a href="./index.php" class="menu_voice backglow">Home</a>
+                <a href="./pages/explore.php" class="menu_voice backglow">esplora</a>
+                <a href="./pages/shop.php" class="menu_voice backglow">Negozio</a>
+            </div>
+        </header>';
+    }
+    
 } else {
     //modified links
-    echo '<header>
+    if(isset($email)){
+        echo '<header>
             <div class="menu">
-                <a href="../index.php" class="menu_voice">Home</a>
-                <a href="./library.php" class="menu_voice">La tua Libreria</a>
-                <a href="./shop.php" class="menu_voice">Negozio</a>
+                <a href="../index.php" class="menu_voice backglow">Home</a>
+                <a href="./library.php" class="menu_voice backglow">La tua Libreria</a>
+                <a href="./explore.php" class="menu_voice backglow">esplora</a>
+                <a href="./shop.php" class="menu_voice backglow">Negozio</a>
             </div>
         </header>';
+    }else{
+        echo '<header>
+            <div class="menu">
+                <a href="../index.php" class="menu_voice backglow">Home</a>
+                <a href="./explore.php" class="menu_voice backglow">esplora</a>
+                <a href="./shop.php" class="menu_voice backglow">Negozio</a>
+            </div>
+        </header>';
+    }
+    
 }
 ?>

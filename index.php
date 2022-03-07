@@ -1,5 +1,11 @@
 <?php
     //code
+    session_start();
+    $email = NULL;
+    if(isset($_SESSION['email'])){
+        $email = $_SESSION['email'];
+    }
+    //connessione al database?
 ?>
 
 
@@ -10,11 +16,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- my css -->
-    <link rel="stylesheet" href="./style/style.css">
+    <!-- <link rel="stylesheet" href="./style/style.css"> -->
     <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300&display=swap" rel="stylesheet">  -->
+    <?php
+        require('./data/head.php');
+    ?>
 
     <title>Home</title>
 </head>

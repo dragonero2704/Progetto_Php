@@ -18,7 +18,7 @@ html, body {
 }
 
 :root {
-  --secondary-color: purple;
+  --secondary-color: rgb(82, 4, 82);
   --text-color: rgb(255, 255, 255);
   --separator: rgb(71, 71, 71);
   --background-color: black;
@@ -28,6 +28,16 @@ a {
   text-decoration: none;
   font-weight: normal;
   color: var(--text-color);
+}
+
+.hoverglow:hover, .hoverglow:focus {
+  color: var(--secondary-color);
+  transition: color 0.2s linear;
+}
+
+.backglow:hover, .backglow:focus {
+  background-color: var(--secondary-color);
+  transition: background-color 0.2s linear;
 }
 
 header {
@@ -53,6 +63,5 @@ header .menu .menu_voice {
   line-height: 100px;
   text-transform: uppercase;
   padding: 0 20px;
-  font-size: 20px;
-  border-right: 2px solid var(--separator);
+  font-size: 1.2em;
 }
