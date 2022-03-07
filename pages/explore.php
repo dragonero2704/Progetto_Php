@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_GET['search'])){
+    $search = $_GET['search'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +15,7 @@ session_start();
     <?php
     require('../data/head.php')
     ?>
-    <title>Document</title>
+    <title>Esplora</title>
 </head>
 
 <body>
