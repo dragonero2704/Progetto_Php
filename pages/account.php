@@ -1,6 +1,7 @@
+
 <?php
 session_start();
-
+//se non si è loggati, rimanda alla pagina di login
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ session_start();
     <?php
     require('../data/head.php')
     ?>
-    <title>Document</title>
+    <title>Account</title>
 </head>
 
 <body>

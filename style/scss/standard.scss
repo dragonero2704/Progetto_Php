@@ -17,12 +17,12 @@ html, body {
     font-family: 'Poppins', sans-serif;
   }
 
-:root {
-    --secondary-color: rgb(82, 4, 82);
-    --text-color: rgb(255, 255, 255);
-    --separator: rgb(71, 71, 71);
-    --background-color: black;
-  }
+// :root {
+//     --secondary-color: rgb(82, 4, 82);
+//     --text-color: rgb(255, 255, 255);
+//     --separator: rgb(71, 71, 71);
+//     --background-color: black;
+//   }
 
   @media (prefers-color-scheme: light){
     :root {
@@ -34,7 +34,12 @@ html, body {
   }
 
   @media (prefers-color-scheme: dark){
-    //sus
+    :root {
+      --secondary-color: rgb(82, 4, 82);
+      --text-color: rgb(255, 255, 255);
+      --separator: rgb(71, 71, 71);
+      --background-color: black;
+    }
   }
 
 a{
@@ -43,12 +48,18 @@ a{
     color: var(--text-color);
 }
 
+.hoverglow{
+  transition: color .3s linear;
+}
+
+.backglow{
+  transition: background-color .3s linear;
+}
+
 .hoverglow:hover, .hoverglow:focus{
   color: var(--secondary-color);
-  transition: color .2s linear;
 }
 
 .backglow:hover, .backglow:focus{
   background-color: var(--secondary-color);
-  transition: background-color .2s linear;
 }

@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ session_start();
     <?php
     require('../data/head.php')
     ?>
-    <title>Document</title>
+    <title>Login</title>
 </head>
 
 <body>
