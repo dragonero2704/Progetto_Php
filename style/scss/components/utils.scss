@@ -1,0 +1,14 @@
+@mixin flex($align: center, $justify: center, $wrap: wrap) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-wrap: $wrap;
+}
+
+.fullvw {
+    width: 100vw;
+}
+
+.fullvh {
+    height: 100vh;
+}

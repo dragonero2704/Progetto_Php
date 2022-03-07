@@ -18,6 +18,9 @@ if (basename($_SERVER["PHP_SELF"]) == 'index.php') {
                 <a href="./pages/explore.php" class="menu_voice backglow">esplora</a>
                 <a href="./pages/shop.php" class="menu_voice backglow">Negozio</a>
             </div>
+
+            <a href="./pages/login.php" class="right menu_voice backglow">Login</a>
+
         </header>';
     }
     
@@ -39,6 +42,9 @@ if (basename($_SERVER["PHP_SELF"]) == 'index.php') {
                 <a href="./explore.php" class="menu_voice backglow">esplora</a>
                 <a href="./shop.php" class="menu_voice backglow">Negozio</a>
             </div>
+
+            <a href="./login.php" class="right menu_voice backglow">Login</a>
+
         </header>';
     }
     
