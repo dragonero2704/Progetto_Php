@@ -2,6 +2,9 @@
     .mt#{$i} {
         margin-top: $i*10px;
     }
+    .mb#{$i} {
+        margin-bottom: $i*10px;
+    }
 }
 
 h1 {
