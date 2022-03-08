@@ -3,18 +3,45 @@
     @include flex(center, center, nowrap);
 }
 
+$shadowsize:30px;
+$sahdowblur:5px;
 .login_container {
     // width: max-content;
     // height: max-content;
-    width: 500px;
+    max-width: calc(var(--max-width) - 400px);
+    width: 100%;
     height: 500px;
-    box-shadow: 0 0 10px 10px var(--secondary-color);
+    box-shadow: 0 0 $shadowsize $sahdowblur var(--secondary-color);
+    padding: 40px;
+    margin: 0 $shadowsize*3;
 }
 
-.back_btn {
-    position: absolute;
-    top: 30%;
-    left: 30%;
+.input_container {
+    width: 100%;
+}
+
+input {
+    border: 2px solid var(--secondary-color);
+    background: transparent;
+    color: var(--text-color);
+    padding: 10px;
+    width: 100%;
+    outline: 0;
+}
+
+input:hover,
+input:focus {}
+
+input[type="submit"] {
+    display: block;
+    padding: 0;
+}
+
+.submitbtn {
+    width: 50%;
+    height: 50px;
+    padding: 5px;
+    // border-radius: 10px;
     text-transform: uppercase;
-    font-size: 1.2em;
+    font-weight: bold;
 }

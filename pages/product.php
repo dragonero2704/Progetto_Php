@@ -6,10 +6,12 @@ if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 }
 //connessione al database?
+//GET dell'articolo
+if(isset($_GET['game'])) $codice_gioco = $_GET['game']; else header('location: explore.php')
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">

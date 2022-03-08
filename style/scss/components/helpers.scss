@@ -1,0 +1,17 @@
+@for $i from 1 to 5 {
+    .mt#{$i} {
+        margin-top: $i*10px;
+    }
+}
+
+h1 {
+    font-size: 3.125em;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.secondarycolor {
+    color: var(--secondary-color);
+}

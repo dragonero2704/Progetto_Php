@@ -1,9 +1,10 @@
 <?php
 session_start();
+$email = "";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
@@ -16,16 +17,26 @@ session_start();
 </head>
 
 <body>
-<a href="" class="menu_voice back_btn" onclick="history.back()">Back</a>
+    <header>
+        <a href="" class="menu_voice backglow" onclick="history.back()">Back</a>
+    </header>
 
-<div class="login_wrapper fullvw fullvh">
-    <div class="login_container">
-        <form action="<?php echo htmlentities($_SERVER['PHP_SELF'])?>" method="post">
-            <input type="email" name="email" id="">
-            <input type="password" name="password" id="">
-        </form>
+    <div class="login_wrapper fullvh fullvw">
+        <div class="login_container">
+            <h1>Login</h1>
+            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+                <div class="input_container mt2">
+                    <input type="email" name="email" id="" value="<?php echo $email ?>" placeholder="Email">
+
+                </div>
+                <div class="input_container mt2">
+                    <input type="password" name="password" id="" placeholder="Password">
+                </div>
+                
+                <input type="submit" class="submitbtn backglow mt2" value="Login" name="login">
+            </form>
+        </div>
     </div>
-</div>
 </body>
-    
+
 </html>

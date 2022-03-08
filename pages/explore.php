@@ -6,7 +6,7 @@ if(isset($_GET['search'])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
