@@ -63,3 +63,7 @@ a {
 .backglow:focus {
     background-color: var(--secondary-color);
 }
+
+::selection {
+    background-color: var(--secondary-color);
+}
