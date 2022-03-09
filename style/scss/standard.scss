@@ -24,7 +24,7 @@ body {
     --separator: rgb(71, 71, 71);
     --background-color: rgb(255, 255, 255);
     --max-width: 1400px;
-    --err-color: darkred;
+    --err-color: #ff5b5b;
 }
 
 @media (prefers-color-scheme: light) {
@@ -67,6 +67,7 @@ a {
 
 ::selection {
     background-color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 .hidden {

@@ -25,9 +25,6 @@ if ($email != "" && isset($email)) {
     } else {
         $row = $ris->fetch_assoc();
         $hash = $row['password'];
-        echo $password;
-        echo $hash;
-        echo password_verify($password, $hash);
 
         if (password_verify($password, $hash)) {
             //login success
