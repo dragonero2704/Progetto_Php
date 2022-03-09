@@ -1,10 +1,13 @@
+$shadowsize:30px;
+$sahdowblur:5px;
+$errorcolor: red;
+
 @use './components/utils.scss' as *;
 .login_wrapper {
     @include flex(center, center, nowrap);
 }
 
-$shadowsize:30px;
-$sahdowblur:5px;
+
 .login_container {
     // width: max-content;
     // height: max-content;
@@ -44,4 +47,11 @@ input[type="submit"] {
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
+}
+
+.error{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    border: 1px solid $errorcolor;
 }
