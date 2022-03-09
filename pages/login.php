@@ -12,13 +12,15 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('Connessio
 $account_exist = "
     SELECT *
     FROM account
-    WHERE email = '$email';
+    WHERE email = '$email'
 ";
 
 $ris = $conn->query($account_exist) or die('Query fallita: '.$conn->error);
 
 if ($ris->num_rows == 0) {
     //email non trovata
+    $error_email = "Email errata";
+    $error_pass = "Password errata";
 
 } else {
     $row = $ris->fetch_assoc();
