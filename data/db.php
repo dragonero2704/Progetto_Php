@@ -1,5 +1,5 @@
 <?php
-    $dbname = "database_php"; //da definire   
+    $dbname = "php_gamestore"; //da definire   
     $dbhost = "localhost";
     $dbusername="root";
     $dbpassword="";    

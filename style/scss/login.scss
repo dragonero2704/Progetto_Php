@@ -1,12 +1,10 @@
 $shadowsize:30px;
-$sahdowblur:5px;
+$sahdowblur:10px;
 $errorcolor: red;
-
 @use './components/utils.scss' as *;
 .login_wrapper {
     @include flex(center, center, nowrap);
 }
-
 
 .login_container {
     // width: max-content;
@@ -49,9 +47,10 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-.error{
+.err {
     width: fit-content;
     height: fit-content;
     padding: 5px;
-    border: 1px solid $errorcolor;
+    // border: 1px solid var(--err-color);
+    color: var(--err-color);
 }

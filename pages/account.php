@@ -2,6 +2,9 @@
 <?php
 session_start();
 //se non si è loggati, rimanda alla pagina di login
+if(isset($_SESSION['email'])) $email = $_SESSION['email'];
+if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +24,7 @@ session_start();
     <?php
     require('../data/menu.php');
     ?>
+    <a href="./logout.php" class="submitbtn">Logout</a>
 </body>
 
 </html>
