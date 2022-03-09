@@ -1,7 +1,7 @@
 
 <?php
 if (basename($_SERVER["PHP_SELF"]) == 'index.php') {
-    //linksù
+    //links
     if(isset($email)){
         echo '<header>
             <div class="menu">
