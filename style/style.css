@@ -19,7 +19,7 @@ body {
 }
 
 :root {
-  --secondary-color: rgb(140, 16, 16);
+  --secondary-color: #10638c;
   --text-color: rgb(0, 0, 0);
   --separator: rgb(71, 71, 71);
   --background-color: rgb(255, 255, 255);
@@ -124,6 +124,14 @@ header::after {
   height: 100vh;
 }
 
+.fullw {
+  width: 100vw;
+}
+
+.fullh {
+  height: 100vh;
+}
+
 .login_wrapper {
   display: flex;
   align-items: center;
@@ -204,6 +212,46 @@ input[type=submit] {
 
 .mb4 {
   margin-bottom: 40px;
+}
+
+.mt5 {
+  margin-top: 50px;
+}
+
+.mb5 {
+  margin-bottom: 50px;
+}
+
+.mt6 {
+  margin-top: 60px;
+}
+
+.mb6 {
+  margin-bottom: 60px;
+}
+
+.mt7 {
+  margin-top: 70px;
+}
+
+.mb7 {
+  margin-bottom: 70px;
+}
+
+.mt8 {
+  margin-top: 80px;
+}
+
+.mb8 {
+  margin-bottom: 80px;
+}
+
+.mt9 {
+  margin-top: 90px;
+}
+
+.mb9 {
+  margin-bottom: 90px;
 }
 
 h1 {

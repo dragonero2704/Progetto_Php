@@ -24,7 +24,6 @@ if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
     <?php
     require('../data/menu.php');
     ?>
-    <a href="./logout.php" class="submitbtn">Logout</a>
 </body>
 
 </html>

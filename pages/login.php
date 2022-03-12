@@ -60,8 +60,8 @@ $conn->close();
         <a href="../index.php" class="menu_voice backglow">Back</a>
     </header>
 
-    <div class="login_wrapper fullvh fullvw">
-        <div class="login_container">
+    <div class="login_wrapper fullh fullw ">
+        <div class="login_container mt5">
             <h1>Login</h1>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
                 <div class="input_container mt2">
