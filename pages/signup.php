@@ -18,7 +18,7 @@
 <body>
 <header>
         <a href="../index.php" class="menu_voice backglow">Home</a>
-        <a href="./login.pho" class="menu_voice backglow right"><nobr>Login</nobr></a>
+        <a href="./login.php" class="menu_voice backglow right"><nobr>Login</nobr></a>
 
     </header>
 </body>
