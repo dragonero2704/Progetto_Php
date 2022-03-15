@@ -1,10 +1,7 @@
 <?php
 //code
 session_start();
-$email = NULL;
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
-}
+require('./data/session.php');
 //connessione al database
 
 
