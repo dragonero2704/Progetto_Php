@@ -202,7 +202,6 @@ input[type=submit] {
   transform: translateY(-50%);
   right: 0;
   cursor: pointer;
-  font-family: "Font Awesome";
 }
 
 #eye::after {
