@@ -5,6 +5,27 @@
     .mb#{$i} {
         margin-bottom: $i*10px;
     }
+    .mr#{$i} {
+        margin-right: $i*10px;
+    }
+    .ml#{$i} {
+        margin-left: $i*10px;
+    }
+}
+
+.mauto {
+    margin: auto;
+}
+
+.abs-right {
+    position: absolute;
+    right: 0;
+}
+
+.abs-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 h1 {

@@ -21,7 +21,7 @@ body {
 $rosso: #8c1010;
 $azzurro: #10638c;
 $blu: #31108c;
-
+$azzurro-chiaro: #198ec8;
 :root {
     --secondary-color: #{$blu};
     --text-color: rgb(0, 0, 0);
@@ -33,15 +33,16 @@ $blu: #31108c;
 
 @media (prefers-color-scheme: light) {
      :root {
-        --text-color: rgb(0, 0, 0);
-        --background-color: rgb(255, 255, 255);
+        --text-color: #444;
+        --background-color: rgb(206, 206, 206);
+        --secondary-color: #{$azzurro-chiaro};
     }
 }
 
 @media (prefers-color-scheme: dark) {
      :root {
-        --text-color: rgb(255, 255, 255);
-        --background-color: black;
+        --text-color: rgb(206, 206, 206);
+        --background-color: #1b1b1b;
     }
 }
 
@@ -76,4 +77,13 @@ a {
 
 .hidden {
     display: none;
+}
+
+i {
+    display: inline-block;
+}
+
+.right {
+    margin-right: 0;
+    margin-left: auto;
 }

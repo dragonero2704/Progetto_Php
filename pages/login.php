@@ -32,7 +32,7 @@ if ($email != "" && isset($email)) {
             $_SESSION['nickname'] = $nickname;
 
             header('location: ../index.php');
-        }else{
+        } else {
             $error_pass = "Password errata";
         }
     }
@@ -52,12 +52,18 @@ $conn->close();
     <?php
     require('../data/head.php')
     ?>
+
+
+
+
     <title>Login</title>
 </head>
 
 <body>
     <header>
         <a href="../index.php" class="menu_voice backglow">Back</a>
+        <a href="./signup.php" class="menu_voice backglow right"><nobr>Sign up</nobr></a>
+
     </header>
 
     <div class="login_wrapper fullh fullw ">
@@ -66,12 +72,14 @@ $conn->close();
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
                 <div class="input_container mt2">
                     <div class="err<?php if (!isset($error_email)) echo ' hidden'; ?>"><?php if (isset($error_email)) echo $error_email ?></div>
-                    <input type="email" name="email" id="" value="<?php echo $email;?>" placeholder="Email">
+                    <input type="email" name="email" id="" value="<?php echo $email; ?>" placeholder="Email">
 
                 </div>
                 <div class="input_container mt2">
                     <div class="err<?php if (!isset($error_pass)) echo ' hidden'; ?>"><?php if (isset($error_pass)) echo $error_pass ?></div>
-                    <input type="password" name="password" id="" value="<?php echo $password; ?>" placeholder="Password">
+                    <input type="password" name="password" id="psw" value="<?php echo $password; ?>" placeholder="Password">
+                    <i onclick="toggleinput()" id="eye" class="fa-regular fa-eye-slash mr2"></i>
+                    
                 </div>
 
                 <input type="submit" class="submitbtn backglow mt2" value="Login" name="login">
@@ -80,8 +88,7 @@ $conn->close();
     </div>
 </body>
 
+
 </html>
 
-<script>
-    
-</script>
+<script src="../javascript/psw.js"></script>
