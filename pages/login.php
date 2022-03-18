@@ -86,6 +86,9 @@ $conn->close();
             </form>
         </div>
     </div>
+    <?php
+    require('../data/footer.php');
+    ?>
 </body>
 
 

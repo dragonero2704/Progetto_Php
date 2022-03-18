@@ -27,6 +27,9 @@ if(isset($_GET['game'])) $codice_gioco = $_GET['game']; else header('location: e
     <?php
     require('../data/menu.php');
     ?>
+    <?php
+    require('../data/footer.php');
+    ?>
 </body>
 
 </html>

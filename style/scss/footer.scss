@@ -1,0 +1,21 @@
+$colonne: 5;
+$righe: 3;
+
+footer{
+    width: 100vw;
+    border-top: 2px solid var(--separator);
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: repeat(#{$righe}, #{100%/$righe});
+    grid-template-columns: repeat(#{$colonne}, #{100%/$colonne});
+}
+
+.cc{
+    grid-column: 1 / #{$colonne +1};
+    grid-row: #{$righe - 1};
+    text-align: center;
+    margin: auto 0;
+    opacity: .5;
+}

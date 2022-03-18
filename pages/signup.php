@@ -21,5 +21,9 @@
         <a href="./login.php" class="menu_voice backglow right"><nobr>Login</nobr></a>
 
     </header>
+
+    <?php
+    require('../data/footer.php');
+    ?>
 </body>
 </html>

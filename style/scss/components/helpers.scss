@@ -11,6 +11,29 @@
     .ml#{$i} {
         margin-left: $i*10px;
     }
+
+    @media (max-width:768px){
+        .mt#{$i}{
+            @if $i*10px - 15px > 0{
+                margin-top: $i*10px - 15px;
+            }
+        }
+        .mb#{$i}{
+            @if $i*10px - 15px > 0{
+                margin-bottom: $i*10px - 15px;
+            }
+        }
+        .mr#{$i}{
+            @if $i*10px - 15px > 0{
+                margin-right: $i*10px - 15px;
+            }
+        }
+        .ml#{$i}{
+            @if $i*10px - 7px > 0{
+                margin-left: $i*10px - 15px;
+            }
+        }
+    }
 }
 
 .mauto {
@@ -39,3 +62,4 @@ h1 {
 .secondarycolor {
     color: var(--secondary-color);
 }
+

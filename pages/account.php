@@ -24,6 +24,10 @@ if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
     <?php
     require('../data/menu.php');
     ?>
+
+<?php
+    require('../data/footer.php');
+    ?>
 </body>
 
 </html>

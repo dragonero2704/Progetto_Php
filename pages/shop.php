@@ -25,6 +25,9 @@ if (isset($_SESSION['email'])) {
     <?php
     require('../data/menu.php');
     ?>
+    <?php
+    require('../data/footer.php');
+    ?>
 </body>
 
 </html>
