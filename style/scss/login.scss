@@ -62,23 +62,13 @@ input[type="submit"] {
     transform: translateY(-50%);
     right: 0;
     cursor: pointer;
-}
-
-#eye::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 100px;
-    background-color: var(--secondary-color);
-    width: 0;
-    height: 0;
-    transition: all 0.3s linear;
     padding: 10px;
+    border-radius: 20px;
+    transition: all 0.1s linear;
 }
 
-#eye:hover::after,
-#eye:focus::after {
-    width: 20px;
-    height: 20px;
+#eye:focus,
+#eye:hover{
+    background-color: var(--secondary-color);
 }
+

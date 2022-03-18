@@ -78,7 +78,7 @@ $conn->close();
                 <div class="input_container mt2">
                     <div class="err<?php if (!isset($error_pass)) echo ' hidden'; ?>"><?php if (isset($error_pass)) echo $error_pass ?></div>
                     <input type="password" name="password" id="psw" value="<?php echo $password; ?>" placeholder="Password">
-                    <i onclick="toggleinput()" id="eye" class="fa-regular fa-eye-slash mr2"></i>
+                    <span id="eye" class="mr3">Show</span>
                     
                 </div>
 
