@@ -14,9 +14,13 @@
 }
 
 .fullw {
-    width: 100vw;
+    width: 100%;
 }
 
 .fullh {
-    height: 100vh;
+    height: 100%;
+}
+
+.pos-rel{
+    position: relative;
 }

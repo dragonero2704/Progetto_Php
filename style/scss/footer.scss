@@ -2,11 +2,11 @@ $colonne: 5;
 $righe: 3;
 
 footer{
-    width: 100vw;
+    width: 100%;
     border-top: 2px solid var(--separator);
     height: 50px;
-    position: absolute;
-    bottom: 0;
+    // position: absolute;
+    // bottom: 0;
     display: grid;
     grid-template-rows: repeat(#{$righe}, #{100%/$righe});
     grid-template-columns: repeat(#{$colonne}, #{100%/$colonne});
