@@ -2,6 +2,7 @@
 session_start();
 $email = "";
 $password = "";
+$error = array();
 
 if (isset($_POST["email"])) $email = $_POST["email"];
 if (isset($_POST["password"])) $password = $_POST["password"];
@@ -68,31 +69,33 @@ $conn->close();
 
     </header>
 
-   
+    <div class="body">
         <div class="login_container mt5">
             <h1>Login</h1>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
 
-                <div class="input_container mt3">
-                    <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
+                <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
+                <div class="input_container mb3">
 
-                    <input type="email" name="email" value="<?php echo $email; ?>" placeholder="Email">
+                    <input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder="">
+                    <label for="email">email</label>
                 </div>
 
-                <div class="input_container mt3">
-                    <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
-                    <div class="pos-rel">
-                        <input type="password" name="password" id="psw" value="<?php echo $password; ?>" placeholder="Password">
-                        <span id="eye" class="mr3">Show</span>
-                    </div>
-
-
+                <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
+                <div class="input_container mb2">
+                    <input type="password" name="password" id="password" value="<?php echo $password; ?>" placeholder="">
+                    <label for="password">password</label>
+                    <span id="eye" class="mr3">Show</span>
                 </div>
-
-                <input type="submit" class="submitbtn backglow mt3" value="Login" name="login">
+                <div class="submitbtn backglow backglow">
+                    <input type="submit" class="" value="login" name="login">
+                </div>
             </form>
         </div>
-    
+    </div>
+
+
+
     <?php
     require('../data/footer.php');
     ?>

@@ -2,39 +2,20 @@
 session_start();
 
 $error = array();
+$userdata = array();
 
-if (isset($_POST['email'])) $email = $_POST['email'];
-else $email = "";
-if (isset($_POST['password'])) $password = $_POST['password'];
-else $password = "";
-if (isset($_POST['confermapassword'])) $confermapassword = $_POST['confermapassword'];
-else $confermapassword = "";
+$userfields = array('email', 'password', 'confermapassword', 'nome', 'cognome', 'nickname', 'nazionalita', 'data_nascita', 'telefono', 'email_recupero');
 
-if (isset($_POST['nome'])) $nome = $_POST['nome'];
-else $nome = "";
+foreach ($userfields as $field) {
+    if (isset($_POST[$field])) $userdata[$field] = $_POST[$field];
+    else $userdata[$field] = "";
+}
 
-if (isset($_POST['cognome'])) $cognome = $_POST['cognome'];
-else $cognome = "";
-
-if (isset($_POST['nickname'])) $nickname = $_POST['nickname'];
-else $nickname = "";
-
-if (isset($_POST['nazionalita'])) $nazionalita = $_POST['nazionalita'];
-else $nazionalita = "";
-
-if (isset($_POST['data_nascita'])) $data_nascita = $_POST['data_nascita'];
-else $data_nascita = "";
-
-if (isset($_POST['telefono'])) $telefono = $_POST['telefono'];
-else $telefono = "";
-
-if (isset($_POST['email_recupero'])) $email_recupero = $_POST['email_recupero'];
-else $email_recupero = "";
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
@@ -58,43 +39,76 @@ else $email_recupero = "";
     </header>
 
     <div class="body">
-        <div class="login_container mt5">
+        <div class="login_container mt5 mb5">
             <h1>Sign up</h1>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
-                <div class="input_container mt3">
-                    <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
-                    <input type="email" name="email" value="<?php echo $email; ?>" placeholder="Email">
+                <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
+
+                <div class="input_container mb2">
+                    <input type="email" id="email" name="email" value="<?php echo $userdata['email']; ?>" placeholder="" required>
+                    <label for="email">email</label>
+                </div>
+                <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
+                <div class="input_container mb2">
+
+                    <input type="password" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder="" required>
+                    <label for="password">password</label>
+                    <span id="eye" class="mr3">Show</span>
+
+                </div>
+                <div class="err<?php if (!isset($error['confermapassword'])) echo ' hidden'; ?>"><?php if (isset($error['confermapassword'])) echo $error['confermapassword'] ?></div>
+                <div class="input_container mb2">
+                    <input type="password" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder="" required>
+                    <label for="confermapassword">conferma password</label>
+
+                </div>
+                <div class="err<?php if (!isset($error['nome'])) echo ' hidden'; ?>"><?php if (isset($error['nome'])) echo $error['nome'] ?></div>
+                <div class="input_container mb2">
+                    <input type="text" id="nome" name="nome" value="<?php echo $userdata['nome']; ?>" placeholder="" required>
+                    <label for="nome">nome</label>
+
+                </div>
+                <div class="err<?php if (!isset($error['cognome'])) echo ' hidden'; ?>"><?php if (isset($error['cognome'])) echo $error['cognome'] ?></div>
+                <div class="input_container mb2">
+                    <input type="text" id="cognome" name="cognome" value="<?php echo $userdata['cognome']; ?>" placeholder="" required>
+                    <label for="cognome">cognome</label>
+
+                </div>
+                <div class="err<?php if (!isset($error['nickname'])) echo ' hidden'; ?>"><?php if (isset($error['nickname'])) echo $error['nickname'] ?></div>
+                <div class="input_container mb2">
+                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder="">
+                    <label for="nickname">nickname</label>
+
+                </div>
+                <div class="err<?php if (!isset($error['data_nascita'])) echo ' hidden'; ?>"><?php if (isset($error['data_nascita'])) echo $error['data_nascita'] ?></div>
+                <div class="input_container mb2">
+                    <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder="" required>
+                    <label for="data_nascita">Data di nascita</label>
                 </div>
 
-                <div class="input_container mt2">
-                    <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
-                    <div class="pos-rel">
-                        <input type="password" name="password" id="psw" value="<?php echo $password; ?>" placeholder="Password">
-                        <span id="eye" class="mr3">Show</span>
-                    </div>
+                <div class="err<?php if (!isset($error['nazionalita'])) echo ' hidden'; ?>"><?php if (isset($error['nazionalita'])) echo $error['nazionalita'] ?></div>
+                <div class="input_container mb2">
+                    <input type="text" id=nazionalita" name="nazionalita" value="<?php echo $userdata['nazionalita']; ?>" placeholder="">
+                    <label for="nazionalita">nazionalita</label>
                 </div>
 
-                <div class="input_container mt2">
-                    <div class="err<?php if (!isset($error['confermapassword'])) echo ' hidden'; ?>"><?php if (isset($error['confermapassword'])) echo $error['confermapassword'] ?></div>
-                    <div class="pos-rel">
-                        <input type="password" name="confermapassword" id="psw" value="<?php echo $confermapassword; ?>" placeholder="Conferma password">
-                        <span id="eye" class="mr3">Show</span>
-                    </div>
+                <div class="err<?php if (!isset($error['telefono'])) echo ' hidden'; ?>"><?php if (isset($error['telefono'])) echo $error['telefono'] ?></div>
+                <div class="input_container mb2">
+                    <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder="" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}--[0-9]{3}">
+                    <label for="telefono">numero di telefono</label>
                 </div>
 
-                <div class="input_container mt2">
-                    <div class="err<?php if (!isset($error['nome'])) echo ' hidden'; ?>"><?php if (isset($error['nome'])) echo $error['nome'] ?></div>
-                    <input type="text" name="nome" value="<?php echo $nome; ?>" placeholder="Nome">
-                </div>
-
-                <div class="input_container mt2">
-                    <div class="err<?php if (!isset($error['cognome'])) echo ' hidden'; ?>"><?php if (isset($error['cognome'])) echo $error['cognome'] ?></div>
-                    <input type="text" name="cognome" value="<?php echo $cognome; ?>" placeholder="Cognome">
+                <div class="err<?php if (!isset($error['email_recupero'])) echo ' hidden'; ?>"><?php if (isset($error['email_recupero'])) echo $error['email_recupero'] ?></div>
+                <div class="input_container mb2">
+                    <input type="email" id=email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder="">
+                    <label for="email_recupero">Email recupero</label>
                 </div>
 
 
 
-                <input type="submit" class="submitbtn backglow mt2" value="Sign up" name="login">
+                <div class="submitbtn backglow mt2">
+                    <input type="submit" class="" value="Sign up" name="Sign_up">
+                </div>
             </form>
         </div>
     </div>

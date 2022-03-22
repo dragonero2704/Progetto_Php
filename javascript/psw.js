@@ -1,5 +1,5 @@
 //elements
-let pswinput = document.getElementById('psw')
+let pswinput = document.getElementById('password')
 let eye = document.getElementById('eye')
 
 // console.log(eye)

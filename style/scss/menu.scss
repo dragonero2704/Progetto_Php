@@ -11,8 +11,8 @@ header {
     align-items: center;
     flex-wrap: nowrap;
     background-color: var(--background-color);
-    opacity: 0.9;
     transition: opacity .1s linear;
+    z-index: 1000;
     .menu {
         position: relative;
         width: 100%;
