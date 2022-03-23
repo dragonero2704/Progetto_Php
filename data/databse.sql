@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.4.21-MariaDB - mariadb.org binary distribution
+-- Versione server:              10.4.22-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            11.3.0.6295
 -- --------------------------------------------------------
@@ -22,7 +22,7 @@ USE `php_gamestore`;
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `email` char(50) NOT NULL,
-  `password` char(100) NOT NULL,
+  `password` char(200) NOT NULL,
   `codice_utente` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `nickname` char(50) NOT NULL,
   `nome` char(50) NOT NULL,
@@ -33,12 +33,12 @@ CREATE TABLE IF NOT EXISTS `account` (
   `nazionalita` char(10) NOT NULL,
   PRIMARY KEY (`email`),
   UNIQUE KEY `codice_utente` (`codice_utente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.account: ~1 rows (circa)
-DELETE FROM `account`;
+-- Dump dei dati della tabella php_gamestore.account: ~2 rows (circa)
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
+	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 0000000004, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
 	('roberto.rudi04@gmail.com', '$2y$10$Zq8feZiFPC8O88lt8WypjezO1uw9sH7GnbuWIBpceGJ885BO0IgM6', 0000000001, 'dragonero2704', 'Roberto', 'Rudi', '3926043632', '', '2004-09-27', 'Italia');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `giochi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.giochi: ~0 rows (circa)
-DELETE FROM `giochi`;
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
 /*!40000 ALTER TABLE `giochi` ENABLE KEYS */;
 
