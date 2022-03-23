@@ -82,8 +82,8 @@ $conn->close();
                 </div>
 
                 <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
-                <div class="input_container mb2">
-                    <input type="password" name="password" id="password" value="<?php echo $password; ?>" placeholder="">
+                <div class="input_container mb3">
+                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $password; ?>" placeholder="">
                     <label for="password">password</label>
                     <span id="eye" class="mr3">Show</span>
                 </div>

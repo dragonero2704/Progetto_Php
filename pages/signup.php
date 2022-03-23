@@ -38,13 +38,17 @@ if($userdata['password']!==$userdata['confermapassword']){
 
 //------------------------------------------------------------------------------------------------------
 //se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
-if(count($error) === 0){
-    $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
+if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($userdata['password'] !=="") $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
     $registration_query = "
         INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
-        VALUES ('".$userdata['email']."','".$userdata['password']."','".$userdata['nickname']."','".$userdata['nome']."','".$userdata['cognome']."','".$userdata['telefono']."','".$userdata['email_recupero']."','".$userdata['data_nascita']."','".$userdata['nazionalita'].")
+        VALUES('".$userdata['email']."','".$userdata['password']."','".$userdata['nickname']."','".$userdata['nome']."','".$userdata['cognome']."','".$userdata['telefono']."','".$userdata['email_recupero']."','".$userdata['data_nascita']."','".$userdata['nazionalita']."')
     ";
+    echo $registration_query;
 
+    $conn->query($registration_query) or die($conn->error);
+
+    header('location: ../index.php');
     
 }
 
@@ -88,14 +92,14 @@ if(count($error) === 0){
                 <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
                 <div class="input_container mb2">
 
-                    <input type="password" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder="" required>
+                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder="" required>
                     <label for="password">password</label>
                     <span id="eye" class="mr3">Show</span>
 
                 </div>
                 <div class="err<?php if (!isset($error['confermapassword'])) echo ' hidden'; ?>"><?php if (isset($error['confermapassword'])) echo $error['confermapassword'] ?></div>
                 <div class="input_container mb2">
-                    <input type="password" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder="" required>
+                    <input type="password" maxlength="20" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder="" required>
                     <label for="confermapassword">conferma password</label>
 
                 </div>
