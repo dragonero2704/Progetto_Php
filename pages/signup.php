@@ -11,6 +11,33 @@ foreach ($userfields as $field) {
     else $userdata[$field] = "";
 }
 
+//connessione al database
+require('../data/db.php');
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error'.$conn->connect_error);
+
+//controlli
+$email = $userdata['email'];
+$query_controllo_mail = "
+SELECT email
+FROM account
+WHERE email='$email'
+";
+
+$ris = $conn->query($query_controllo_mail) or die($conn->error);
+if($ris->num_rows !=0){
+    $error['email'] = 'Un account è già associato a questa email';
+}
+
+//se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
+if(count($error) === 0){
+    $registration_query = "
+        INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
+        VALUES ('".$userdata['email']."','".$userdata['password']."','".$userdata['nickname']."','".$userdata['nome']."','".$userdata['cognome']."','".$userdata['telefono']."','".$userdata['email_recupero']."','".$userdata['data_nascita']."','".$userdata['nazionalita'].")
+    ";
+
+    
+}
+
 
 ?>
 
