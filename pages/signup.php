@@ -15,7 +15,10 @@ foreach ($userfields as $field) {
 require('../data/db.php');
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error'.$conn->connect_error);
 
-//controlli
+//controll
+
+//------------------------------------------------------------------------------------------------------
+//controllo email
 $email = $userdata['email'];
 $query_controllo_mail = "
 SELECT email
@@ -27,9 +30,16 @@ $ris = $conn->query($query_controllo_mail) or die($conn->error);
 if($ris->num_rows !=0){
     $error['email'] = 'Un account è già associato a questa email';
 }
+//------------------------------------------------------------------------------------------------------
+//controllo password
+if($userdata['password']!==$userdata['confermapassword']){
+    $error['confermapassword'] = 'La password non coincide';
+}
 
+//------------------------------------------------------------------------------------------------------
 //se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
 if(count($error) === 0){
+    $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
     $registration_query = "
         INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
         VALUES ('".$userdata['email']."','".$userdata['password']."','".$userdata['nickname']."','".$userdata['nome']."','".$userdata['cognome']."','".$userdata['telefono']."','".$userdata['email_recupero']."','".$userdata['data_nascita']."','".$userdata['nazionalita'].")
