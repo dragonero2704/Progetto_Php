@@ -48,6 +48,7 @@ if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $conn->query($registration_query) or die($conn->error);
 
+    $_SESSION['email'] = $userdata['email'];
     header('location: ../index.php');
     
 }
