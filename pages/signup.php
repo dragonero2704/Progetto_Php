@@ -136,7 +136,7 @@ if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
 
                 <div class="err<?php if (!isset($error['telefono'])) echo ' hidden'; ?>"><?php if (isset($error['telefono'])) echo $error['telefono'] ?></div>
                 <div class="input_container mb2">
-                    <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder="" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}--[0-9]{3}">
+                    <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder="" pattern="^{2}\d{3}\d{3}\d{4}">
                     <label for="telefono">numero di telefono</label>
                 </div>
 
