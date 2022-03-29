@@ -1,9 +1,9 @@
 <?php
-session_start();
-if(isset($_GET['search'])){
-    $search = urldecode($_GET['search']);
-}
+//code
 require('../data/session.php');
+//connessione al database
+
+
 
 ?>
 
@@ -15,9 +15,9 @@ require('../data/session.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    require('../data/head.php')
+    require('../data/head.php');
     ?>
-    <title>Esplora</title>
+    <title>Home</title>
 </head>
 
 <body>
