@@ -39,12 +39,13 @@ if($userdata['password']!==$userdata['confermapassword']){
 //------------------------------------------------------------------------------------------------------
 //se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
 if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
-    if($userdata['password'] !=="") $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
+    if(!empty($userdata['password'])) $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
+    if(!empty($userdata['telefono'])) $userdata['telefono'] = str_replace(' ', '', $userdata['telefono']);
+    
     $registration_query = "
         INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
         VALUES('".$userdata['email']."','".$userdata['password']."','".$userdata['nickname']."','".$userdata['nome']."','".$userdata['cognome']."','".$userdata['telefono']."','".$userdata['email_recupero']."','".$userdata['data_nascita']."','".$userdata['nazionalita']."')
     ";
-    echo $registration_query;
 
     $conn->query($registration_query) or die($conn->error);
 

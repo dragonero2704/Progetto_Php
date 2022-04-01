@@ -51,6 +51,12 @@ a {
     color: var(--text-color);
 }
 
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .hoverglow {
     transition: color .3s linear;
 }
@@ -88,7 +94,7 @@ i {
 }
 
 .body{
-    min-width: auto;
+    min-width: var(--max-width);
     min-height: calc(100vh - 100px);
     width: 100%;
     height: max-content;
