@@ -77,13 +77,13 @@ $conn->close();
                 <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
                 <div class="input_container mb3">
 
-                    <input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder="">
+                    <input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder=" ">
                     <label for="email">email</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
                 <div class="input_container mb3">
-                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $password; ?>" placeholder="">
+                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $password; ?>" placeholder=" ">
                     <label for="password">password</label>
                     <span id="eye" class="mr3">Show</span>
                 </div>

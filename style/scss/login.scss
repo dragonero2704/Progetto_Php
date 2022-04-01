@@ -52,13 +52,12 @@ label {
     text-transform: capitalize;
 }
 
-input:focus+label,
-input:not(:placeholder-shown)+label,
-input:not(:-moz-placeholder)+label,
-input:not(::-webkit-input-placeholder)+label {
-    top: 20%;
-    left: 17px;
-    font-size: 13px;
+input:focus + label,
+input:active + label,
+input:not(:placeholder-shown) + label{
+    top: 20% !important;
+    left: 17px !important;
+    font-size: 13px !important;
 }
 
 input:-webkit-autofill,
@@ -68,15 +67,6 @@ input:-webkit-autofill:active {
     box-shadow: 0 0 0 30px var(--background-color) inset !important;
     -webkit-box-shadow: 0 0 0 30px var(--background-color) inset !important;
     -webkit-text-fill-color: var(--text-color) !important;
-}
-
-input:focus {
-    background-color: var(--background-color);
-}
-
-input[type="submit"] {
-    display: block;
-    padding: 0;
 }
 
 .submitbtn {
@@ -92,6 +82,8 @@ input[type="submit"] {
         font-weight: bold;
         height: 100%;
         width: 100%;
+        display: block;
+        padding: 0;
     }
 
     input:focus{
