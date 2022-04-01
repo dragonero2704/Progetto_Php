@@ -70,7 +70,7 @@ $conn->close();
     </header>
 
     <div class="body">
-        <div class="login_container mt5">
+        <div class="login_container mt5 reveal">
             <h1>Login</h1>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
 
