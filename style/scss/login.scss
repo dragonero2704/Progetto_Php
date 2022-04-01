@@ -53,7 +53,9 @@ label {
 }
 
 input:focus+label,
-input:not(:placeholder-shown)+label {
+input:not(:placeholder-shown)+label,
+input:not(:-moz-placeholder)+label,
+input:not(::-webkit-input-placeholder)+label {
     top: 20%;
     left: 17px;
     font-size: 13px;
