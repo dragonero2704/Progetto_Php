@@ -18,7 +18,7 @@ if (isset($_SESSION['email'])) {
     <?php
     require('../data/head.php')
     ?>
-    <title>Document</title>
+    <title>Shop</title>
 </head>
 
 <body>
