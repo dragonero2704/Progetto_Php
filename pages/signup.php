@@ -13,7 +13,7 @@ foreach ($userfields as $field) {
 
 //connessione al database
 require('../data/db.php');
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error'.$conn->connect_error);
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error' . $conn->connect_error);
 
 //controll
 
@@ -27,32 +27,35 @@ WHERE email='$email'
 ";
 
 $ris = $conn->query($query_controllo_mail) or die($conn->error);
-if($ris->num_rows !=0){
+if ($ris->num_rows != 0) {
     $error['email'] = 'Un account è già associato a questa email';
 }
 //------------------------------------------------------------------------------------------------------
 //controllo password
-if($userdata['password']!==$userdata['confermapassword']){
+if ($userdata['password'] !== $userdata['confermapassword']) {
     $error['confermapassword'] = 'La password non coincide';
 }
-
-//------------------------------------------------------------------------------------------------------
 //se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
-if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(!empty($userdata['password'])) $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
-    if(!empty($userdata['telefono'])) $userdata['telefono'] = str_replace(' ', '', $userdata['telefono']);
-    
+if (sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!empty($userdata['password'])) $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
+    if (!empty($userdata['telefono'])) $userdata['telefono'] = str_replace(' ', '', $userdata['telefono']);
+
     $registration_query = "
-        INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
-        VALUES('".$userdata['email']."','".$userdata['password']."','".$userdata['nickname']."','".$userdata['nome']."','".$userdata['cognome']."','".$userdata['telefono']."','".$userdata['email_recupero']."','".$userdata['data_nascita']."','".$userdata['nazionalita']."')
-    ";
+                            INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
+                            VALUES('" . $userdata['email'] . "','" . $userdata['password'] . "','" . $userdata['nickname'] . "','" . $userdata['nome'] . "','"
+        . $userdata['cognome'] . "','" . $userdata['telefono'] . "','" . $userdata['email_recupero'] . "','" . $userdata['data_nascita'] . "','"
+        . $userdata['nazionalita'] . "')";
 
     $conn->query($registration_query) or die($conn->error);
 
     $_SESSION['email'] = $userdata['email'];
+    // $redirectsleep = 3;
+    // echo '<div class="result mauto">Registrazione completata con successo</div>';
+    // sleep($redirectsleep);
     header('location: ../index.php');
-    
 }
+//------------------------------------------------------------------------------------------------------
+
 
 
 ?>
@@ -107,13 +110,13 @@ if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
                 <div class="err<?php if (!isset($error['nome'])) echo ' hidden'; ?>"><?php if (isset($error['nome'])) echo $error['nome'] ?></div>
                 <div class="input_container mb2">
-                    <input type="text" id="nome" name="nome" value="<?php echo $userdata['nome']; ?>" placeholder=" " required>
+                    <input type="text" id="nome" name="nome" value="<?php echo $userdata['nome']; ?>" placeholder=" ">
                     <label for="nome">nome</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['cognome'])) echo ' hidden'; ?>"><?php if (isset($error['cognome'])) echo $error['cognome'] ?></div>
                 <div class="input_container mb2">
-                    <input type="text" id="cognome" name="cognome" value="<?php echo $userdata['cognome']; ?>" placeholder=" " required>
+                    <input type="text" id="cognome" name="cognome" value="<?php echo $userdata['cognome']; ?>" placeholder=" ">
                     <label for="cognome">cognome</label>
 
                 </div>
@@ -125,7 +128,7 @@ if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
                 <div class="err<?php if (!isset($error['data_nascita'])) echo ' hidden'; ?>"><?php if (isset($error['data_nascita'])) echo $error['data_nascita'] ?></div>
                 <div class="input_container mb2">
-                    <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" " required>
+                    <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
                     <label for="data_nascita">Data di nascita</label>
                 </div>
 
@@ -149,10 +152,14 @@ if(sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-                <div class="submitbtn backglow mt2">
+                <div class="submitbtn backglow mt2 mb2">
                     <input type="submit" class="" value="Sign up" name="Sign_up">
                 </div>
+
             </form>
+
+
+
         </div>
     </div>
     <?php

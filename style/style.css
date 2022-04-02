@@ -276,6 +276,13 @@ input:-webkit-autofill:active {
   border-color: var(--err-color);
 }
 
+.result {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  color: var(--text-color);
+}
+
 #eye {
   position: absolute;
   top: 50%;

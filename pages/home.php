@@ -24,7 +24,9 @@ require('../data/session.php');
     <?php
     require('../data/menu.php');
     ?>
-    <div class="body"></div>
+    <div class="body">
+        
+    </div>
     <?php
     require('../data/footer.php');
     ?>

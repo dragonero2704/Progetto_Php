@@ -1,14 +1,3 @@
-<!-- 
-    <header>
-            <div class="menu">
-                <a href="./index.php" class="menu_voice backglow">Home</a>
-                <a href="./pages/shop.php" class="menu_voice backglow">Negozio</a>
-            </div>
-
-            <a href="./pages/account.php" class="right menu_voice backglow">Account</a>
-
-        </header>
- -->
 <?php
 if (basename($_SERVER["PHP_SELF"]) === 'index.php') {
     //links
