@@ -1,8 +1,7 @@
 //elements
 let pswinput = document.getElementById('password')
 let eye = document.getElementById('eye')
-
-// console.log(eye)
+    // console.log(eye)
 eye.addEventListener('click', () => {
     if (eye.firstChild.nodeValue == 'Show') {
         pswinput.type = 'text'
@@ -16,8 +15,8 @@ eye.addEventListener('click', () => {
     } else {
         pswinput.type = 'password'
             // console.log(eye.classList.toString())
-            eye.firstChild.nodeValue = 'Show'
+        eye.firstChild.nodeValue = 'Show'
 
-            // eye.className = eye.classList.toString()
+        // eye.className = eye.classList.toString()
     }
 })

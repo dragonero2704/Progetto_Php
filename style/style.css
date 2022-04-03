@@ -181,7 +181,7 @@ header:focus {
 }
 
 .login_container {
-  max-width: calc(var(--max-width) - 400px);
+  max-width: var(--max-width);
   min-width: 300px;
   width: 100%;
   height: auto;
@@ -197,6 +197,7 @@ input {
   width: 100%;
   outline: 0;
   display: block;
+  z-index: 2;
 }
 
 .input_container {
@@ -207,6 +208,7 @@ input {
   padding-top: 20px;
   padding-bottom: 10px;
   border: 2px solid var(--secondary-color);
+  background: transparent;
 }
 .input_container input {
   position: relative;
@@ -225,6 +227,7 @@ label {
   left: 15px;
   transition: all 0.1s linear;
   text-transform: capitalize;
+  z-index: 1;
 }
 
 input:focus + label,
@@ -292,6 +295,7 @@ input:-webkit-autofill:active {
   padding: 5px;
   border-radius: 20px;
   transition: all 0.1s linear;
+  z-index: 3;
 }
 
 #eye:focus,
@@ -332,11 +336,6 @@ footer {
   margin-left: 10px !important;
 }
 
-@media (max-width: 768px) {
-  .ml1 {
-    margin-left: -5px !important;
-  }
-}
 .mt2 {
   margin-top: 20px !important;
 }
@@ -355,19 +354,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt2 {
-    margin-top: 5px !important;
+    margin-top: 10px !important;
   }
 
   .mb2 {
-    margin-bottom: 5px !important;
+    margin-bottom: 10px !important;
   }
 
   .mr2 {
-    margin-right: 5px !important;
+    margin-right: 10px !important;
   }
 
   .ml2 {
-    margin-left: 5px !important;
+    margin-left: 10px !important;
   }
 }
 .mt3 {
@@ -388,19 +387,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt3 {
-    margin-top: 15px !important;
+    margin-top: 20px !important;
   }
 
   .mb3 {
-    margin-bottom: 15px !important;
+    margin-bottom: 20px !important;
   }
 
   .mr3 {
-    margin-right: 15px !important;
+    margin-right: 20px !important;
   }
 
   .ml3 {
-    margin-left: 15px !important;
+    margin-left: 20px !important;
   }
 }
 .mt4 {
@@ -421,19 +420,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt4 {
-    margin-top: 25px !important;
+    margin-top: 30px !important;
   }
 
   .mb4 {
-    margin-bottom: 25px !important;
+    margin-bottom: 30px !important;
   }
 
   .mr4 {
-    margin-right: 25px !important;
+    margin-right: 30px !important;
   }
 
   .ml4 {
-    margin-left: 25px !important;
+    margin-left: 30px !important;
   }
 }
 .mt5 {
@@ -454,19 +453,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt5 {
-    margin-top: 35px !important;
+    margin-top: 40px !important;
   }
 
   .mb5 {
-    margin-bottom: 35px !important;
+    margin-bottom: 40px !important;
   }
 
   .mr5 {
-    margin-right: 35px !important;
+    margin-right: 40px !important;
   }
 
   .ml5 {
-    margin-left: 35px !important;
+    margin-left: 40px !important;
   }
 }
 .mt6 {
@@ -487,19 +486,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt6 {
-    margin-top: 45px !important;
+    margin-top: 50px !important;
   }
 
   .mb6 {
-    margin-bottom: 45px !important;
+    margin-bottom: 50px !important;
   }
 
   .mr6 {
-    margin-right: 45px !important;
+    margin-right: 50px !important;
   }
 
   .ml6 {
-    margin-left: 45px !important;
+    margin-left: 50px !important;
   }
 }
 .mt7 {
@@ -520,19 +519,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt7 {
-    margin-top: 55px !important;
+    margin-top: 60px !important;
   }
 
   .mb7 {
-    margin-bottom: 55px !important;
+    margin-bottom: 60px !important;
   }
 
   .mr7 {
-    margin-right: 55px !important;
+    margin-right: 60px !important;
   }
 
   .ml7 {
-    margin-left: 55px !important;
+    margin-left: 60px !important;
   }
 }
 .mt8 {
@@ -553,19 +552,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt8 {
-    margin-top: 65px !important;
+    margin-top: 70px !important;
   }
 
   .mb8 {
-    margin-bottom: 65px !important;
+    margin-bottom: 70px !important;
   }
 
   .mr8 {
-    margin-right: 65px !important;
+    margin-right: 70px !important;
   }
 
   .ml8 {
-    margin-left: 65px !important;
+    margin-left: 70px !important;
   }
 }
 .mt9 {
@@ -586,19 +585,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt9 {
-    margin-top: 75px !important;
+    margin-top: 80px !important;
   }
 
   .mb9 {
-    margin-bottom: 75px !important;
+    margin-bottom: 80px !important;
   }
 
   .mr9 {
-    margin-right: 75px !important;
+    margin-right: 80px !important;
   }
 
   .ml9 {
-    margin-left: 75px !important;
+    margin-left: 80px !important;
   }
 }
 .mt10 {
@@ -619,19 +618,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt10 {
-    margin-top: 85px !important;
+    margin-top: 90px !important;
   }
 
   .mb10 {
-    margin-bottom: 85px !important;
+    margin-bottom: 90px !important;
   }
 
   .mr10 {
-    margin-right: 85px !important;
+    margin-right: 90px !important;
   }
 
   .ml10 {
-    margin-left: 85px !important;
+    margin-left: 90px !important;
   }
 }
 .mt11 {
@@ -652,19 +651,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt11 {
-    margin-top: 95px !important;
+    margin-top: 100px !important;
   }
 
   .mb11 {
-    margin-bottom: 95px !important;
+    margin-bottom: 100px !important;
   }
 
   .mr11 {
-    margin-right: 95px !important;
+    margin-right: 100px !important;
   }
 
   .ml11 {
-    margin-left: 95px !important;
+    margin-left: 100px !important;
   }
 }
 .mt12 {
@@ -685,19 +684,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt12 {
-    margin-top: 105px !important;
+    margin-top: 110px !important;
   }
 
   .mb12 {
-    margin-bottom: 105px !important;
+    margin-bottom: 110px !important;
   }
 
   .mr12 {
-    margin-right: 105px !important;
+    margin-right: 110px !important;
   }
 
   .ml12 {
-    margin-left: 105px !important;
+    margin-left: 110px !important;
   }
 }
 .mt13 {
@@ -718,19 +717,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt13 {
-    margin-top: 115px !important;
+    margin-top: 120px !important;
   }
 
   .mb13 {
-    margin-bottom: 115px !important;
+    margin-bottom: 120px !important;
   }
 
   .mr13 {
-    margin-right: 115px !important;
+    margin-right: 120px !important;
   }
 
   .ml13 {
-    margin-left: 115px !important;
+    margin-left: 120px !important;
   }
 }
 .mt14 {
@@ -751,19 +750,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt14 {
-    margin-top: 125px !important;
+    margin-top: 130px !important;
   }
 
   .mb14 {
-    margin-bottom: 125px !important;
+    margin-bottom: 130px !important;
   }
 
   .mr14 {
-    margin-right: 125px !important;
+    margin-right: 130px !important;
   }
 
   .ml14 {
-    margin-left: 125px !important;
+    margin-left: 130px !important;
   }
 }
 .mt15 {
@@ -784,19 +783,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt15 {
-    margin-top: 135px !important;
+    margin-top: 140px !important;
   }
 
   .mb15 {
-    margin-bottom: 135px !important;
+    margin-bottom: 140px !important;
   }
 
   .mr15 {
-    margin-right: 135px !important;
+    margin-right: 140px !important;
   }
 
   .ml15 {
-    margin-left: 135px !important;
+    margin-left: 140px !important;
   }
 }
 .mt16 {
@@ -817,19 +816,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt16 {
-    margin-top: 145px !important;
+    margin-top: 150px !important;
   }
 
   .mb16 {
-    margin-bottom: 145px !important;
+    margin-bottom: 150px !important;
   }
 
   .mr16 {
-    margin-right: 145px !important;
+    margin-right: 150px !important;
   }
 
   .ml16 {
-    margin-left: 145px !important;
+    margin-left: 150px !important;
   }
 }
 .mt17 {
@@ -850,19 +849,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt17 {
-    margin-top: 155px !important;
+    margin-top: 160px !important;
   }
 
   .mb17 {
-    margin-bottom: 155px !important;
+    margin-bottom: 160px !important;
   }
 
   .mr17 {
-    margin-right: 155px !important;
+    margin-right: 160px !important;
   }
 
   .ml17 {
-    margin-left: 155px !important;
+    margin-left: 160px !important;
   }
 }
 .mt18 {
@@ -883,19 +882,19 @@ footer {
 
 @media (max-width: 768px) {
   .mt18 {
-    margin-top: 165px !important;
+    margin-top: 170px !important;
   }
 
   .mb18 {
-    margin-bottom: 165px !important;
+    margin-bottom: 170px !important;
   }
 
   .mr18 {
-    margin-right: 165px !important;
+    margin-right: 170px !important;
   }
 
   .ml18 {
-    margin-left: 165px !important;
+    margin-left: 170px !important;
   }
 }
 .mt19 {
@@ -916,21 +915,25 @@ footer {
 
 @media (max-width: 768px) {
   .mt19 {
-    margin-top: 175px !important;
+    margin-top: 180px !important;
   }
 
   .mb19 {
-    margin-bottom: 175px !important;
+    margin-bottom: 180px !important;
   }
 
   .mr19 {
-    margin-right: 175px !important;
+    margin-right: 180px !important;
   }
 
   .ml19 {
-    margin-left: 175px !important;
+    margin-left: 180px !important;
   }
 }
+.m0 {
+  margin: 0;
+}
+
 .mauto {
   margin: auto;
 }
@@ -950,10 +953,22 @@ h1 {
   font-size: 3.125em;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
 .upper {
   text-transform: uppercase;
 }
 
 .secondarycolor {
   color: var(--secondary-color);
+}
+
+.bold {
+  font-weight: bold;
 }

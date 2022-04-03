@@ -3,7 +3,7 @@ $sahdowblur:10px;
 $errorcolor: red;
 @use './components/utils.scss' as *;
 .login_container {
-    max-width: calc(var(--max-width) - 400px);
+    max-width: var(--max-width);
     min-width: 300px;
     width: 100%;
     height: auto;
@@ -21,6 +21,7 @@ input {
     width: 100%;
     outline: 0;
     display: block;
+    z-index: 2;
 }
 
 .input_container {
@@ -31,6 +32,7 @@ input {
     padding-top: 20px;
     padding-bottom: 10px;
     border: 2px solid var(--secondary-color);
+    background: transparent;
     input {
         position: relative;
         width: 100%;
@@ -50,6 +52,7 @@ label {
     left: 15px;
     transition: all 0.1s linear;
     text-transform: capitalize;
+    z-index: 1;
 }
 
 input:focus+label,
@@ -118,6 +121,7 @@ input:-webkit-autofill:active {
     padding: 5px;
     border-radius: 20px;
     transition: all 0.1s linear;
+    z-index: 3;
 }
 
 #eye:focus,

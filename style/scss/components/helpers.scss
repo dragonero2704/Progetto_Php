@@ -11,29 +11,32 @@
     .ml#{$i} {
         margin-left: $i*10px !important;
     }
-
-    @media (max-width:768px){
-        .mt#{$i}{
-            @if $i*10px - 15px > 0{
-                margin-top: $i*10px - 15px !important;
+    @media (max-width:768px) {
+        .mt#{$i} {
+            @if $i*10px - 10px>0 {
+                margin-top: $i*10px - 10px !important;
             }
         }
-        .mb#{$i}{
-            @if $i*10px - 15px > 0{
-                margin-bottom: $i*10px - 15px !important;
+        .mb#{$i} {
+            @if $i*10px - 10px>0 {
+                margin-bottom: $i*10px - 10px !important;
             }
         }
-        .mr#{$i}{
-            @if $i*10px - 15px > 0{
-                margin-right: $i*10px - 15px !important;
+        .mr#{$i} {
+            @if $i*10px - 10px>0 {
+                margin-right: $i*10px - 10px !important;
             }
         }
-        .ml#{$i}{
-            @if $i*10px - 7px > 0{
-                margin-left: $i*10px - 15px !important;
+        .ml#{$i} {
+            @if $i*10px - 10px>0 {
+                margin-left: $i*10px - 10px !important;
             }
         }
     }
+}
+
+.m0 {
+    margin: 0;
 }
 
 .mauto {
@@ -55,6 +58,14 @@ h1 {
     font-size: 3.125em;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
 .upper {
     text-transform: uppercase;
 }
@@ -63,3 +74,6 @@ h1 {
     color: var(--secondary-color);
 }
 
+.bold {
+    font-weight: bold;
+}

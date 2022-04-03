@@ -12,48 +12,75 @@ foreach ($userfields as $field) {
 }
 
 //connessione al database
-require('../data/db.php');
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error' . $conn->connect_error);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require('../data/db.php');
+    $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error' . $conn->connect_error);
 
-//controll
+    //controll
 
-//------------------------------------------------------------------------------------------------------
-//controllo email
-$email = $userdata['email'];
-$query_controllo_mail = "
+    //------------------------------------------------------------------------------------------------------
+    //controllo email
+    $email = $userdata['email'];
+    $query_controllo_mail = "
 SELECT email
 FROM account
 WHERE email='$email'
 ";
 
-$ris = $conn->query($query_controllo_mail) or die($conn->error);
-if ($ris->num_rows != 0) {
-    $error['email'] = 'Un account è già associato a questa email';
-}
-//------------------------------------------------------------------------------------------------------
-//controllo password
-if ($userdata['password'] !== $userdata['confermapassword']) {
-    $error['confermapassword'] = 'La password non coincide';
-}
-//se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
-if (sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!empty($userdata['password'])) $userdata['password'] = password_hash($userdata['password'], PASSWORD_DEFAULT);
-    if (!empty($userdata['telefono'])) $userdata['telefono'] = str_replace(' ', '', $userdata['telefono']);
+    $ris = $conn->query($query_controllo_mail) or die($conn->error);
+    if ($ris->num_rows != 0) {
+        $error['email'] = 'Un account è già associato a questa email';
+    }
+    //------------------------------------------------------------------------------------------------------
+    //funzione di controllo password
+    /** 
+1 numero
+caratteri speciali (!?@)
+1 Maiuscola
+     */
+    function Validate($pass)
+    {
+        // return '';
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@', $pass);
+        $specialChars = preg_match('@[^\w]@', $pass);
+        if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pass) < 8) {
+            return 'La password deve contenere almeno 8 caratteri di cui 1 carattere speciale, 1 numero e 1 mauiscola';
+        } else {
+            return '';
+        }
+    }
+    if (!empty($userdata['password']) and !empty(Validate($userdata['password'])))
+        $error['password'] = Validate($userdata['password']);
 
-    $registration_query = "
+    //controllo password
+    if ($userdata['password'] !== $userdata['confermapassword']) {
+        $error['confermapassword'] = 'La password non coincide';
+    }
+    //se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
+    if (sizeof($error) === 0) {
+        if (!empty($userdata['password'])) $passwordhash = password_hash($userdata['password'], PASSWORD_DEFAULT);
+        if (!empty($userdata['telefono'])) $userdata['telefono'] = str_replace(' ', '', $userdata['telefono']);
+
+        $registration_query = "
                             INSERT INTO account (email, password, nickname, nome, cognome, telefono, email_recupero, data_nascita, nazionalita)
-                            VALUES('" . $userdata['email'] . "','" . $userdata['password'] . "','" . $userdata['nickname'] . "','" . $userdata['nome'] . "','"
-        . $userdata['cognome'] . "','" . $userdata['telefono'] . "','" . $userdata['email_recupero'] . "','" . $userdata['data_nascita'] . "','"
-        . $userdata['nazionalita'] . "')";
+                            VALUES('" . $userdata['email'] . "','" . $passwordhash . "','" . $userdata['nickname'] . "','" . $userdata['nome'] . "','"
+            . $userdata['cognome'] . "','" . $userdata['telefono'] . "','" . $userdata['email_recupero'] . "','" . $userdata['data_nascita'] . "','"
+            . $userdata['nazionalita'] . "')";
 
-    $conn->query($registration_query) or die($conn->error);
+        $conn->query($registration_query) or die($conn->error);
+        $conn->close();
 
-    $_SESSION['email'] = $userdata['email'];
-    // $redirectsleep = 3;
-    // echo '<div class="result mauto">Registrazione completata con successo</div>';
-    // sleep($redirectsleep);
-    header('location: ../index.php');
+        $error['state'] = 'ok';
+
+        $_SESSION['email'] = $userdata['email'];
+
+        $refreshtime = 5;
+        header("refresh: $refreshtime; URL=../index.php");
+    }
 }
+
 //------------------------------------------------------------------------------------------------------
 
 
@@ -86,7 +113,8 @@ if (sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="body">
         <div class="login_container mt5 mb5">
-            <h1>Sign up</h1>
+            <h1 class="mt3">Sign up</h1>
+            <p class="mt2 mb3">Hai già un account? <a class="hoverglow bold" href="./login.php">Accedi</a></p>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
                 <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
 
@@ -157,8 +185,21 @@ if (sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
             </form>
+            <?php
+            if (isset($error['state']))
+                echo '<p class="result">Registrazione effettuata con successo. Sarai reindirizzato alla home tra <span id="refreshseconds">' . $refreshtime . '</span>...</p>
+                <script>
+                    let el = document.getElementById("refreshseconds")
+                        setInterval(function() {
+                        let number = parseInt(el.innerHTML)
+                        el.innerHTML = number - 1
+                    }, 1000)
+                </script>
+                ';
 
+            ?>
 
+            <span onlo></span>
 
         </div>
     </div>
@@ -166,7 +207,8 @@ if (sizeof($error) === 0 and $_SERVER['REQUEST_METHOD'] == 'POST') {
     require('../data/footer.php');
     ?>
 </body>
+<script src="../javascript/psw.js"></script>
+
+
 
 </html>
-
-<script src="../javascript/psw.js"></script>
