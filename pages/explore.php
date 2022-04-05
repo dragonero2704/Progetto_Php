@@ -1,5 +1,6 @@
 <?php
-session_start();
+require('../data/session.php');
+
 if(isset($_GET['search'])){
     $search = urldecode($_GET['search']);
 }
