@@ -28,3 +28,4 @@
     }
 
     echo '<script src="../javascript/hamburger.js"></script>';
+?>

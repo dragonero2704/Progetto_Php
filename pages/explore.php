@@ -4,7 +4,6 @@ require('../data/session.php');
 if(isset($_GET['search'])){
     $search = urldecode($_GET['search']);
 }
-require('../data/session.php');
 
 ?>
 

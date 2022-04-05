@@ -72,7 +72,7 @@ caratteri speciali (!?@)
         $conn->query($registration_query) or die($conn->error);
         $conn->close();
 
-        $error['state'] = 'ok';
+        $error['ok'] = 'ok';
 
         $_SESSION['email'] = $userdata['email'];
 
@@ -112,8 +112,8 @@ caratteri speciali (!?@)
     </header>
 
     <div class="body">
-        <div class="login_container mt5 mb5">
-            <h1 class="mt3">Sign up</h1>
+        <div class="login_container mauto">
+            <h1>Sign up</h1>
             <p class="mt2 mb3">Hai già un account? <a class="hoverglow bold" href="./login.php">Accedi</a></p>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
                 <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
@@ -186,7 +186,7 @@ caratteri speciali (!?@)
 
             </form>
             <?php
-            if (isset($error['state']))
+            if (isset($error['ok']))
                 echo '<p class="result">Registrazione effettuata con successo. Sarai reindirizzato alla home tra <span id="refreshseconds">' . $refreshtime . '</span>...</p>
                 <script>
                     let el = document.getElementById("refreshseconds")

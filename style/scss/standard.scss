@@ -51,7 +51,7 @@ a {
     color: var(--text-color);
 }
 
-img{
+img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -93,27 +93,25 @@ i {
     margin-left: auto;
 }
 
-.body{
+.body {
     // min-width: var(--max-width);
     min-height: calc(100vh - 100px);
     width: 100%;
-    height: max-content;
+    height: 100%;
     margin-top: 50px;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 10px;
     background-color: var(--background-color);
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: var(--separator);
 }
 
-@media (max-width:1200px){
-    ::-webkit-scrollbar{
+@media (max-width:1200px) {
+     ::-webkit-scrollbar {
         width: 5px;
     }
 }
-
-
