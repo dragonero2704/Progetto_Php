@@ -1,9 +1,23 @@
-
 <?php
-session_start();
-//se non si è loggati, rimanda alla pagina di login
-if(isset($_SESSION['email'])) $email = $_SESSION['email'];
-if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
+require('../data/session.php');
+
+require('../data/db.php');
+
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+
+$sql = "
+SELECT *
+FROM account
+WHERE email='$email'
+";
+
+$ris = $conn->query($sql) or die($conn->error);
+
+if($ris->num_rows>0){
+    $ris=$ris->fetch_assoc();
+    $accountdata = $ris;
+}
+
 
 ?>
 
@@ -25,12 +39,23 @@ if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
     require('../data/menu.php');
     ?>
     <div class="body">
-        <h1>Modifica il tuo account</h1>
-        
+        <div class="login_container">
+            <h1 class="mt3 mb3">Modifica il tuo account</h1>
+            <div class="input_container mb3">
+
+                    <input type="email" name="email" id="email" value="<?php echo $accountdata['email']; ?>" placeholder=" ">
+                    <label for="email">email</label>
+                </div>
+        </div>
+
     </div>
-<?php
+    <?php
     require('../data/footer.php');
     ?>
 </body>
+
+<script>
+    //async update
+</script>
 
 </html>
