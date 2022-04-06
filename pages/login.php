@@ -17,7 +17,7 @@ $account_exist = "
 ";
 
 
-if ($email != "" && isset($email)) {
+if (!empty($email) && isset($email)) {
     $ris = $conn->query($account_exist) or die('Query fallita: ' . $conn->error);
     if ($ris->num_rows == 0) {
         //email non trovata
@@ -69,11 +69,11 @@ $conn->close();
         <div class="login_wrapper">
             <div class="login_container reveal">
                 <h1>Login</h1>
-                <p class="mt2 mb3">Non hai un account? <a class="hoverglow bold" href="./signup.php">Registrati</a></p>
+                <p class="mt2">Non hai un account? <a class="hoverglow bold" href="./signup.php">Registrati</a></p>
                 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
 
                     <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
-                    <div class="input_container mb3">
+                    <div class="input_container">
                         <input type="email" name="email" id="email" value="<?php echo $email; ?>" placeholder=" ">
                         <label for="email">email</label>
                     </div>

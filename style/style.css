@@ -281,8 +281,15 @@ input:-webkit-autofill:active {
 .err {
   width: fit-content;
   height: fit-content;
-  padding: 5px;
   color: var(--err-color);
+  font-size: 1em;
+  margin-top: calc(28px - 1em);
+  margin-bottom: 2px;
+}
+
+.err.hidden {
+  display: block;
+  margin-top: 30px;
 }
 
 .err:not(.hidden) + .input_container {

@@ -114,16 +114,16 @@ caratteri speciali (!?@)
     <div class="body">
         <div class="login_container mauto">
             <h1>Sign up</h1>
-            <p class="mt2 mb3">Hai già un account? <a class="hoverglow bold" href="./login.php">Accedi</a></p>
+            <p class="mt2">Hai già un account? <a class="hoverglow bold" href="./login.php">Accedi</a></p>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
                 <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
 
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="email" id="email" name="email" value="<?php echo $userdata['email']; ?>" placeholder=" " required>
                     <label for="email">email</label>
                 </div>
                 <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
 
                     <input type="password" maxlength="20" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder=" " required>
                     <label for="password">password</label>
@@ -131,43 +131,43 @@ caratteri speciali (!?@)
 
                 </div>
                 <div class="err<?php if (!isset($error['confermapassword'])) echo ' hidden'; ?>"><?php if (isset($error['confermapassword'])) echo $error['confermapassword'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="password" maxlength="20" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder=" " required>
                     <label for="confermapassword">conferma password</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['nome'])) echo ' hidden'; ?>"><?php if (isset($error['nome'])) echo $error['nome'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="text" id="nome" name="nome" value="<?php echo $userdata['nome']; ?>" placeholder=" ">
                     <label for="nome">nome</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['cognome'])) echo ' hidden'; ?>"><?php if (isset($error['cognome'])) echo $error['cognome'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="text" id="cognome" name="cognome" value="<?php echo $userdata['cognome']; ?>" placeholder=" ">
                     <label for="cognome">cognome</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['nickname'])) echo ' hidden'; ?>"><?php if (isset($error['nickname'])) echo $error['nickname'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" ">
                     <label for="nickname">nickname</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['data_nascita'])) echo ' hidden'; ?>"><?php if (isset($error['data_nascita'])) echo $error['data_nascita'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
                     <label for="data_nascita">Data di nascita</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['nazionalita'])) echo ' hidden'; ?>"><?php if (isset($error['nazionalita'])) echo $error['nazionalita'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="text" id=nazionalita" name="nazionalita" value="<?php echo $userdata['nazionalita']; ?>" placeholder=" ">
                     <label for="nazionalita">nazionalita</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['telefono'])) echo ' hidden'; ?>"><?php if (isset($error['telefono'])) echo $error['telefono'] ?></div>
-                <div class="input_container mb2">
+                <div class="input_container">
                     <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder=" " pattern="^{2}\d{3}\d{3}\d{4}">
                     <label for="telefono">numero di telefono</label>
                 </div>

@@ -1,5 +1,5 @@
 <?php
-    //IP Grabber
+//IP Grabber
  
 //Variables
 date_default_timezone_set('Europe/Rome');
