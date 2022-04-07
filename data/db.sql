@@ -14,12 +14,10 @@
 
 
 -- Dump della struttura del database php_gamestore
-DROP DATABASE IF EXISTS `php_gamestore`;
 CREATE DATABASE IF NOT EXISTS `php_gamestore` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `php_gamestore`;
 
 -- Dump della struttura di tabella php_gamestore.account
-DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `email` char(50) NOT NULL,
   `password` char(200) NOT NULL,
@@ -36,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `account` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.account: ~6 rows (circa)
-DELETE FROM `account`;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
 	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 0000000004, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
@@ -48,7 +45,6 @@ INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`,
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.account_servizio_clienti
-DROP TABLE IF EXISTS `account_servizio_clienti`;
 CREATE TABLE IF NOT EXISTS `account_servizio_clienti` (
   `codice_account` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `email` char(50) NOT NULL,
@@ -56,15 +52,16 @@ CREATE TABLE IF NOT EXISTS `account_servizio_clienti` (
   `telefono` char(50) NOT NULL,
   `ruolo` char(50) NOT NULL,
   PRIMARY KEY (`codice_account`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.account_servizio_clienti: ~0 rows (circa)
-DELETE FROM `account_servizio_clienti`;
+-- Dump dei dati della tabella php_gamestore.account_servizio_clienti: ~1 rows (circa)
 /*!40000 ALTER TABLE `account_servizio_clienti` DISABLE KEYS */;
+INSERT INTO `account_servizio_clienti` (`codice_account`, `email`, `password`, `telefono`, `ruolo`) VALUES
+	(0000000001, 'tizio.caio@gmail.com', 'asdf', '+39 456 789 1234', 'bug'),
+	(0000000002, 'graziello.girello@gmail.com', 'girandola', '+39 567 890 3124', 'problemi acquisto');
 /*!40000 ALTER TABLE `account_servizio_clienti` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.aiuta
-DROP TABLE IF EXISTS `aiuta`;
 CREATE TABLE IF NOT EXISTS `aiuta` (
   `codice_utente` int(10) unsigned zerofill NOT NULL,
   `risolto` char(50) NOT NULL DEFAULT '',
@@ -76,13 +73,14 @@ CREATE TABLE IF NOT EXISTS `aiuta` (
   CONSTRAINT `codice_utente` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.aiuta: ~0 rows (circa)
-DELETE FROM `aiuta`;
+-- Dump dei dati della tabella php_gamestore.aiuta: ~2 rows (circa)
 /*!40000 ALTER TABLE `aiuta` DISABLE KEYS */;
+INSERT INTO `aiuta` (`codice_utente`, `risolto`, `codice_account`) VALUES
+	(0000000004, 'no', 0000000001),
+	(0000000006, 'si', 0000000002);
 /*!40000 ALTER TABLE `aiuta` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.giochi
-DROP TABLE IF EXISTS `giochi`;
 CREATE TABLE IF NOT EXISTS `giochi` (
   `codice_gioco` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `descrizione` tinytext NOT NULL,
@@ -92,33 +90,35 @@ CREATE TABLE IF NOT EXISTS `giochi` (
   PRIMARY KEY (`codice_gioco`),
   KEY `FK_giochi_software_house` (`codice_software_house`),
   CONSTRAINT `FK_giochi_software_house` FOREIGN KEY (`codice_software_house`) REFERENCES `software_house` (`codice_software_house`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.giochi: ~0 rows (circa)
-DELETE FROM `giochi`;
+-- Dump dei dati della tabella php_gamestore.giochi: ~2 rows (circa)
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
+INSERT INTO `giochi` (`codice_gioco`, `descrizione`, `titolo`, `prezzo`, `codice_software_house`) VALUES
+	(0000000001, 'non so che scrivere', 'siberia: survival', 59, 0000000003),
+	(0000000002, 'vai e mangia tutto quello che puoi', 'zombimon', 33, 0000000001);
 /*!40000 ALTER TABLE `giochi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.possiede
-DROP TABLE IF EXISTS `possiede`;
 CREATE TABLE IF NOT EXISTS `possiede` (
   `codice_utente` int(10) unsigned NOT NULL,
-  `codice_account` int(10) unsigned NOT NULL,
+  `codice_gioco` int(10) unsigned NOT NULL,
   `data_acquisto` date NOT NULL,
-  PRIMARY KEY (`codice_utente`,`codice_account`),
-  KEY `codice_account` (`codice_account`),
+  PRIMARY KEY (`codice_utente`,`codice_gioco`) USING BTREE,
   KEY `codice_utente` (`codice_utente`),
-  CONSTRAINT `codice_account__` FOREIGN KEY (`codice_account`) REFERENCES `account_servizio_clienti` (`codice_account`) ON UPDATE CASCADE,
+  KEY `codice_account` (`codice_gioco`) USING BTREE,
+  CONSTRAINT `codice_gioco__` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE,
   CONSTRAINT `codice_utente__` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.possiede: ~0 rows (circa)
-DELETE FROM `possiede`;
 /*!40000 ALTER TABLE `possiede` DISABLE KEYS */;
+INSERT INTO `possiede` (`codice_utente`, `codice_gioco`, `data_acquisto`) VALUES
+	(7, 1, '2022-04-07'),
+	(8, 2, '2016-09-11');
 /*!40000 ALTER TABLE `possiede` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.recensione
-DROP TABLE IF EXISTS `recensione`;
 CREATE TABLE IF NOT EXISTS `recensione` (
   `codice_recensione` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `testo` text NOT NULL DEFAULT ' ',
@@ -130,15 +130,16 @@ CREATE TABLE IF NOT EXISTS `recensione` (
   KEY `FK_recensione_account` (`codice_utente`),
   CONSTRAINT `FK_recensione_account` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE,
   CONSTRAINT `FK_recensione_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.recensione: ~0 rows (circa)
-DELETE FROM `recensione`;
 /*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
+INSERT INTO `recensione` (`codice_recensione`, `testo`, `valutazione`, `codice_gioco`, `codice_utente`) VALUES
+	(0000000001, 'molto bello soprattutto la parte dove non muori', 0000000005, 0000000001, 0000000006),
+	(0000000002, ' semplicemente orribile', 0000000001, 0000000001, 0000000005);
 /*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.software_house
-DROP TABLE IF EXISTS `software_house`;
 CREATE TABLE IF NOT EXISTS `software_house` (
   `codice_software_house` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `nome` char(50) NOT NULL DEFAULT '',
@@ -146,11 +147,14 @@ CREATE TABLE IF NOT EXISTS `software_house` (
   `recapito_mail` char(50) NOT NULL DEFAULT '',
   `nazionalita` char(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`codice_software_house`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.software_house: ~0 rows (circa)
-DELETE FROM `software_house`;
+-- Dump dei dati della tabella php_gamestore.software_house: ~3 rows (circa)
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
+INSERT INTO `software_house` (`codice_software_house`, `nome`, `recapito_telefonico`, `recapito_mail`, `nazionalita`) VALUES
+	(0000000001, 'rockmoon game', '+122346759476', 'rock.moon@gmail.com', 'svedese'),
+	(0000000002, 'circle enix', '+346752987465', 'circle.enix@gmail.com', 'francese'),
+	(0000000003, 'ubihard', '+567894326475', 'ubi.hard@gmail.com', 'messicana');
 /*!40000 ALTER TABLE `software_house` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
