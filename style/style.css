@@ -320,6 +320,43 @@ input:-webkit-autofill:active {
   background-color: var(--secondary-color);
 }
 
+.profilepic_container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.profilepic_container:hover img {
+  transition: 0.5s linear;
+}
+
+.profilepic_container input[type=file] {
+  display: none;
+}
+
+.profilepic_container label {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: large;
+  opacity: 0;
+  transition: 0.5s linear;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  line-height: 200px;
+}
+
+.profilepic_container:hover label {
+  display: block;
+  opacity: 1;
+  z-index: 1;
+}
+
 footer {
   width: 100%;
   border-top: 2px solid var(--separator);
@@ -335,6 +372,57 @@ footer {
   text-align: center;
   margin: auto 0;
   opacity: 0.5;
+}
+
+.search_container {
+  position: relative;
+  max-width: var(--max-width);
+  width: 100%;
+  height: auto;
+  padding: 5px 20px;
+  border: 2px solid var(--separator);
+  border-radius: 20px;
+  margin: auto;
+}
+
+input[type=search] {
+  position: relative;
+  z-index: 0;
+}
+
+.result {
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchbutton {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  height: 37px;
+  width: 37px;
+  cursor: pointer;
+}
+
+.searchbutton input[type=submit] {
+  cursor: pointer;
+  padding: 0;
+}
+
+.searchbutton * {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+}
+
+.searchbutton i.fa-solid {
+  margin-top: 16px;
 }
 
 .mt1 {

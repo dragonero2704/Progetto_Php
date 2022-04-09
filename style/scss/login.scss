@@ -117,7 +117,7 @@ input:-webkit-autofill:active {
     margin-bottom: 2px;
 }
 
-.err.hidden{
+.err.hidden {
     display: block;
     margin-top: 30px;
 }
@@ -148,4 +148,42 @@ input:-webkit-autofill:active {
 #eye:focus,
 #eye:hover {
     background-color: var(--secondary-color);
+}
+
+.profilepic_container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.profilepic_container:hover img {
+    // filter: blur(20px);
+    transition: 0.5s linear;
+}
+
+.profilepic_container input[type='file'] {
+    display: none;
+}
+
+.profilepic_container label {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: large;
+    opacity: 0;
+    transition: 0.5s linear;
+    background-color: rgba($color: #000000, $alpha: 0.8);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    line-height: 200px;
+}
+
+.profilepic_container:hover label {
+    display: block;
+    opacity: 1;
+    z-index: 1;
 }

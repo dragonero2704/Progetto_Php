@@ -18,6 +18,20 @@ if($ris->num_rows>0){
     $userdata = $ris;
 }
 
+$codice=  isset($userdata['codice_utente']) ? $userdata['codice_utente'] : $userdata['codice_account'];
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $data = array();
+    $fields = array();
+}
+
+$defaultpath = '../media/account/defaultuser.jpg';
+if(file_exists("../media/account/$codice.jpg")){
+    $path = "../media/account/$codice.jpg";
+}else{
+    $path = $defaultpath;
+}
+
 
 ?>
 
@@ -39,10 +53,18 @@ if($ris->num_rows>0){
     require('../data/menu.php');
     ?>
     <div class="body">
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF'])?>" method="post">
+
         <div class="login_container mauto">
             <h1 class="mb3">Personalizza il tuo account</h1>
+            <div class="profilepic_container mb2">
+                <img src="<?php echo $path?>" alt="../media/account/defaultuser.jpg">
+                <label for="uploadfile">Sfoglia...</label>
+
+                <input type="file" name="profileimg" id="uploadfile" class="hidden">
+            </div>
             <div class="input_container mb3">
-                <input type="email" name="email" id="email" value="<?php echo $userdata['email']; ?>" placeholder=" ">
+                <input type="email" id="email" value="<?php echo $userdata['email']; ?>" placeholder=" " disabled aria-hidden="true">
                 <label for="email">email</label>
             </div>
             <div class="input_container mb2">
@@ -80,7 +102,7 @@ if($ris->num_rows>0){
                     <label for="email_recupero">Email recupero</label>
                 </div>
         </div>
-
+        </form>
     </div>
     <?php
     require('../data/footer.php');

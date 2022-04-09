@@ -24,7 +24,7 @@ if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
     require('../data/menu.php');
     ?>
     <div class="body">
-        <h1>Bentornato <?php echo $nickname?></h1>
+        <h1 class="mauto">Libreria di <?php echo $nickname?></h1>
     </div>
     <?php
     require('../data/footer.php');
