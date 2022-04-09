@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `account_servizio_clienti` (
   PRIMARY KEY (`codice_account`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.account_servizio_clienti: ~1 rows (circa)
+-- Dump dei dati della tabella php_gamestore.account_servizio_clienti: ~2 rows (circa)
 /*!40000 ALTER TABLE `account_servizio_clienti` DISABLE KEYS */;
 INSERT INTO `account_servizio_clienti` (`codice_account`, `email`, `password`, `telefono`, `ruolo`) VALUES
 	(0000000001, 'tizio.caio@gmail.com', 'asdf', '+39 456 789 1234', 'bug'),
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `possiede` (
   CONSTRAINT `codice_utente__` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.possiede: ~0 rows (circa)
+-- Dump dei dati della tabella php_gamestore.possiede: ~2 rows (circa)
 /*!40000 ALTER TABLE `possiede` DISABLE KEYS */;
 INSERT INTO `possiede` (`codice_utente`, `codice_gioco`, `data_acquisto`) VALUES
 	(7, 1, '2022-04-07'),
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `recensione` (
   CONSTRAINT `FK_recensione_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.recensione: ~0 rows (circa)
+-- Dump dei dati della tabella php_gamestore.recensione: ~2 rows (circa)
 /*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
 INSERT INTO `recensione` (`codice_recensione`, `testo`, `valutazione`, `codice_gioco`, `codice_utente`) VALUES
 	(0000000001, 'molto bello soprattutto la parte dove non muori', 0000000005, 0000000001, 0000000006),
