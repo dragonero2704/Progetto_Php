@@ -16,14 +16,29 @@ $account_exist = "
     WHERE email = '$email'
 ";
 
+$account_servizio_clienti_exist = "
+SELECT *
+FROM account_servizio_clienti
+WHERE email = '$email'
+";
+
 
 if (!empty($email) && isset($email)) {
-    $ris = $conn->query($account_exist) or die('Query fallita: ' . $conn->error);
-    if ($ris->num_rows == 0) {
+    $ris1 = $conn->query($account_exist) or die('Query fallita: ' . $conn->error);
+    $ris2 = $conn->query($account_servizio_clienti_exist) or die('Query fallita: ' . $conn->error);
+    if ($ris1->num_rows == 0 and $ris2->num_rows == 0) {
         //email non trovata
         $error['email'] = "Email errata";
         $error['password'] = "Password errata";
     } else {
+
+        if($ris1->num_rows == 0)
+        {
+            $ris = $ris2;
+        } else {
+            $ris = $ris1;
+        }
+
         $row = $ris->fetch_assoc();
         $hash = $row['password'];
 
