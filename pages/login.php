@@ -30,7 +30,7 @@ if (!empty($email) && isset($email)) {
         if (password_verify($password, $hash)) {
             //login success
             $_SESSION['email'] = $email;
-            $_SESSION['nickname'] = $nickname;
+            $_SESSION['nickname'] = $row['nickname'];
 
             header('location: ../index.php');
         } else {

@@ -75,6 +75,7 @@ caratteri speciali (!?@)
         $error['ok'] = 'ok';
 
         $_SESSION['email'] = $userdata['email'];
+        $_SESSION['nickname'] = $userdata['nickname'];
 
         $refreshtime = 5;
         header("refresh: $refreshtime; URL=../index.php");

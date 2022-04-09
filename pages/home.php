@@ -2,8 +2,7 @@
 //code
 require('../data/session.php');
 //connessione al database
-
-
+if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
 
 ?>
 
@@ -25,7 +24,7 @@ require('../data/session.php');
     require('../data/menu.php');
     ?>
     <div class="body">
-        
+        <h1>Bentornato <?php echo $nickname?></h1>
     </div>
     <?php
     require('../data/footer.php');
