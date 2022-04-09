@@ -16,6 +16,12 @@ $account_exist = "
     WHERE email = '$email'
 ";
 
+$account_servizio_clienti_exist = "
+SELECT *
+FROM account_servizio_clienti
+WHERE email = '$email'
+";
+
 
 if (!empty($email) && isset($email)) {
     $ris = $conn->query($account_exist) or die('Query fallita: ' . $conn->error);
