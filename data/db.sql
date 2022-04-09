@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   UNIQUE KEY `codice_utente` (`codice_utente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.account: ~6 rows (circa)
+-- Dump dei dati della tabella php_gamestore.account: ~5 rows (circa)
 DELETE FROM `account`;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
@@ -84,7 +84,7 @@ INSERT INTO `aiuta` (`codice_utente`, `risolto`, `codice_account`) VALUES
 
 -- Dump della struttura di tabella php_gamestore.appartiene
 CREATE TABLE IF NOT EXISTS `appartiene` (
-  `codice_gioco` int(11) unsigned zerofill NOT NULL,
+  `codice_gioco` int(11) unsigned NOT NULL,
   `genere` char(50) NOT NULL,
   PRIMARY KEY (`genere`,`codice_gioco`) USING BTREE,
   KEY `FK_appartiene_giochi` (`codice_gioco`),
@@ -118,7 +118,7 @@ INSERT INTO `genere` (`genere`, `descrizione`) VALUES
 
 -- Dump della struttura di tabella php_gamestore.giochi
 CREATE TABLE IF NOT EXISTS `giochi` (
-  `codice_gioco` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `codice_gioco` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `titolo` char(50) NOT NULL,
   `descrizione` tinytext NOT NULL,
   `prezzo` float NOT NULL DEFAULT 0,
@@ -135,7 +135,7 @@ DELETE FROM `giochi`;
 
 -- Dump della struttura di tabella php_gamestore.motivazione_pegi
 CREATE TABLE IF NOT EXISTS `motivazione_pegi` (
-  `codice_gioco` int(11) unsigned zerofill NOT NULL,
+  `codice_gioco` int(11) unsigned NOT NULL,
   `motivazione` char(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`codice_gioco`,`motivazione`) USING BTREE,
   CONSTRAINT `FK_motivazione_pegi_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
@@ -203,7 +203,7 @@ DELETE FROM `recensione`;
 
 -- Dump della struttura di tabella php_gamestore.software_house
 CREATE TABLE IF NOT EXISTS `software_house` (
-  `codice_software_house` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `codice_software_house` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` char(50) NOT NULL DEFAULT '',
   `telefono` char(13) NOT NULL DEFAULT '',
   `email` char(50) NOT NULL DEFAULT '',
@@ -215,15 +215,15 @@ CREATE TABLE IF NOT EXISTS `software_house` (
 DELETE FROM `software_house`;
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
 INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `email`, `nazionalita`) VALUES
-	(0000000001, 'Rockmoon Games', '+122346759476', 'rock.moon@gmail.com', 'svedese'),
-	(0000000002, 'Circle Enix', '+346752987465', 'circle.enix@gmail.com', 'francese'),
-	(0000000003, 'Ubihard', '+567894326475', 'ubi.hard@gmail.com', 'messicana');
+	(1, 'Rockmoon Games', '+122346759476', 'rock.moon@gmail.com', 'svedese'),
+	(2, 'Circle Enix', '+346752987465', 'circle.enix@gmail.com', 'francese'),
+	(3, 'Ubihard', '+567894326475', 'ubi.hard@gmail.com', 'messicana');
 /*!40000 ALTER TABLE `software_house` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.sviluppato
 CREATE TABLE IF NOT EXISTS `sviluppato` (
-  `codice_gioco` int(11) unsigned zerofill NOT NULL,
-  `software_house` int(10) unsigned zerofill NOT NULL,
+  `codice_gioco` int(11) unsigned NOT NULL,
+  `software_house` int(10) unsigned NOT NULL,
   PRIMARY KEY (`codice_gioco`,`software_house`),
   KEY `FK_sviluppato_software_house` (`software_house`),
   CONSTRAINT `FK_sviluppato_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE,
