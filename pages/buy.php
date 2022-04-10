@@ -1,9 +1,10 @@
 <?php
 //code
 require('../data/session.php');
+if(empty($email)) header('location: login.php');
 //connessione al database?
 //GET dell'articolo
-if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php')
+if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php');
 ?>
 
 <!DOCTYPE html>
