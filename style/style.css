@@ -427,6 +427,7 @@ input[type=search] {
 .game {
   width: calc(var(--max-width) / 5);
   margin: 10px 20px;
+  transition: all 0.2s linear;
 }
 .game h2 {
   font-weight: normal;
@@ -437,6 +438,7 @@ input[type=search] {
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 1.4em;
+  transition: all 0.2s linear;
 }
 .game .img_container {
   width: 100%;
@@ -458,6 +460,12 @@ input[type=search] {
   font-weight: bold;
   width: fit-content;
   margin-right: 0;
+}
+
+.game:hover h2,
+.game:focus h2,
+.game:active h2 {
+  color: var(--secondary-color);
 }
 
 .mt1 {
