@@ -326,10 +326,6 @@ input:-webkit-autofill:active {
   height: 200px;
 }
 
-.profilepic_container:hover img {
-  transition: 0.5s linear;
-}
-
 .profilepic_container input[type=file] {
   display: none;
 }
@@ -343,7 +339,7 @@ input:-webkit-autofill:active {
   text-align: center;
   font-size: large;
   opacity: 0;
-  transition: 0.5s linear;
+  transition: 0.2s linear;
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
@@ -391,11 +387,13 @@ input[type=search] {
 }
 
 .result {
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width) + 40px);
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
 }
 
 .searchbutton {
@@ -423,6 +421,38 @@ input[type=search] {
 
 .searchbutton i.fa-solid {
   margin-top: 16px;
+}
+
+.game {
+  width: calc(var(--max-width) / 5);
+  margin: 10px 20px;
+}
+.game h2 {
+  font-weight: normal;
+  margin-top: 5px;
+  padding: 10px;
+  padding-left: 0%;
+}
+.game .img_container {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.game .img_container img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.game .pricetag {
+  background-color: var(--secondary-color);
+  color: var(--textcolor);
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  width: fit-content;
+  margin-right: 0;
 }
 
 .mt1 {

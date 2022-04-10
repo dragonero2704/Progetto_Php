@@ -1,8 +1,8 @@
 <?php
     require('./data/session.php');
     if(isset($email)){
-        header("location: ./pages/home.php?theme=default");
+        header("location: ./pages/library.php?theme=default");
     }else{
-        header("location: ./pages/explore.php?theme=default");
+        header("location: ./pages/home.php?theme=default");
     }
 ?>

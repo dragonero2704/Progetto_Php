@@ -156,11 +156,6 @@ input:-webkit-autofill:active {
     height: 200px;
 }
 
-.profilepic_container:hover img {
-    // filter: blur(20px);
-    transition: 0.5s linear;
-}
-
 .profilepic_container input[type='file'] {
     display: none;
 }
@@ -174,7 +169,7 @@ input:-webkit-autofill:active {
     text-align: center;
     font-size: large;
     opacity: 0;
-    transition: 0.5s linear;
+    transition: 0.2s linear;
     background-color: rgba($color: #000000, $alpha: 0.8);
     width: 100%;
     height: 100%;
