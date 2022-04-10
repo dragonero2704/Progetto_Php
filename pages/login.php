@@ -16,27 +16,9 @@ $account_exist = "
     WHERE email = '$email'
 ";
 
-$account_servizio_clienti_exist = "
-SELECT *
-FROM account_servizio_clienti
-WHERE email = '$email'
-";
-
 
 if (!empty($email) && isset($email)) {
     $ris = $conn->query($account_exist) or die('Query fallita: ' . $conn->error);
-    if ($ris->num_rows == 0) {
-        //email non trovata nella tabella account
-        //ricerca nella tabella supporto clienti
-        $account_exist = "
-            SELECT *
-            FROM account_servizio_clienti
-            WHERE email = '$email'
-        ";
-
-        $ris = $conn->query($account_exist) or die('Query fallita: ' . $conn->error);
-
-    } 
     if ($ris->num_rows != 0) {
         $row = $ris->fetch_assoc();
         $hash = $row['password'];
