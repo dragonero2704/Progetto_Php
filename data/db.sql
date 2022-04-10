@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.4.21-MariaDB - mariadb.org binary distribution
+-- Versione server:              10.4.22-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            11.3.0.6295
 -- --------------------------------------------------------
@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `account` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.account: ~5 rows (circa)
-DELETE FROM `account`;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
 	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 0000000004, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
@@ -44,42 +43,21 @@ INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`,
 	('sessopazzo@gmail.com', '$2y$10$aVTaHsEMS9UshpkHMBj4EOe1Z3kgAZakj91FHVtU2/n9PCYytQRly', 0000000005, 'cocksucker69', 'dio', 'cane', '', '', '2001-09-11', 'Siria');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
--- Dump della struttura di tabella php_gamestore.account_servizio_clienti
-CREATE TABLE IF NOT EXISTS `account_servizio_clienti` (
-  `codice_account` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `email` char(50) NOT NULL,
-  `password` char(200) NOT NULL,
-  `telefono` char(50) NOT NULL,
-  `ruolo` char(50) NOT NULL,
-  PRIMARY KEY (`codice_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
--- Dump dei dati della tabella php_gamestore.account_servizio_clienti: ~2 rows (circa)
-DELETE FROM `account_servizio_clienti`;
-/*!40000 ALTER TABLE `account_servizio_clienti` DISABLE KEYS */;
-INSERT INTO `account_servizio_clienti` (`codice_account`, `email`, `password`, `telefono`, `ruolo`) VALUES
-	(0000000001, 'tizio.caio@gmail.com', 'asdf', '+394567891234', 'bug'),
-	(0000000002, 'graziello.girello@gmail.com', 'girandola', '+395678903124', 'problemi acquisto');
-/*!40000 ALTER TABLE `account_servizio_clienti` ENABLE KEYS */;
-
 -- Dump della struttura di tabella php_gamestore.aiuta
 CREATE TABLE IF NOT EXISTS `aiuta` (
   `codice_utente` int(10) unsigned zerofill NOT NULL,
   `risolto` char(50) NOT NULL DEFAULT '',
   `codice_account` int(10) unsigned zerofill NOT NULL,
+  `tipo_problema` text DEFAULT NULL,
   PRIMARY KEY (`codice_utente`,`codice_account`),
   KEY `codice_account` (`codice_account`),
   KEY `codice_utente` (`codice_utente`),
-  CONSTRAINT `codice_account` FOREIGN KEY (`codice_account`) REFERENCES `account_servizio_clienti` (`codice_account`) ON UPDATE CASCADE,
-  CONSTRAINT `codice_utente` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
+  CONSTRAINT `FK_aiuta_account` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `codice_account` FOREIGN KEY (`codice_account`) REFERENCES `account_servizio_clienti` (`codice_account`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.aiuta: ~2 rows (circa)
-DELETE FROM `aiuta`;
+-- Dump dei dati della tabella php_gamestore.aiuta: ~0 rows (circa)
 /*!40000 ALTER TABLE `aiuta` DISABLE KEYS */;
-INSERT INTO `aiuta` (`codice_utente`, `risolto`, `codice_account`) VALUES
-	(0000000004, 'no', 0000000001),
-	(0000000006, 'si', 0000000002);
 /*!40000 ALTER TABLE `aiuta` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.appartiene
@@ -93,7 +71,6 @@ CREATE TABLE IF NOT EXISTS `appartiene` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Relazione N a N tra gioco e genere';
 
 -- Dump dei dati della tabella php_gamestore.appartiene: ~0 rows (circa)
-DELETE FROM `appartiene`;
 /*!40000 ALTER TABLE `appartiene` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appartiene` ENABLE KEYS */;
 
@@ -105,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `genere` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Dump dei dati della tabella php_gamestore.genere: ~6 rows (circa)
-DELETE FROM `genere`;
 /*!40000 ALTER TABLE `genere` DISABLE KEYS */;
 INSERT INTO `genere` (`genere`, `descrizione`) VALUES
 	('Avventura', NULL),
@@ -129,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `giochi` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.giochi: ~0 rows (circa)
-DELETE FROM `giochi`;
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
 /*!40000 ALTER TABLE `giochi` ENABLE KEYS */;
 
@@ -142,7 +117,6 @@ CREATE TABLE IF NOT EXISTS `motivazione_pegi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Dump dei dati della tabella php_gamestore.motivazione_pegi: ~0 rows (circa)
-DELETE FROM `motivazione_pegi`;
 /*!40000 ALTER TABLE `motivazione_pegi` DISABLE KEYS */;
 /*!40000 ALTER TABLE `motivazione_pegi` ENABLE KEYS */;
 
@@ -154,7 +128,6 @@ CREATE TABLE IF NOT EXISTS `pegi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Dump dei dati della tabella php_gamestore.pegi: ~6 rows (circa)
-DELETE FROM `pegi`;
 /*!40000 ALTER TABLE `pegi` DISABLE KEYS */;
 INSERT INTO `pegi` (`pegi`, `descrizione`) VALUES
 	('12', 'Adatto dai 12 anni in su'),
@@ -178,7 +151,6 @@ CREATE TABLE IF NOT EXISTS `possiede` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.possiede: ~0 rows (circa)
-DELETE FROM `possiede`;
 /*!40000 ALTER TABLE `possiede` DISABLE KEYS */;
 /*!40000 ALTER TABLE `possiede` ENABLE KEYS */;
 
@@ -197,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `recensione` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.recensione: ~0 rows (circa)
-DELETE FROM `recensione`;
 /*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
 /*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
 
@@ -212,7 +183,6 @@ CREATE TABLE IF NOT EXISTS `software_house` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.software_house: ~3 rows (circa)
-DELETE FROM `software_house`;
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
 INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `email`, `nazionalita`) VALUES
 	(1, 'Rockmoon Games', '+122346759476', 'rock.moon@gmail.com', 'svedese'),
@@ -231,7 +201,6 @@ CREATE TABLE IF NOT EXISTS `sviluppato` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Relazione N a N tra gioco e software house';
 
 -- Dump dei dati della tabella php_gamestore.sviluppato: ~0 rows (circa)
-DELETE FROM `sviluppato`;
 /*!40000 ALTER TABLE `sviluppato` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sviluppato` ENABLE KEYS */;
 
