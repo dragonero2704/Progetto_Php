@@ -24,11 +24,24 @@ require('../data/session.php');
     <div class="body">
         <div class="evidenza">
             <div class="img_evidenza">
-                <img src="../media/games/16/preview.png" alt="immagine non caricata">
-                <h1>lego star wars</h1>
+                <img src="../media/games/16/preview.jpg" alt="immagine non caricata">
             </div>
+            <h1>lego star wars</h1>
         </div>
+
         <?php
+
+            $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+            $trova_giochi = "
+                SELECT *
+                FROM giochi
+            "
+            $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
+
+            while($row = $ris->fetch_assoc())
+            {
+                echo
+            }
         ?>
     </div>
     <?php
