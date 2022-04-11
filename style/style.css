@@ -373,7 +373,7 @@ footer {
 .search_container {
   position: relative;
   max-width: var(--max-width);
-  width: 100%;
+  width: 95%;
   height: auto;
   padding: 5px 20px;
   border: 2px solid var(--separator);
@@ -425,7 +425,7 @@ input[type=search] {
 }
 
 .game {
-  width: calc(var(--max-width) / 5);
+  width: calc(var(--max-width) / 6);
   margin: 10px 20px;
   transition: all 0.2s linear;
 }
@@ -439,6 +439,7 @@ input[type=search] {
   text-overflow: ellipsis;
   font-size: 1.4em;
   transition: all 0.2s linear;
+  text-transform: capitalize;
 }
 .game .img_container {
   width: 100%;

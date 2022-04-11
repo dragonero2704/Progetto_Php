@@ -2,13 +2,14 @@ $padding:20px;
 .search_container {
     position: relative;
     max-width: var(--max-width);
-    width: 100%;
+    width: 95%;
     height: auto;
     padding: $padding/4 $padding;
     border: 2px solid var(--separator);
     border-radius: 20px;
     margin: auto;
 }
+
 
 input[type="search"] {
     position: relative;
@@ -54,7 +55,7 @@ input[type="search"] {
 }
 
 .game {
-    width: calc(var(--max-width) / 5);
+    width: calc(var(--max-width) / 6);
     margin: 10px 20px;
     transition: all 0.2s linear;
     // border: 2px solid var(--separator);
@@ -68,6 +69,7 @@ input[type="search"] {
         text-overflow: ellipsis;
         font-size: 1.4em;
         transition: all 0.2s linear;
+        text-transform: capitalize;
     }
     .img_container {
         width: 100%;
