@@ -492,6 +492,8 @@ input[type=search] {
   width: 50%;
   height: 50%;
   position: relative;
+  transform: translateX(50%);
+  transition: transform 0.5s;
 }
 
 .game_container {
@@ -499,6 +501,13 @@ input[type=search] {
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+  position: relative;
+}
+
+.game_negozio:hover {
+  transform: scale(1.2) translateX(50%);
+  position: relative;
 }
 
 .mt1 {
