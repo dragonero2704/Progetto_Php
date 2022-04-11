@@ -488,6 +488,19 @@ input[type=search] {
   object-fit: cover;
 }
 
+.game_negozio {
+  width: 50%;
+  height: 50%;
+  position: relative;
+}
+
+.game_container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .mt1 {
   margin-top: 10px !important;
 }

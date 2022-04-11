@@ -60,16 +60,21 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
             ";
             $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
 
+
+            echo '<div class="game_container">';
             while($row = $ris->fetch_assoc())
             {
                 echo '<a class="game" href="product.php?game=' . $row['codice_gioco'] . '">
-                <div class="img_container">
-                    <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt="Immagine non caricata :(">
+                <div class="game_negozio">
+                    <div class="img_container">
+                        <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt="Immagine non caricata :(">
+                    </div>
+                    <h2>' . $row['titolo'] . '</h2>
+                    <div class="pricetag">' . $row['prezzo'] . ' €</div>
                 </div>
-                <h2>' . $row['titolo'] . '</h2>
-                <div class="pricetag">' . $row['prezzo'] . ' €</div>
                 </a>';
             }
+            echo '</div>';
         ?>
     </div>
     <?php

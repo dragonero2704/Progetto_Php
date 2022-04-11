@@ -19,3 +19,16 @@
         }
     }
 }
+
+.game_negozio {
+    width: 20%;
+    height: 20%;
+    position: relative;
+}
+
+.game_container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+}
