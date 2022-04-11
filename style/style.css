@@ -1124,3 +1124,26 @@ h5 {
 .txtcenter {
   text-align: center;
 }
+
+.evidenza {
+  width: 60%;
+  height: 40%;
+  margin: auto;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.evidenza h1 {
+  text-align: center;
+}
+
+.img_evidenza {
+  width: fit-content;
+  height: 100%;
+  padding: 5px;
+  position: relative;
+  margin: auto;
+}
+.img_evidenza img {
+  border-radius: 25px;
+}

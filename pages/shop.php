@@ -21,7 +21,16 @@ require('../data/session.php');
     <?php
     require('../data/menu.php');
     ?>
-    <div class="body"></div>
+    <div class="body">
+        <div class="evidenza">
+            <div class="img_evidenza">
+                <img src="../media/games/16/preview.png" alt="immagine non caricata">
+                <h1>lego star wars</h1>
+            </div>
+        </div>
+        <?php
+        ?>
+    </div>
     <?php
     require('../data/footer.php');
     ?>
