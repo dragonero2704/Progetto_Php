@@ -1,6 +1,9 @@
 <?php
 //code
 require('../data/session.php');
+require('../data/db.php');
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+
 //connessione al database?
 ?>
 
@@ -23,24 +26,43 @@ require('../data/session.php');
     ?>
     <div class="body">
         <div class="evidenza">
+            <?php
+                $query = "
+                    SELECT codice_gioco
+                    FROM giochi
+                ";
+                $ris = $conn->query($query) or die($conn->error);
+                $codici = array();
+                while($row=$ris->fetch_assoc()){
+                    array_push($codici, $row['codice_gioco']);
+                }
+
+                $game_display = $codici[array_rand($codici, 1)];
+                $query = "SELECT *
+                FROM giochi
+                WHERE codice_gioco = $game_display";
+                $ris = $conn->query($query) or die($conn->error);
+                $gamedata = $ris->fetch_assoc();
+            ?>
             <div class="img_evidenza">
-                <img src="../media/games/16/preview.jpg" alt="immagine non caricata">
+                <img src="../media/games/<?php echo $game_display?>/banner.jpg" alt="immagine non caricata">
             </div>
-            <h1>lego star wars</h1>
+            <h1><?php
+                echo $gamedata['titolo'];
+            ?></h1>
         </div>
 
         <?php
 
-            $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
             $trova_giochi = "
                 SELECT *
                 FROM giochi
-            "
+            ";
             $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
 
             while($row = $ris->fetch_assoc())
             {
-                echo
+                echo "";
             }
         ?>
     </div>

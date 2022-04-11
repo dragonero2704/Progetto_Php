@@ -2,7 +2,7 @@
 //code
 require('../data/session.php');
 //connessione al database
-if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
+if(isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname']; else $nickname = "";
 
 ?>
 
