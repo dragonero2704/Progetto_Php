@@ -62,7 +62,13 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
 
             while($row = $ris->fetch_assoc())
             {
-                echo "";
+                echo '<a class="game" href="product.php?game=' . $row['codice_gioco'] . '">
+                <div class="img_container">
+                    <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt="Immagine non caricata :(">
+                </div>
+                <h2>' . $row['titolo'] . '</h2>
+                <div class="pricetag">' . $row['prezzo'] . ' €</div>
+                </a>';
             }
         ?>
     </div>
