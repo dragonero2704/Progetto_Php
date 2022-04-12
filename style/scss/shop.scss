@@ -13,31 +13,14 @@
         height: calc(100vh - 50px);
         // padding: 5px;
         position: relative;
+        clip-path: inset(0);
         img {
             aspect-ratio: 16 / 9;
             object-fit: cover;
+            object-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
     }
-}
-
-.game_negozio {
-    width: 50%;
-    height: 50%;
-    position: relative;
-    transform: translateX(50%);
-    transition: transform 0.5s;
-}
-
-.game_container {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    position: relative;
-}
-
-.game_negozio:hover {
-    transform: scale(1.2) translateX(50%);
-    position: relative;
 }

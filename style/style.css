@@ -51,40 +51,13 @@ img {
   object-fit: contain;
 }
 
-.hoverglow {
-  transition: color 0.3s linear;
-}
-
-.backglow {
-  transition: background-color 0.3s linear;
-}
-
-.hoverglow:hover,
-.hoverglow:focus {
-  color: var(--secondary-color);
-}
-
-.backglow:hover,
-.backglow:focus {
-  background-color: var(--secondary-color);
-}
-
 ::selection {
   background-color: var(--secondary-color);
   color: var(--text-color);
 }
 
-.hidden {
-  display: none;
-}
-
 i {
   display: inline-block;
-}
-
-.right {
-  margin-right: 0;
-  margin-left: auto;
 }
 
 .body {
@@ -491,32 +464,15 @@ input[type=search] {
   width: 100%;
   height: calc(100vh - 50px);
   position: relative;
+  clip-path: inset(0);
 }
 .evidenza .img_evidenza img {
   aspect-ratio: 16/9;
   object-fit: cover;
-}
-
-.game_negozio {
-  width: 50%;
-  height: 50%;
-  position: relative;
-  transform: translateX(50%);
-  transition: transform 0.5s;
-}
-
-.game_container {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  position: relative;
-}
-
-.game_negozio:hover {
-  transform: scale(1.2) translateX(50%);
-  position: relative;
+  object-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .mt1 {
@@ -1174,4 +1130,38 @@ h5 {
 
 .txtcenter {
   text-align: center;
+}
+
+.scalehover:hover {
+  transform-origin: center center;
+  transform: scale(1.05);
+  transition: 0.1s linear;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.hoverglow {
+  transition: color 0.3s linear;
+}
+
+.backglow {
+  transition: background-color 0.3s linear;
+}
+
+.hoverglow:hover,
+.hoverglow:focus {
+  color: var(--secondary-color);
+}
+
+.backglow:hover,
+.backglow:focus {
+  background-color: var(--secondary-color);
+}
+
+.right {
+  margin-right: 0;
+  margin-left: auto;
 }

@@ -25,6 +25,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
     require('../data/menu.php');
     ?>
     <div class="body">
+
         <div class="evidenza">
             <?php
                 $query = "
@@ -66,7 +67,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
             <!-- roba che esce con search -->
             <?php
             while ($row = $ris->fetch_assoc()) {
-                echo '<a class="game" href="product.php?game=' . $row['codice_gioco'] . '">
+                echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
                 <div class="img_container">
                     <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
                 </div>

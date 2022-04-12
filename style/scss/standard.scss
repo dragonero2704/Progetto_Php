@@ -57,40 +57,13 @@ img {
     object-fit: contain;
 }
 
-.hoverglow {
-    transition: color .3s linear;
-}
-
-.backglow {
-    transition: background-color .3s linear;
-}
-
-.hoverglow:hover,
-.hoverglow:focus {
-    color: var(--secondary-color);
-}
-
-.backglow:hover,
-.backglow:focus {
-    background-color: var(--secondary-color);
-}
-
 ::selection {
     background-color: var(--secondary-color);
     color: var(--text-color);
 }
 
-.hidden {
-    display: none;
-}
-
 i {
     display: inline-block;
-}
-
-.right {
-    margin-right: 0;
-    margin-left: auto;
 }
 
 .body {
