@@ -52,6 +52,8 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
             ?></h1>
         </div>
 
+        <!-- barra di selezione tipo di ordine -->
+
         <?php
 
             $trova_giochi = "

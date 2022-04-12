@@ -17,22 +17,22 @@ $query = "SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
 
         SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         FROM giochi JOIN sviluppato ON sviluppato.codice_gioco = giochi.codice_gioco
-        JOIN software_house ON sviluppato.software_house = sviluppato.software_house
+        JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
         WHERE software_house.nome LIKE '%$search%'
         GROUP BY giochi.codice_gioco
 
-        UNION
+/*         UNION
 
         SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         FROM giochi JOIN sviluppato ON sviluppato.codice_gioco = giochi.codice_gioco
         JOIN software_house ON sviluppato.software_house = sviluppato.software_house
         WHERE software_house.nome LIKE '%$search%'
-        GROUP BY giochi.codice_gioco
+        GROUP BY giochi.codice_gioco */
 
-        UNION
+/*         UNION
         SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         FROM giochi
-        WHERE descrizione LIKE '%$search%'
+        WHERE descrizione LIKE '%$search%' */
      ";
 
 $result = $conn->query($query) or die($conn->error);
