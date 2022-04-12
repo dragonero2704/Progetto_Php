@@ -509,6 +509,27 @@ input[type=search] {
   width: fit-content;
 }
 
+#menuButton {
+  background-color: black;
+  color: white;
+  padding: 5px 5px;
+  border: solid black 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin: 10px;
+}
+
+#menu {
+  width: fit-content;
+  margin-left: 0px;
+}
+
+.bottone {
+  margin: 10px;
+  cursor: pointer;
+}
+
 .mt1 {
   margin-top: 10px !important;
 }

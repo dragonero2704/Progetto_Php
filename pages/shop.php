@@ -71,13 +71,12 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
 
         </script>
         <!-- eventuale chiusura </head>, apertura <body> -->
-        <button id="menuButton">Menu</button>
+        <button id="menuButton">Ordina per:</button>
         <div id="menu" style="display:none;">
-        <p>Ordina per:</p>
         <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-            <input type="submit" value="titolo" name="metodo">
-            <input type="submit" value="prezzo" name="metodo">
-            <input type="submit" value="pegi" name="metodo">
+            <input class="bottone" type="submit" value="titolo" name="metodo">
+            <input class="bottone" type="submit" value="prezzo" name="metodo">
+            <input class="bottone" type="submit" value="pegi" name="metodo">
         </form>
         </div>
 
