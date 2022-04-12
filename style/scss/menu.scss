@@ -12,7 +12,7 @@ header {
     flex-wrap: nowrap;
     background-color: var(--background-color);
     transition: opacity .1s linear;
-    z-index: 1000;
+    z-index: 999;
     .menu {
         position: relative;
         width: 100%;
@@ -32,16 +32,19 @@ header {
         text-transform: uppercase;
         padding: 0 20px;
         font-size: 1em;
+        z-index: 1000;
     }
 }
 
-header::after {
+header::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     transform: translateX(-50%);
     left: 50%;
     width: 100vw;
+    height: 50px;
+    background-color: var(--background-color);
     border-bottom: 2px solid var(--separator);
 }
 

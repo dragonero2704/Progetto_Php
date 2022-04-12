@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require('../data/db.php');
     $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error' . $conn->connect_error);
 
-    //controll
-
+    //controlli
+    //campi essenziali lasciati vuoti
+    
     //------------------------------------------------------------------------------------------------------
     //controllo email
     $email = $userdata['email'];
@@ -151,7 +152,7 @@ caratteri speciali (!?@)
                 </div>
                 <div class="err<?php if (!isset($error['nickname'])) echo ' hidden'; ?>"><?php if (isset($error['nickname'])) echo $error['nickname'] ?></div>
                 <div class="input_container">
-                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" ">
+                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" " required>
                     <label for="nickname">nickname</label>
 
                 </div>
@@ -199,9 +200,6 @@ caratteri speciali (!?@)
                 ';
 
             ?>
-
-            <span onlo></span>
-
         </div>
     </div>
     <?php
