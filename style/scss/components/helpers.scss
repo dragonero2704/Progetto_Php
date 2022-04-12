@@ -82,7 +82,9 @@ h5 {
     text-align: center;
 }
 
-.scalehover:hover {
+.scalehover:hover,
+.scalehover:focus,
+.scalehover:active {
     transform-origin: center center;
     transform: scale(1.05);
     transition: 0.1s linear;
