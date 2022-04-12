@@ -78,23 +78,29 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
         <p>Ordina per:</p>
         <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
             <input type="submit" value="titolo" name="metodo">
-            <input type="submit" value="Produttore" name="metodo">
-            <input type="submit" value="Prezzo" name="metodo">
-            <input type="submit" value="Pegi" name="metodo">
+            <input type="submit" value="prezzo" name="metodo">
+            <input type="submit" value="pegi" name="metodo">
         </form>
         </div>
 
 
     <?php
-    $trova_giochi = "
-                SELECT *
-                FROM giochi
-            ";
-            $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
-            if(isset($_POST['metodo']))
-            {
-                if($_post['metodo'] == 'Titolo'){}
-            }
+
+        if(isset($_POST['metodo']) && !empty($_POST['metodo']))
+        {
+            $metodo=$_POST['metodo'];
+            $trova_giochi = "
+            SELECT *
+            FROM giochi
+            ORDER BY $metodo";
+
+        } else {
+            $trova_giochi = "
+            SELECT *
+            FROM giochi";
+        }
+
+        $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
         ?>
 
     <div class="result mt3">
