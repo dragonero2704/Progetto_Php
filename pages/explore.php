@@ -7,7 +7,9 @@ $fieldsearch = array('name', 'software_house', 'genere', 'description');
 $search = isset($_GET['search']) ? urldecode($_GET['search']) : "";
 
 require('../data/db.php');
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+require('../data/errorredicrect.php');
+
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
 $query = "SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         FROM giochi

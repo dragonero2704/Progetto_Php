@@ -1,0 +1,15 @@
+.errorbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    h1 {
+        color: var(--err-color);
+        width: fit-content;
+        text-align: center;
+    }
+    p {
+        width: fit-content;
+    }
+}

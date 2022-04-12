@@ -1,9 +1,9 @@
 <?php
 require('../data/session.php');
-
 require('../data/db.php');
+require('../data/errorredicrect.php');
 
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
 $sql = "
 SELECT *

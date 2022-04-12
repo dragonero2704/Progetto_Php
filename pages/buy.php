@@ -1,10 +1,17 @@
 <?php
 //code
 require('../data/session.php');
+require('../data/db.php');
+require('../data/errorredicrect.php');
+
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
+
 if(empty($email)) header('location: login.php');
 //connessione al database?
 //GET dell'articolo
 if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php');
+
+
 ?>
 
 <!DOCTYPE html>

@@ -49,11 +49,9 @@
             font-size: 1.1em;
         }
     }
-}
-
-.button {
-    padding: 20px 40px;
-    background-color: var(--secondary-color);
-    border-radius: 20px;
-    width: fit-content;
+    .button {
+        padding: 20px 40px;
+        background-color: var(--secondary-color);
+        width: fit-content;
+    }
 }
