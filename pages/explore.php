@@ -58,6 +58,7 @@ $result = $conn->query($query) or die($conn->error);
     <div class="body">
         <!-- search bar -->
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
+        <div class="search_wrapper">
             <div class="search_container mt8">
                 <input type="search" name="search" class="search" id="" placeholder="Search..." value="<?php echo htmlentities($search)?>">
                 <div class="searchbutton">
@@ -65,11 +66,13 @@ $result = $conn->query($query) or die($conn->error);
                     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                 </div>
             </div>
+        </div>
+            
 
 
         </form>
 
-        <div class="result mt10">
+        <div class="result mt3">
             <!-- roba che esce con search -->
             <?php
             while ($row = $result->fetch_assoc()) {

@@ -373,15 +373,20 @@ footer {
   opacity: 0.5;
 }
 
+.search_wrapper {
+  padding: 0 20px;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: auto;
+}
+
 .search_container {
   position: relative;
-  max-width: var(--max-width);
-  width: 95%;
+  width: 100%;
   height: auto;
   padding: 5px 20px;
   border: 2px solid var(--separator);
   border-radius: 20px;
-  margin: auto;
 }
 
 input[type=search] {
