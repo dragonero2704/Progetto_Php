@@ -455,6 +455,7 @@ input[type=search] {
   aspect-ratio: 1/1;
   border-radius: 20px;
   overflow: hidden;
+  background-color: var(--separator);
 }
 .game .img_container img {
   aspect-ratio: 1/1;

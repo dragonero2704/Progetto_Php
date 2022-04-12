@@ -21,18 +21,18 @@ $query = "SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         WHERE software_house.nome LIKE '%$search%'
         GROUP BY giochi.codice_gioco
 
-/*         UNION
+        UNION
 
         SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         FROM giochi JOIN sviluppato ON sviluppato.codice_gioco = giochi.codice_gioco
-        JOIN software_house ON sviluppato.software_house = sviluppato.software_house
+        JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
         WHERE software_house.nome LIKE '%$search%'
-        GROUP BY giochi.codice_gioco */
+        GROUP BY giochi.codice_gioco 
 
-/*         UNION
-        SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
-        FROM giochi
-        WHERE descrizione LIKE '%$search%' */
+        -- UNION
+        -- SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
+        -- FROM giochi
+        -- WHERE descrizione LIKE '%$search%' 
      ";
 
 $result = $conn->query($query) or die($conn->error);
@@ -78,23 +78,13 @@ $result = $conn->query($query) or die($conn->error);
             while ($row = $result->fetch_assoc()) {
                 echo '<a class="game" href="product.php?game=' . $row['codice_gioco'] . '">
                 <div class="img_container">
-                    <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt="Immagine non caricata :(">
+                    <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
                 </div>
                 <h2>' . $row['titolo'] . '</h2>
                 <div class="pricetag">' . $row['prezzo'] . ' €</div>
             </a>';
             }
             ?>
-            <!-- card di prova -->
-            <!-- <a class="game" href="product.php?game=6">
-                <div class="gameimg_container">
-                    <img src="../media/games/6.jpg" alt="Immagine non caricata :(">
-                </div>
-                <h2>Battlefront 2</h2>
-                <p>Generi:</p>
-                <p><span>Sparatutto</span>, <span>Open world</span></p>
-                <div class="pricetag">40,00</div>
-            </a> -->
         </div>
     </div>
     <?php

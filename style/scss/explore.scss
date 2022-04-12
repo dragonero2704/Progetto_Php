@@ -82,6 +82,7 @@ input[type="search"] {
         aspect-ratio: 1/1;
         border-radius: 20px;
         overflow: hidden;
+        background-color: var(--separator);
         img {
             aspect-ratio: 1/1;
             object-fit: cover;
