@@ -14,10 +14,12 @@
 
 
 -- Dump della struttura del database php_gamestore
+DROP DATABASE IF EXISTS `php_gamestore`;
 CREATE DATABASE IF NOT EXISTS `php_gamestore` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `php_gamestore`;
 
 -- Dump della struttura di tabella php_gamestore.account
+DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `email` char(50) NOT NULL,
   `password` char(200) NOT NULL,
@@ -45,6 +47,7 @@ INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`,
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.account_servizio_clienti
+DROP TABLE IF EXISTS `account_servizio_clienti`;
 CREATE TABLE IF NOT EXISTS `account_servizio_clienti` (
   `codice_account` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `email` char(50) NOT NULL,
@@ -63,6 +66,7 @@ INSERT INTO `account_servizio_clienti` (`codice_account`, `email`, `password`, `
 /*!40000 ALTER TABLE `account_servizio_clienti` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.aiuta
+DROP TABLE IF EXISTS `aiuta`;
 CREATE TABLE IF NOT EXISTS `aiuta` (
   `codice_utente` int(10) unsigned zerofill NOT NULL,
   `risolto` char(50) NOT NULL DEFAULT '',
@@ -83,6 +87,7 @@ INSERT INTO `aiuta` (`codice_utente`, `risolto`, `codice_account`) VALUES
 /*!40000 ALTER TABLE `aiuta` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.appartiene
+DROP TABLE IF EXISTS `appartiene`;
 CREATE TABLE IF NOT EXISTS `appartiene` (
   `codice_gioco` int(11) unsigned NOT NULL,
   `genere` char(50) NOT NULL,
@@ -98,6 +103,7 @@ DELETE FROM `appartiene`;
 /*!40000 ALTER TABLE `appartiene` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.genere
+DROP TABLE IF EXISTS `genere`;
 CREATE TABLE IF NOT EXISTS `genere` (
   `genere` char(50) NOT NULL,
   `descrizione` text DEFAULT NULL,
@@ -120,10 +126,11 @@ INSERT INTO `genere` (`genere`, `descrizione`) VALUES
 /*!40000 ALTER TABLE `genere` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.giochi
+DROP TABLE IF EXISTS `giochi`;
 CREATE TABLE IF NOT EXISTS `giochi` (
   `codice_gioco` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `titolo` char(50) NOT NULL,
-  `descrizione` tinytext NOT NULL,
+  `descrizione` mediumtext NOT NULL,
   `prezzo` float unsigned NOT NULL,
   `pegi` char(2) NOT NULL,
   PRIMARY KEY (`codice_gioco`),
@@ -136,17 +143,17 @@ DELETE FROM `giochi`;
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
 INSERT INTO `giochi` (`codice_gioco`, `titolo`, `descrizione`, `prezzo`, `pegi`) VALUES
 	(6, 'Battlefront 2', 'Sparatutto ambientato nell\'universo di Star Wars', 39.99, '12'),
-	(7, 'Red Dead Redemption 2', 'Sparatutto openworld anmbientato nel tardo Far West', 49.99, '18'),
-	(9, 'Destiny 2', 'Sparatutto fantascientifico', 0, '16'),
-	(10, 'Minecraft', 'Sandbox', 16.99, '7'),
+	(7, 'Red Dead Redemption 2', 'America, 1899. Arthur Morgan e la banda di Van der Linde sono in fuga. Con gli agenti federali e i migliori cacciatori di teste del Paese alle calcagna, la banda deve attraversare il cuore dell\'America, rapinando, rubando e combattendo per sopravvivere. E quando dei confitti interni sempre più profondi minacciano di lacerare il gruppo, Arthur sarà costretto a scegliere tra seguire i propri ideali o restare fedele alla banda che l\'ha cresciuto.', 49.99, '18'),
+	(9, 'Destiny 2', 'Destiny 2 è un MMO d\'azione con un unico mondo in continua evoluzione, accessibile ovunque, gratuitamente e in qualsiasi momento con gli amici.', 0, '16'),
+	(10, 'Minecraft', 'Minecraft è un gioco in cui potrai costruire con i blocchi e vivere avventure', 16.99, '7'),
 	(11, 'Sifu', 'Sifu è il nuovo gioco di Sloclap, lo studio indipendente che ha realizzato Absolver. Un gioco d\'azione in terza persona con intensi combattimenti a mani nude, in cui vestirai i panni di un giovane studente di Kung Fu sulla via della vendetta.', 39.99, '16'),
 	(13, 'Hitman', 'Divertiti con il parco giochi definitivo dell\'Agente 47 e diventa l\'assassino più letale del mondo. Viaggia in luoghi esotici e elimina i tuoi bersagli con katane, fucili, palline da golf esplosive, sughi per la pasta scaduti e molto altro.', 29.99, '18'),
-	(14, 'Hitman 2', 'L\'atteso seguito della prima parte della serie', 49.99, '18'),
+	(14, 'Hitman 2', 'Viaggia in tutto il mondo e rintraccia i tuoi bersagli in fantastici luoghi esotici su HITMAN™ 2. Da strade assolate all\'ombra di pericolose foreste tropicali, nessun luogo è al sicuro dall\'Agente 47, l\'assassino più creativo del mondo, in questo incredibile thriller di spionaggio.', 49.99, '18'),
 	(15, 'Hitman 3', 'La morte attende. L\'Agente 47 ritorna in HITMAN 3, la drammatica conclusione della trilogia del mondo degli assassini.', 69.99, '18'),
 	(16, 'lego star wars the skywalker saga', 'In LEGO® Star Wars™: The Skywalker Saga, la galassia è tua. Vivi momenti memorabili e azione senza fine da tutti i nove film della saga di Skywalker, reinventati nel classico umorismo LEGO.', 59.99, 'E'),
-	(17, 'assassin\'s creed 2', 'Assassin\'s Creed II è il seguito del titolo non derivato da una proprietà intellettuale esistente che ha venduto più rapidamente nella storia dei videogiochi. L\'attesissimo capitolo introduce un nuovo eroe, il giovane nobile italiano Ezio Auditore da F', 29.99, '18'),
+	(17, 'assassin\'s creed 2', 'Assassin\'s Creed II è il seguito del titolo non derivato da una proprietà intellettuale esistente che ha venduto più rapidamente nella storia dei videogiochi. L\'attesissimo capitolo introduce un nuovo eroe, il giovane nobile italiano Ezio Auditore da Firenze', 29.99, '18'),
 	(18, 'far cry 6', 'Ti diamo il benvenuto a Yara, un paradiso tropicale congelato nel tempo. Antón Castillo, dittatore di Yara, vuole riportare la sua nazione alla gloria di un tempo. Per farlo è pronto a tutto, insieme al figlio Diego, che segue le sue orme insanguinate. ', 49.99, '18'),
-	(19, 'gta 5', 'Grand Theft Auto V: Premium Edition comprende l\'esperienza di gioco completa di Grand Theft Auto V, l\'accesso gratuito a Grand Theft Auto Online, in evoluzione costante, e tutti gli aggiornamenti e i nuovi contenuti, come Il colpo dell\'apocalisse, Traffic', 39.99, '18'),
+	(19, 'Grand Theft Auto V', 'Un giovane truffatore, un rapinatore di banche in pensione e uno spaventoso psicopatico sono costretti da una serie di difficoltà a mettere in atto una serie di audaci colpi in una città dove non possono fidarsi di nessuno, men che meno l\'uno dell\'altro.', 39.99, '18'),
 	(20, 'genshin impact', 'Climb any mountain, swim across any river, and glide over the world below, taking in the jaw-dropping scenery each step of the way. And if you stop to investigate a wandering Seelie or strange mechanism, who knows what you might discover?', 0, '12'),
 	(21, 'assassin\'s creed odissey', 'Vivi una vera e propria odissea per svelare i segreti del tuo passato, cambia il destino dell\'antica Grecia e diventa una leggenda vivente', 69.99, '18'),
 	(22, 'among us', 'La vita di un astronauta: completa tutti gli incarichi per vincere, ma fai attenzione agli impostori! Segnala i cadaveri e convoca riunioni d\'emergenza per espellere gli impostori. Scegli con attenzione!', 0, 'E'),
@@ -156,6 +163,7 @@ INSERT INTO `giochi` (`codice_gioco`, `titolo`, `descrizione`, `prezzo`, `pegi`)
 /*!40000 ALTER TABLE `giochi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.motivazione_pegi
+DROP TABLE IF EXISTS `motivazione_pegi`;
 CREATE TABLE IF NOT EXISTS `motivazione_pegi` (
   `codice_gioco` int(11) unsigned NOT NULL,
   `motivazione` char(50) NOT NULL DEFAULT '',
@@ -163,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `motivazione_pegi` (
   CONSTRAINT `FK_motivazione_pegi_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Dump dei dati della tabella php_gamestore.motivazione_pegi: ~0 rows (circa)
+-- Dump dei dati della tabella php_gamestore.motivazione_pegi: ~2 rows (circa)
 DELETE FROM `motivazione_pegi`;
 /*!40000 ALTER TABLE `motivazione_pegi` DISABLE KEYS */;
 INSERT INTO `motivazione_pegi` (`codice_gioco`, `motivazione`) VALUES
@@ -172,13 +180,14 @@ INSERT INTO `motivazione_pegi` (`codice_gioco`, `motivazione`) VALUES
 /*!40000 ALTER TABLE `motivazione_pegi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.pegi
+DROP TABLE IF EXISTS `pegi`;
 CREATE TABLE IF NOT EXISTS `pegi` (
   `pegi` char(2) NOT NULL DEFAULT 'E',
   `descrizione` tinytext DEFAULT NULL,
   PRIMARY KEY (`pegi`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Dump dei dati della tabella php_gamestore.pegi: ~0 rows (circa)
+-- Dump dei dati della tabella php_gamestore.pegi: ~6 rows (circa)
 DELETE FROM `pegi`;
 /*!40000 ALTER TABLE `pegi` DISABLE KEYS */;
 INSERT INTO `pegi` (`pegi`, `descrizione`) VALUES
@@ -191,6 +200,7 @@ INSERT INTO `pegi` (`pegi`, `descrizione`) VALUES
 /*!40000 ALTER TABLE `pegi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.possiede
+DROP TABLE IF EXISTS `possiede`;
 CREATE TABLE IF NOT EXISTS `possiede` (
   `codice_utente` int(10) unsigned NOT NULL,
   `codice_gioco` int(10) unsigned NOT NULL,
@@ -208,6 +218,7 @@ DELETE FROM `possiede`;
 /*!40000 ALTER TABLE `possiede` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.recensione
+DROP TABLE IF EXISTS `recensione`;
 CREATE TABLE IF NOT EXISTS `recensione` (
   `codice_recensione` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `testo` text NOT NULL DEFAULT ' ',
@@ -227,6 +238,7 @@ DELETE FROM `recensione`;
 /*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.software_house
+DROP TABLE IF EXISTS `software_house`;
 CREATE TABLE IF NOT EXISTS `software_house` (
   `codice_software_house` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` char(50) NOT NULL DEFAULT '',
@@ -236,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `software_house` (
   PRIMARY KEY (`codice_software_house`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.software_house: ~0 rows (circa)
+-- Dump dei dati della tabella php_gamestore.software_house: ~4 rows (circa)
 DELETE FROM `software_house`;
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
 INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `email`, `nazionalita`) VALUES
@@ -247,6 +259,7 @@ INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `emai
 /*!40000 ALTER TABLE `software_house` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.sviluppato
+DROP TABLE IF EXISTS `sviluppato`;
 CREATE TABLE IF NOT EXISTS `sviluppato` (
   `codice_gioco` int(11) unsigned NOT NULL,
   `software_house` int(10) unsigned NOT NULL,
