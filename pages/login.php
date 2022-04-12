@@ -9,7 +9,9 @@ if (isset($_POST["password"])) $password = $_POST["password"];
 
 //connessione al database per verificare le credenziali
 require('../data/db.php');
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+require('../data/errorredicrect.php');
+
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 $account_exist = "
     SELECT *
     FROM account

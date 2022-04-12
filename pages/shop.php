@@ -2,7 +2,9 @@
 //code
 require('../data/session.php');
 require('../data/db.php');
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->connect_error);
+require('../data/errorredicrect.php');
+
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
 //connessione al database?
 ?>
@@ -51,7 +53,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
                     <h1><?php echo $gamedata['titolo']; ?></h1>
                     <p> <?php echo $gamedata['descrizione']; ?> </p>
                     <a href="./product.php?game=<?php echo $game_display; ?>" class="button group scalehover mt4">
-                        <h3>Acquista ora</h3>
+                        Acquista ora
                     </a>
                 </div>
             </div>

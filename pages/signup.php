@@ -14,7 +14,9 @@ foreach ($userfields as $field) {
 //connessione al database
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require('../data/db.php');
-    $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die('connection error' . $conn->connect_error);
+    require('../data/errorredicrect.php');
+
+    $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
     //controlli
     //campi essenziali lasciati vuoti
