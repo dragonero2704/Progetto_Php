@@ -54,6 +54,27 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
         </div>
 
         <!-- barra di selezione tipo di ordine -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $("#menuButton").click(function(){
+            $("#menu").slideToggle();
+            }); 
+        });
+
+        </script>
+        <!-- eventuale chiusura </head>, apertura <body> -->
+        <button id="menuButton">Menu</button>
+        <div id="menu" style="display:none;">
+        <p>Ordina per:</p>
+        <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+            <input type="submit" value="titolo" name="metodo">
+            <input type="submit" value="Produttore" name="metodo">
+            <input type="submit" value="Prezzo" name="metodo">
+            <input type="submit" value="Pegi" name="metodo">
+        </form>
+        </div>
+
 
         <?php
             $trova_giochi = "
@@ -61,6 +82,10 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or die($conn->con
                 FROM giochi
             ";
             $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
+            if(isset($_POST['metodo']))
+            {
+                if($_post['metodo'] == 'Titolo')
+            }
         ?>
 
         <div class="result mt3">
