@@ -9,7 +9,7 @@ $search = isset($_GET['search']) ? urldecode($_GET['search']) : "";
 require('../data/db.php');
 require('../data/errorredicrect.php');
 
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
 $query = "SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         FROM giochi
@@ -60,18 +60,15 @@ $result = $conn->query($query) or die($conn->error);
     <div class="body">
         <!-- search bar -->
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
-        <div class="search_wrapper">
-            <div class="search_container mt8">
-                <input type="search" name="search" class="search" id="" placeholder="Search..." value="<?php echo htmlentities($search)?>">
-                <div class="searchbutton">
-                    <input type="submit" value="">
-                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+            <div class="search_wrapper">
+                <div class="search_container mt8">
+                    <input type="search" name="search" class="search" id="" placeholder="Search..." value="<?php echo htmlentities($search) ?>">
+                    <div class="searchbutton">
+                        <input type="submit" value="">
+                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-            
-
-
         </form>
 
         <div class="result mt3">

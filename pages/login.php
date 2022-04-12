@@ -29,6 +29,7 @@ if (!empty($email) && isset($email)) {
             //login success
             $_SESSION['email'] = $email;
             $_SESSION['nickname'] = $row['nickname'];
+            $_SESSION['codice_utente'] = $row['codice_utente'];
 
             header('location: ../index.php');
         } else {
@@ -70,7 +71,7 @@ $conn->close();
         <div class="login_wrapper">
             <div class="login_container reveal">
                 <h1>Login</h1>
-                <p class="mt2">Non hai un account? <a class="hoverglow bold" href="./signup.php">Registrati</a></p>
+                <p class="mt2">Non hai un account? <a class="hoverglow bold inline" href="./signup.php">Registrati</a></p>
                 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
 
                     <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>

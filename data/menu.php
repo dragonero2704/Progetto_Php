@@ -1,5 +1,7 @@
 <?php
     //modified links
+    $nickname = isset($_SESSION['nickname']) ? $nickname = $_SESSION['nickname'] : $nickname = "Account";
+
     if (isset($email)) {
         echo '<header>
             <div class="menu">
@@ -11,8 +13,8 @@
             echo '<a href="./logout.php" class="right menu_voice backglow">Logout</a>
             </header>';
         } else {
-            echo '<a href="./account.php" class="right menu_voice backglow">Account</a>
-            </header>';
+            echo "<a href='./account.php' class='right menu_voice backglow'>$nickname</a>
+            </header>";
         }
     } else {
         echo '<header>

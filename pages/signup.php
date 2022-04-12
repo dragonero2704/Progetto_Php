@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //controlli
     //campi essenziali lasciati vuoti
+    if(empty($userdata['email'])) $error['email'] = 'Inserire una email';
+    if(empty($userdata['password'])) $error['password'] = 'Inserire una password';
+    if(empty($userdata['nickname'])) $error['nickname'] = 'Inserire un nickname';
+
     
     //------------------------------------------------------------------------------------------------------
     //controllo email
@@ -73,13 +77,19 @@ caratteri speciali (!?@)
             . $userdata['nazionalita'] . "')";
 
         $conn->query($registration_query) or die($conn->error);
+
+        $query = "SELECT codice_utente
+        FROM account
+        WHERE email = '".$userdata['email']."'";
+        $ris = $conn->query($query);
+        $codice_utente = $ris->fetch_assoc()['codice_utente'];
         $conn->close();
 
         $error['ok'] = 'ok';
 
         $_SESSION['email'] = $userdata['email'];
         $_SESSION['nickname'] = $userdata['nickname'];
-
+        $_SESSION['cocice_utente'] = $codice_utente;
         $refreshtime = 5;
         header("refresh: $refreshtime; URL=../index.php");
     }
@@ -118,26 +128,26 @@ caratteri speciali (!?@)
     <div class="body">
         <div class="login_container mauto">
             <h1>Sign up</h1>
-            <p class="mt2">Hai già un account? <a class="hoverglow bold" href="./login.php">Accedi</a></p>
+            <p class="mt2">Hai già un account? <a class="hoverglow bold inline" href="./login.php">Accedi</a></p>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
                 <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
 
                 <div class="input_container">
-                    <input type="email" id="email" name="email" value="<?php echo $userdata['email']; ?>" placeholder=" " required>
-                    <label for="email">email</label>
+                    <input type="email" id="email" name="email" value="<?php echo $userdata['email']; ?>" placeholder=" " >
+                    <label for="email">email*</label>
                 </div>
                 <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
                 <div class="input_container">
 
-                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder=" " required>
-                    <label for="password">password</label>
+                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder=" " >
+                    <label for="password">password*</label>
                     <span id="eye" class="mr3">Show</span>
 
                 </div>
                 <div class="err<?php if (!isset($error['confermapassword'])) echo ' hidden'; ?>"><?php if (isset($error['confermapassword'])) echo $error['confermapassword'] ?></div>
                 <div class="input_container">
-                    <input type="password" maxlength="20" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder=" " required>
-                    <label for="confermapassword">conferma password</label>
+                    <input type="password" maxlength="20" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder=" " >
+                    <label for="confermapassword">conferma password*</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['nome'])) echo ' hidden'; ?>"><?php if (isset($error['nome'])) echo $error['nome'] ?></div>
@@ -154,8 +164,8 @@ caratteri speciali (!?@)
                 </div>
                 <div class="err<?php if (!isset($error['nickname'])) echo ' hidden'; ?>"><?php if (isset($error['nickname'])) echo $error['nickname'] ?></div>
                 <div class="input_container">
-                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" " required>
-                    <label for="nickname">nickname</label>
+                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" " >
+                    <label for="nickname">nickname*</label>
 
                 </div>
                 <div class="err<?php if (!isset($error['data_nascita'])) echo ' hidden'; ?>"><?php if (isset($error['data_nascita'])) echo $error['data_nascita'] ?></div>
@@ -173,7 +183,7 @@ caratteri speciali (!?@)
                 <div class="err<?php if (!isset($error['telefono'])) echo ' hidden'; ?>"><?php if (isset($error['telefono'])) echo $error['telefono'] ?></div>
                 <div class="input_container">
                     <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder=" " pattern="^{2}\d{3}\d{3}\d{4}">
-                    <label for="telefono">numero di telefono</label>
+                    <label for="telefono no-txt-transform">Numero di telefono</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['email_recupero'])) echo ' hidden'; ?>"><?php if (isset($error['email_recupero'])) echo $error['email_recupero'] ?></div>

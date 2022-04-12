@@ -75,7 +75,7 @@ while ($row = $ris->fetch_assoc()) {
                         ?>
                     </h2>
                     <div class="separator"></div>
-                    <a href="buy.php?game=<?php echo $codice_gioco; ?>" class="button">Acquista ora</a>
+                    <a href="buy.php?game=<?php echo $codice_gioco; ?>" class="button">Acquista ora - <?php echo $gamedata['prezzo'];?>€</a>
                     <div class="separator"></div>
                 </div>
             </div>
