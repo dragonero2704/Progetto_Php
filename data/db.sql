@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `giochi` (
   CONSTRAINT `FK_giochi_pegi` FOREIGN KEY (`pegi`) REFERENCES `pegi` (`pegi`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.giochi: ~15 rows (circa)
+-- Dump dei dati della tabella php_gamestore.giochi: ~18 rows (circa)
 DELETE FROM `giochi`;
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
 INSERT INTO `giochi` (`codice_gioco`, `titolo`, `descrizione`, `prezzo`, `pegi`) VALUES
