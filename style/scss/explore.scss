@@ -23,12 +23,12 @@ input[type="search"] {
 
 .result {
     max-width: calc(var(--max-width));
-    width: 100%;
+    width: fit-content;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin: auto;
+    margin: 0 auto;
     padding: 0;
 }
 

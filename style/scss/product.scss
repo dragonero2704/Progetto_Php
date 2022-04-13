@@ -1,3 +1,4 @@
+@use './components/utils.scss' as *;
 .product {
     position: relative;
     margin: 0 auto;
@@ -27,6 +28,9 @@
             text-align: center;
             margin: 10px 0;
         }
+        .voice_flex{
+            @include flex(center, space-between, nowrap);
+        }
     }
     .banner_container {
         position: relative;
@@ -49,10 +53,3 @@
     }
 }
 
-.button {
-    display: block;
-    width: 100%;
-    padding: 20px 40px;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-}

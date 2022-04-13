@@ -127,32 +127,35 @@ CREATE TABLE IF NOT EXISTS `giochi` (
   `descrizione` text NOT NULL,
   `prezzo` float unsigned NOT NULL,
   `pegi` char(2) NOT NULL,
+  `software_house` int(10) unsigned NOT NULL,
   PRIMARY KEY (`codice_gioco`),
   KEY `FK_giochi_pegi` (`pegi`),
-  CONSTRAINT `FK_giochi_pegi` FOREIGN KEY (`pegi`) REFERENCES `pegi` (`pegi`) ON UPDATE CASCADE
+  KEY `FK_giochi_software_house` (`software_house`),
+  CONSTRAINT `FK_giochi_pegi` FOREIGN KEY (`pegi`) REFERENCES `pegi` (`pegi`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_giochi_software_house` FOREIGN KEY (`software_house`) REFERENCES `software_house` (`codice_software_house`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.giochi: ~18 rows (circa)
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
-INSERT INTO `giochi` (`codice_gioco`, `titolo`, `descrizione`, `prezzo`, `pegi`) VALUES
-	(6, 'Battlefront 2', 'Metti alla prova la tua padronanza di blaster, spada laser e potere della Forza online e offline in STAR WARS™ Battlefront™ II: Celebration Edition.', 39.99, '12'),
-	(7, 'Red Dead Redemption 2', 'America, 1899. Arthur Morgan e la banda di Van der Linde sono in fuga. Con gli agenti federali e i migliori cacciatori di teste del Paese alle calcagna, la banda deve attraversare il cuore dell\'America, rapinando, rubando e combattendo per sopravvivere. E quando dei confitti interni sempre più profondi minacciano di lacerare il gruppo, Arthur sarà costretto a scegliere tra seguire i propri ideali o restare fedele alla banda che l\'ha cresciuto.', 49.99, '18'),
-	(9, 'Destiny 2', 'Destiny 2 è un MMO d\'azione con un unico mondo in continua evoluzione, accessibile ovunque, gratuitamente e in qualsiasi momento con gli amici.', 0, '16'),
-	(10, 'Minecraft', 'Minecraft è un gioco in cui potrai costruire con i blocchi e vivere avventure.', 16.99, ' 7'),
-	(11, 'Sifu', 'Sifu è il nuovo gioco di Sloclap, lo studio indipendente che ha realizzato Absolver. Un gioco d\'azione in terza persona con intensi combattimenti a mani nude, in cui vestirai i panni di un giovane studente di Kung Fu sulla via della vendetta.', 39.99, '16'),
-	(13, 'Hitman', 'Divertiti con il parco giochi definitivo dell\'Agente 47 e diventa l\'assassino più letale del mondo. Viaggia in luoghi esotici e elimina i tuoi bersagli con katane, fucili, palline da golf esplosive, sughi per la pasta scaduti e molto altro.', 29.99, '18'),
-	(14, 'Hitman 2', 'Viaggia in tutto il mondo e rintraccia i tuoi bersagli in fantastici luoghi esotici su HITMAN™ 2. Da strade assolate all\'ombra di pericolose foreste tropicali, nessun luogo è al sicuro dall\'Agente 47, l\'assassino più creativo del mondo, in questo incredibile thriller di spionaggio.', 49.99, '18'),
-	(15, 'Hitman 3', 'La morte attende. L\'Agente 47 ritorna in HITMAN 3, la drammatica conclusione della trilogia del mondo degli assassini.', 69.99, '18'),
-	(16, 'Lego star wars the skywalker saga', 'In LEGO® Star Wars™: The Skywalker Saga, la galassia è tua. Vivi momenti memorabili e azione senza fine da tutti i nove film della saga di Skywalker, reinventati nel classico umorismo LEGO.', 59.99, ' 0'),
-	(17, 'Assassin\'s creed 2', 'Assassin\'s Creed II è il seguito del titolo non derivato da una proprietà intellettuale esistente che ha venduto più rapidamente nella storia dei videogiochi. L\'attesissimo capitolo introduce un nuovo eroe, il giovane nobile italiano Ezio Auditore da Firenze', 29.99, '18'),
-	(18, 'Far cry 6', 'Ti diamo il benvenuto a Yara, un paradiso tropicale congelato nel tempo. Antón Castillo, dittatore di Yara, vuole riportare la sua nazione alla gloria di un tempo. Per farlo è pronto a tutto, insieme al figlio Diego, che segue le sue orme insanguinate. ', 49.99, '18'),
-	(19, 'Grand Theft Auto V', 'Un giovane truffatore, un rapinatore di banche in pensione e uno spaventoso psicopatico sono costretti da una serie di difficoltà a mettere in atto una serie di audaci colpi in una città dove non possono fidarsi di nessuno, men che meno l\'uno dell\'altro.', 39.99, '18'),
-	(20, 'Genshin impact', 'Genshin Impact è un action RPG open world, che ruota attorno alla costruzione ed all\'uso sinergico di un gruppo di quattro elementi, scelti tra i numerosi personaggi disponibili', 0, '12'),
-	(21, 'Assassin\'s creed odissey', 'Vivi una vera e propria odissea per svelare i segreti del tuo passato, cambia il destino dell\'antica Grecia e diventa una leggenda vivente.', 69.99, '18'),
-	(22, 'Among us', 'La vita di un astronauta: completa tutti gli incarichi per vincere, ma fai attenzione agli impostori! Segnala i cadaveri e convoca riunioni d\'emergenza per espellere gli impostori. Scegli con attenzione!', 0, ' 0'),
-	(23, 'Stranger of paradise final fantasy', 'In questo GDR d\'azione duro e puro, Jack affronta numerose sfide per restituire la luce ai Cristalli di Cornelia, regno invaso dall\'oscurità.', 59.99, '16'),
-	(24, 'Football manager 2022', 'La gestione del calcio non è solo vincere, è superare le avversità e conquistare il successo. Lottare fino a raggiungere la vetta o salvarti dal baratro; sono questi i momenti più belli.', 45, '12'),
-	(25, 'Rocket league', 'Rocket League è un ibrido arcade che unisce il calcio a una frenetica scorrazzata di veicoli potentissimi, con comandi semplici e gare basate sulle leggi della fisica.', 0, '12');
+INSERT INTO `giochi` (`codice_gioco`, `titolo`, `descrizione`, `prezzo`, `pegi`, `software_house`) VALUES
+	(6, 'Battlefront 2', 'Metti alla prova la tua padronanza di blaster, spada laser e potere della Forza online e offline in STAR WARS™ Battlefront™ II: Celebration Edition.', 39.99, '12', 5),
+	(7, 'Red Dead Redemption 2', 'America, 1899. Arthur Morgan e la banda di Van der Linde sono in fuga. Con gli agenti federali e i migliori cacciatori di teste del Paese alle calcagna, la banda deve attraversare il cuore dell\'America, rapinando, rubando e combattendo per sopravvivere. E quando dei confitti interni sempre più profondi minacciano di lacerare il gruppo, Arthur sarà costretto a scegliere tra seguire i propri ideali o restare fedele alla banda che l\'ha cresciuto.', 49.99, '18', 1),
+	(9, 'Destiny 2', 'Destiny 2 è un MMO d\'azione con un unico mondo in continua evoluzione, accessibile ovunque, gratuitamente e in qualsiasi momento con gli amici.', 0, '16', 1),
+	(10, 'Minecraft', 'Minecraft è un gioco in cui potrai costruire con i blocchi e vivere avventure.', 16.99, ' 7', 1),
+	(11, 'Sifu', 'Sifu è il nuovo gioco di Sloclap, lo studio indipendente che ha realizzato Absolver. Un gioco d\'azione in terza persona con intensi combattimenti a mani nude, in cui vestirai i panni di un giovane studente di Kung Fu sulla via della vendetta.', 39.99, '16', 4),
+	(13, 'Hitman', 'Divertiti con il parco giochi definitivo dell\'Agente 47 e diventa l\'assassino più letale del mondo. Viaggia in luoghi esotici e elimina i tuoi bersagli con katane, fucili, palline da golf esplosive, sughi per la pasta scaduti e molto altro.', 29.99, '18', 6),
+	(14, 'Hitman 2', 'Viaggia in tutto il mondo e rintraccia i tuoi bersagli in fantastici luoghi esotici su HITMAN™ 2. Da strade assolate all\'ombra di pericolose foreste tropicali, nessun luogo è al sicuro dall\'Agente 47, l\'assassino più creativo del mondo, in questo incredibile thriller di spionaggio.', 49.99, '18', 6),
+	(15, 'Hitman 3', 'La morte attende. L\'Agente 47 ritorna in HITMAN 3, la drammatica conclusione della trilogia del mondo degli assassini.', 69.99, '18', 6),
+	(16, 'Lego star wars the skywalker saga', 'In LEGO® Star Wars™: The Skywalker Saga, la galassia è tua. Vivi momenti memorabili e azione senza fine da tutti i nove film della saga di Skywalker, reinventati nel classico umorismo LEGO.', 59.99, ' 0', 1),
+	(17, 'Assassin\'s creed 2', 'Assassin\'s Creed II è il seguito del titolo non derivato da una proprietà intellettuale esistente che ha venduto più rapidamente nella storia dei videogiochi. L\'attesissimo capitolo introduce un nuovo eroe, il giovane nobile italiano Ezio Auditore da Firenze', 29.99, '18', 3),
+	(18, 'Far cry 6', 'Ti diamo il benvenuto a Yara, un paradiso tropicale congelato nel tempo. Antón Castillo, dittatore di Yara, vuole riportare la sua nazione alla gloria di un tempo. Per farlo è pronto a tutto, insieme al figlio Diego, che segue le sue orme insanguinate. ', 49.99, '18', 3),
+	(19, 'Grand Theft Auto V', 'Un giovane truffatore, un rapinatore di banche in pensione e uno spaventoso psicopatico sono costretti da una serie di difficoltà a mettere in atto una serie di audaci colpi in una città dove non possono fidarsi di nessuno, men che meno l\'uno dell\'altro.', 39.99, '18', 1),
+	(20, 'Genshin impact', 'Genshin Impact è un action RPG open world, che ruota attorno alla costruzione ed all\'uso sinergico di un gruppo di quattro elementi, scelti tra i numerosi personaggi disponibili', 0, '12', 1),
+	(21, 'Assassin\'s creed odissey', 'Vivi una vera e propria odissea per svelare i segreti del tuo passato, cambia il destino dell\'antica Grecia e diventa una leggenda vivente.', 69.99, '18', 3),
+	(22, 'Among us', 'La vita di un astronauta: completa tutti gli incarichi per vincere, ma fai attenzione agli impostori! Segnala i cadaveri e convoca riunioni d\'emergenza per espellere gli impostori. Scegli con attenzione!', 0, ' 0', 1),
+	(23, 'Stranger of paradise final fantasy', 'In questo GDR d\'azione duro e puro, Jack affronta numerose sfide per restituire la luce ai Cristalli di Cornelia, regno invaso dall\'oscurità.', 59.99, '16', 1),
+	(24, 'Football manager 2022', 'La gestione del calcio non è solo vincere, è superare le avversità e conquistare il successo. Lottare fino a raggiungere la vetta o salvarti dal baratro; sono questi i momenti più belli.', 45, '12', 1),
+	(25, 'Rocket league', 'Rocket League è un ibrido arcade che unisce il calcio a una frenetica scorrazzata di veicoli potentissimi, con comandi semplici e gare basate sulle leggi della fisica.', 0, '12', 1);
 /*!40000 ALTER TABLE `giochi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.motivazione_pegi
@@ -230,15 +233,18 @@ CREATE TABLE IF NOT EXISTS `software_house` (
   `email` char(50) NOT NULL DEFAULT '',
   `nazionalita` char(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`codice_software_house`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.software_house: ~4 rows (circa)
+-- Dump dei dati della tabella php_gamestore.software_house: ~6 rows (circa)
+DELETE FROM `software_house`;
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
 INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `email`, `nazionalita`) VALUES
-	(1, 'Rockmoon Games', '+122346759476', 'rock.moon@gmail.com', 'svedese'),
-	(2, 'Circle Enix', '+346752987465', 'circle.enix@gmail.com', 'francese'),
-	(3, 'Ubihard', '+567894326475', 'ubi.hard@gmail.com', 'messicana'),
-	(4, 'Sloclap', '', '', '');
+	(1, 'Rockstar Games', '+122346759476', 'rockstar.games@gmail.com', 'svedese'),
+	(2, 'Square Enix', '+346752987465', 'square.enix@gmail.com', 'francese'),
+	(3, 'Ubisoft', '+567894326475', 'ubisoft@gmail.com', 'messicana'),
+	(4, 'Sloclap', '', '', ''),
+	(5, 'Eletronic Arts', '', 'ea@gmail.com', 'americana'),
+	(6, 'IOI interactive', '', 'ioisupport@gmail.com', 'americana');
 /*!40000 ALTER TABLE `software_house` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.sviluppato

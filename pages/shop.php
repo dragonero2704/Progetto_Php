@@ -4,7 +4,7 @@ require('../data/session.php');
 require('../data/db.php');
 require('../data/errorredicrect.php');
 
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
 //connessione al database?
 ?>
@@ -49,7 +49,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
             ?>
             <div class="img_evidenza">
                 <img src="../media/games/<?php echo $game_display ?>/banner.jpg" alt="immagine non caricata">
-                <div class="content mr7">
+                <div class="content">
                     <h1><?php echo $gamedata['titolo']; ?></h1>
                     <p> <?php echo $gamedata['descrizione']; ?> </p>
                     <a href="./product.php?game=<?php echo $game_display; ?>" class="button group scalehover mt4">
@@ -60,63 +60,63 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 
 
         </div>
-    </div>
+
+
+
 
         <!-- barra di selezione tipo di ordine -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-        $(document).ready(function(){
-            $("#menuButton").click(function(){
-            $("#menu").slideToggle();
-            }); 
-        });
-
+            $(document).ready(function() {
+                $("#menuButton").click(function() {
+                    $("#menu").slideToggle();
+                });
+            });
         </script>
         <!-- eventuale chiusura </head>, apertura <body> -->
         <button id="menuButton">Ordina per:</button>
         <div id="menu" style="display:none;">
-        <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-            <input class="bottone" type="submit" value="titolo" name="metodo">
-            <input class="bottone" type="submit" value="prezzo" name="metodo">
-            <input class="bottone" type="submit" value="pegi" name="metodo">
-        </form>
+            <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+                <input class="bottone" type="submit" value="titolo" name="metodo">
+                <input class="bottone" type="submit" value="prezzo" name="metodo">
+                <input class="bottone" type="submit" value="pegi" name="metodo">
+            </form>
         </div>
 
 
-    <?php
+        <?php
 
-        if(isset($_POST['metodo']) && !empty($_POST['metodo']))
-        {
-            $metodo=$_POST['metodo'];
+        if (isset($_POST['metodo']) && !empty($_POST['metodo'])) {
+            $metodo = $_POST['metodo'];
             $trova_giochi = "
             SELECT *
             FROM giochi
             ORDER BY $metodo";
-
         } else {
             $trova_giochi = "
             SELECT *
             FROM giochi";
         }
 
-        $ris=$conn->query($trova_giochi) or die ($conn->connect_error);
+        $ris = $conn->query($trova_giochi) or die($conn->connect_error);
         ?>
 
-    <div class="result mt3">
-        <!-- roba che esce con search -->
-        <?php
-        while ($row = $ris->fetch_assoc()) {
-            echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
+        <div class="result">
+            <!-- roba che esce con search -->
+            <?php
+            while ($row = $ris->fetch_assoc()) {
+                echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
                 <div class="img_container">
                     <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
                 </div>
                 <h2>' . $row['titolo'] . '</h2>
                 <div class="pricetag">' . $row['prezzo'] . ' €</div>
             </a>';
-        }
-        ?>
+            }
+            ?>
+        </div>
     </div>
-    </div>
+
     <?php
     require('../data/footer.php');
     ?>

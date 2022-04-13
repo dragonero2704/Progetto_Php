@@ -12,7 +12,7 @@ else header('location: explore.php');
 
 //Fetch dei dettagli del gioco
 $query = "SELECT *
-FROM giochi
+FROM giochi JOIN software_house ON giochi.software_house = software_house.codice_software_house
 WHERE codice_gioco = $codice_gioco";
 
 $ris = $conn->query($query) or die($conn->error);
@@ -30,15 +30,15 @@ while ($row = $ris->fetch_assoc()) {
     $generi[$row['genere']] = $row['descrizione'];
 }
 //Fetch software house
-$query = "SELECT sviluppato.software_house, nome, telefono, email, nazionalita
-FROM sviluppato JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
-WHERE codice_gioco = $codice_gioco";
+// $query = "SELECT sviluppato.software_house, nome, telefono, email, nazionalita
+// FROM sviluppato JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
+// WHERE codice_gioco = $codice_gioco";
 
-$ris = $conn->query($query) or erredirect($conn->errno, $conn->error);
-$software_house = array();
-while ($row = $ris->fetch_assoc()) {
-    $software_house[$row['codice_software_house']] = $row;
-}
+// $ris = $conn->query($query) or erredirect($conn->errno, $conn->error);
+// $software_house = array();
+// while ($row = $ris->fetch_assoc()) {
+//     $software_house[$row['codice_software_house']] = $row;
+// }
 
 ?>
 
@@ -77,6 +77,15 @@ while ($row = $ris->fetch_assoc()) {
                     <div class="separator"></div>
                     <a href="buy.php?game=<?php echo $codice_gioco; ?>" class="button">Acquista ora - <?php echo $gamedata['prezzo'];?>€</a>
                     <div class="separator"></div>
+                    <div class="voice_flex"><span>Sviluppatore:</span><span><?php echo $gamedata['nome'];?></span></div>
+                    <div class="separator"></div>
+                    <div class="voice_flex"><span>Pegi:</span><span><?php echo $gamedata['pegi'];?></span></div>
+                    <div class="separator"></div>
+                    <div class="voice_flex"><span>Genere:</span><span><?php foreach(array_keys($generi) as $key){echo $key.' ';}?></span></div>
+
+                    <div class="separator"></div>
+
+
                 </div>
             </div>
 

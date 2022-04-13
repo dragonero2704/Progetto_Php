@@ -3,7 +3,7 @@ require('../data/session.php');
 require('../data/db.php');
 require('../data/errorredicrect.php');
 
-$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
 $sql = "
 SELECT *
@@ -13,22 +13,41 @@ WHERE email='$email'
 
 $ris = $conn->query($sql) or die($conn->error);
 
-if($ris->num_rows>0){
-    $ris=$ris->fetch_assoc();
+if ($ris->num_rows > 0) {
+    $ris = $ris->fetch_assoc();
     $userdata = $ris;
 }
 
-$codice=  isset($userdata['codice_utente']) ? $userdata['codice_utente'] : $userdata['codice_account'];
+$codice =  isset($userdata['codice_utente']) ? $userdata['codice_utente'] : $userdata['codice_account'];
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = array();
     $fields = array();
+
+    $cartella_upload = "../media/account/";
+    $img = "" . $codice . ".jpg";
+    if (trim($_FILES["upload"]["name"]) == '') {
+     
+        if (!is_uploaded_file($_FILES["profileimg"]["tmp_name"]) or $_FILES["profileimg"]["error"] > 0) {
+            echo 'Si sono verificati problemi nella procedura di upload!';
+        }
+        if (!is_dir($cartella_upload)) {
+            echo 'La cartella in cui si desidera salvare il file non esiste!';
+        }
+        if (!is_writable($cartella_upload)) {
+            echo "La cartella in cui fare l'upload non ha i permessi!";
+        }
+        if (!move_uploaded_file($_FILES["profileimg"]["tmp_name"], $cartella_upload . $img)) {
+            echo 'Ops qualcosa è andato storto nella procedura di upload!';
+        }
+    }
+   
 }
 
 $defaultpath = '../media/account/defaultuser.jpg';
-if(file_exists("../media/account/$codice.jpg")){
+if (file_exists("../media/account/$codice.jpg")) {
     $path = "../media/account/$codice.jpg";
-}else{
+} else {
     $path = $defaultpath;
 }
 
@@ -53,21 +72,21 @@ if(file_exists("../media/account/$codice.jpg")){
     require('../data/menu.php');
     ?>
     <div class="body">
-        <form action="<?php echo htmlentities($_SERVER['PHP_SELF'])?>" method="post">
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
 
-        <div class="login_container mauto">
-            <h1 class="mb3">Personalizza il tuo account</h1>
-            <div class="profilepic_container mb2">
-                <img src="<?php echo $path?>" alt="../media/account/defaultuser.jpg">
-                <label for="uploadfile">Sfoglia...</label>
+            <div class="login_container mauto">
+                <h1 class="mb3">Personalizza il tuo account</h1>
+                <div class="profilepic_container mb2">
+                    <img src="<?php echo $path ?>" alt="../media/account/defaultuser.jpg">
+                    <label for="uploadfile">Sfoglia...</label>
 
-                <input type="file" name="profileimg" id="uploadfile" class="hidden">
-            </div>
-            <div class="input_container mb3">
-                <input type="email" id="email" value="<?php echo $userdata['email']; ?>" placeholder=" " disabled aria-hidden="true">
-                <label for="email">email</label>
-            </div>
-            <div class="input_container mb2">
+                    <input type="file" name="profileimg" id="uploadfile" class="hidden">
+                </div>
+                <div class="input_container mb3">
+                    <input type="email" id="email" value="<?php echo $userdata['email']; ?>" placeholder=" " disabled aria-hidden="true">
+                    <label for="email">email</label>
+                </div>
+                <div class="input_container mb2">
                     <input type="text" id="nome" name="nome" value="<?php echo $userdata['nome']; ?>" placeholder=" ">
                     <label for="nome">nome</label>
 
@@ -101,7 +120,7 @@ if(file_exists("../media/account/$codice.jpg")){
                     <input type="email" id=email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder=" ">
                     <label for="email_recupero">Email recupero</label>
                 </div>
-        </div>
+            </div>
         </form>
     </div>
     <?php
