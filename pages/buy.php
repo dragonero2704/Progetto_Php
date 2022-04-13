@@ -11,15 +11,33 @@ if(empty($email)) header('location: login.php');
 //GET dell'articolo
 if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php');
 
+//trovo l'utente
+$email=$_SESSION['email'];
+
+$query = "SELECT *
+FROM account
+WHERE email = '$email'";
+
+$ris = $conn->query($query);
+$dati_utente = $ris->fetch_assoc();
+
 //trovo il gioco
-$query = "
-SELECT *
+$query = "SELECT *
 FROM giochi
 WHERE codice_gioco = $codice_gioco";
 
 $ris=$conn->query($query);
 $dati_gioco = $ris->fetch_assoc();
 
+$data_oggi=date("d/m/Y", time());
+
+$inserimento = "INSERT INTO possiede (codice_utente, codice_gioco, data_acquisto)
+VALUES ( '" . $dati_utente['codice_utente'] . "', '" . $dati_gioco['codice_gioco'] . "', '" . date("d/m/Y", time()) . "')
+";
+
+$conn->query('SET FOREIGN_KEY_CHECKS=0;');
+$conn->query($inserimento) or die($conn->error);
+$conn->query('SET FOREIGN_KEY_CHECKS=1;');
 
 ?>
 
@@ -40,7 +58,8 @@ $dati_gioco = $ris->fetch_assoc();
     <?php
     require('../data/menu.php');
     ?>
-    <div class="body"></div>
+    <div class="body">
+    </div>
     <?php
     require('../data/footer.php');
     ?>
