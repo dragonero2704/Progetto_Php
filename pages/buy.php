@@ -12,7 +12,6 @@ if(empty($email)) header('location: login.php');
 if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php');
 
 //trovo l'utente
-$email=$_SESSION['email'];
 
 $query = "SELECT *
 FROM account
