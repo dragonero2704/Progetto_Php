@@ -11,6 +11,15 @@ if(empty($email)) header('location: login.php');
 //GET dell'articolo
 if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php');
 
+//trovo il gioco
+$query = "
+SELECT *
+FROM giochi
+WHERE codice_gioco = $codice_gioco";
+
+$ris=$conn->query($query);
+$dati_gioco = $ris->fetch_assoc();
+
 
 ?>
 
@@ -24,7 +33,7 @@ if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('
     <?php
     require('../data/head.php')
     ?>
-    <title>Nome prodotto</title>
+    <title><?php echo $dati_gioco['titolo'] ?></title>
 </head>
 
 <body>
