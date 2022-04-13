@@ -18,18 +18,9 @@ $query = "SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         UNION
 
         SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
-        FROM giochi JOIN sviluppato ON sviluppato.codice_gioco = giochi.codice_gioco
-        JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
+        FROM giochi JOIN software_house ON giochi.software_house = software_house.codice_software_house
         WHERE software_house.nome LIKE '%$search%'
         GROUP BY giochi.codice_gioco
-
-        UNION
-
-        SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
-        FROM giochi JOIN sviluppato ON sviluppato.codice_gioco = giochi.codice_gioco
-        JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
-        WHERE software_house.nome LIKE '%$search%'
-        GROUP BY giochi.codice_gioco 
 
         -- UNION
         -- SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo

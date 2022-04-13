@@ -62,6 +62,7 @@ i {
 }
 
 .body {
+  display: block;
   min-height: calc(100vh - 100px);
   width: 100%;
   height: 100%;
@@ -370,12 +371,12 @@ input[type=search] {
 
 .result {
   max-width: calc(var(--max-width));
-  width: 100%;
+  width: fit-content;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin: auto;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -454,7 +455,6 @@ input[type=search] {
 
 .evidenza {
   width: 100%;
-  height: fit-content;
 }
 .evidenza h1 {
   position: relative;
@@ -482,7 +482,7 @@ input[type=search] {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.9));
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.9));
 }
 .evidenza .content {
   position: fixed;
@@ -502,13 +502,20 @@ input[type=search] {
   line-height: 1.5em;
   font-size: 1.1em;
 }
+.evidenza .content h1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .button {
   padding: 20px 40px;
   background-color: var(--secondary-color);
-  width: fit-content;
+  width: 100%;
   transition: 0.2s linear;
   text-align: center;
+  display: block;
+  border-radius: 10px;
 }
 
 #menuButton {
@@ -580,6 +587,12 @@ input[type=search] {
   text-align: center;
   margin: 10px 0;
 }
+.product .product_content .voice_flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
 .product .banner_container {
   position: relative;
   width: 80%;
@@ -598,14 +611,6 @@ input[type=search] {
   .product .product_content {
     width: 60%;
   }
-}
-
-.button {
-  display: block;
-  width: 100%;
-  padding: 20px 40px;
-  background-color: var(--secondary-color);
-  border-radius: 10px;
 }
 
 .mt1 {
