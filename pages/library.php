@@ -41,15 +41,6 @@ if (empty($search)) {
         WHERE software_house.nome LIKE '%$search%'
         GROUP BY giochi.codice_gioco
 
-        UNION
-
-        SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
-        FROM possiede JOIN giochi ON posside.codice_gioco = giochi.codice_gioco 
-        JOIN sviluppato ON sviluppato.codice_gioco = giochi.codice_gioco
-        JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
-        WHERE software_house.nome LIKE '%$search%'
-        GROUP BY giochi.codice_gioco 
-
         -- UNION
         -- SELECT giochi.codice_gioco, titolo, descrizione, pegi, prezzo
         -- FROM giochi
@@ -64,7 +55,6 @@ if (empty($search)) {
         while ($row = $ris->fetch_assoc()) {
             array_push($games, $row);
         }
-    } else {
     }
 }
 
