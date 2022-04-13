@@ -263,26 +263,6 @@ INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `emai
 	(6, 'IOI interactive', '', 'ioisupport@gmail.com', 'americana');
 /*!40000 ALTER TABLE `software_house` ENABLE KEYS */;
 
--- Dump della struttura di tabella php_gamestore.sviluppato
-DROP TABLE IF EXISTS `sviluppato`;
-CREATE TABLE IF NOT EXISTS `sviluppato` (
-  `codice_gioco` int(11) unsigned NOT NULL,
-  `software_house` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`codice_gioco`,`software_house`),
-  KEY `FK_sviluppato_software_house` (`software_house`),
-  CONSTRAINT `FK_sviluppato_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_sviluppato_software_house` FOREIGN KEY (`software_house`) REFERENCES `software_house` (`codice_software_house`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Relazione N a N tra gioco e software house';
-
--- Dump dei dati della tabella php_gamestore.sviluppato: ~3 rows (circa)
-DELETE FROM `sviluppato`;
-/*!40000 ALTER TABLE `sviluppato` DISABLE KEYS */;
-INSERT INTO `sviluppato` (`codice_gioco`, `software_house`) VALUES
-	(7, 1),
-	(11, 4),
-	(19, 1);
-/*!40000 ALTER TABLE `sviluppato` ENABLE KEYS */;
-
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
