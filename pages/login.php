@@ -86,7 +86,7 @@ $conn->close();
                         <label for="password">password</label>
                         <span id="eye" class="mr3">Show</span>
                     </div>
-                    <div class="submitbtn backglow backglow">
+                    <div class="submitbtn backglow">
                         <input type="submit" class="" value="login" name="login">
                     </div>
                 </form>

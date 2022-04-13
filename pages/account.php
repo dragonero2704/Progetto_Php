@@ -18,30 +18,32 @@ if ($ris->num_rows > 0) {
     $userdata = $ris;
 }
 
-$codice =  isset($userdata['codice_utente']) ? $userdata['codice_utente'] : $userdata['codice_account'];
+if (isset($userdata['codice_utente'])) $codice = $userdata['codice_utente'];
+else $codice = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = array();
     $fields = array();
-
+    $error = array();
     $cartella_upload = "../media/account/";
-    $img = "" . $codice . ".jpg";
-    if (trim($_FILES["upload"]["name"]) == '') {
-     
-        if (!is_uploaded_file($_FILES["profileimg"]["tmp_name"]) or $_FILES["profileimg"]["error"] > 0) {
-            echo 'Si sono verificati problemi nella procedura di upload!';
+    $img = $codice . ".jpg";
+
+    if (!empty(trim($_FILES["upload"]["name"]))) {
+
+        if (!is_uploaded_file($_FILES["upload"]["tmp_name"]) or $_FILES["upload"]["error"] > 0) {
+            $error['file'] = 'Si sono verificati problemi nella procedura di upload!';
         }
         if (!is_dir($cartella_upload)) {
-            echo 'La cartella in cui si desidera salvare il file non esiste!';
+            $error['file'] = 'La cartella in cui si desidera salvare il file non esiste!';
         }
         if (!is_writable($cartella_upload)) {
-            echo "La cartella in cui fare l'upload non ha i permessi!";
+            $error['file'] = "La cartella in cui fare l'upload non ha i permessi!";
         }
-        if (!move_uploaded_file($_FILES["profileimg"]["tmp_name"], $cartella_upload . $img)) {
-            echo 'Ops qualcosa è andato storto nella procedura di upload!';
+        if (!move_uploaded_file($_FILES["upload"]["tmp_name"], $cartella_upload . $img)) {
+            $error['file'] = 'Ops qualcosa è andato storto nella procedura di upload!';
         }
     }
-   
 }
 
 $defaultpath = '../media/account/defaultuser.jpg';
@@ -72,7 +74,7 @@ if (file_exists("../media/account/$codice.jpg")) {
     require('../data/menu.php');
     ?>
     <div class="body">
-        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
 
             <div class="login_container mauto">
                 <h1 class="mb3">Personalizza il tuo account</h1>
@@ -80,11 +82,16 @@ if (file_exists("../media/account/$codice.jpg")) {
                     <img src="<?php echo $path ?>" alt="../media/account/defaultuser.jpg">
                     <label for="uploadfile">Sfoglia...</label>
 
-                    <input type="file" name="profileimg" id="uploadfile" class="hidden">
+                    <input type="file" name="upload" id="uploadfile" class="hidden">
                 </div>
                 <div class="input_container mb3">
                     <input type="email" id="email" value="<?php echo $userdata['email']; ?>" placeholder=" " disabled aria-hidden="true">
                     <label for="email">email</label>
+                </div>
+                <div class="input_container mb2">
+                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" ">
+                    <label for="nickname">nickname</label>
+
                 </div>
                 <div class="input_container mb2">
                     <input type="text" id="nome" name="nome" value="<?php echo $userdata['nome']; ?>" placeholder=" ">
@@ -96,11 +103,7 @@ if (file_exists("../media/account/$codice.jpg")) {
                     <label for="cognome">cognome</label>
 
                 </div>
-                <div class="input_container mb2">
-                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" ">
-                    <label for="nickname">nickname</label>
 
-                </div>
                 <div class="input_container mb2">
                     <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
                     <label for="data_nascita">Data di nascita</label>
@@ -120,6 +123,14 @@ if (file_exists("../media/account/$codice.jpg")) {
                     <input type="email" id=email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder=" ">
                     <label for="email_recupero">Email recupero</label>
                 </div>
+
+                <div class="submitbtn backglow mb2">
+                    <input type="submit" class="" value="Salva" name="save">
+                </div>
+                <div class="submitbtn backglow">
+                    <input type="submit" class="" value="Scarta" name="Cancel"> 
+                </div>
+
             </div>
         </form>
     </div>
