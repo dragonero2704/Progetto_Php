@@ -36,7 +36,7 @@
         top: 50%;
         transform: translateY(-50%);
         padding: 20px 40px;
-        max-width: 500px;
+        max-width: 700px;
         z-index: 5;
         * {
             position: relative;
@@ -44,13 +44,11 @@
         }
         p {
             padding: 5px;
-            line-height: 1.5em;
-            font-size: 1.1em;
+            line-height: 1.5rem;
+            font-size: 1.1rem;
         }
-        h1{
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+        h1 {
+            font-size: 3.125rem;
         }
     }
 }
@@ -63,6 +61,7 @@
     text-align: center;
     display: block;
     border-radius: 10px;
+    font-size: 16px;
 }
 
 #menuButton {

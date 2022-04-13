@@ -31,7 +31,7 @@ header {
         line-height: 50px;
         text-transform: uppercase;
         padding: 0 20px;
-        font-size: 1em;
+        font-size: 1rem;
         z-index: 1000;
     }
 }
@@ -49,6 +49,6 @@ header::before {
 }
 
 header:hover,
-header:focus{
+header:focus {
     opacity: 1;
 }
