@@ -16,7 +16,7 @@ $search = isset($_GET['search']) ? $search = $_GET['search'] : $search = "";
 
 if (empty($search)) {
     $query = "SELECT *
-    FROM possiede JOIN giochi ON posside.codice_gioco = giochi.codice_gioco
+    FROM possiede JOIN giochi ON possiede.codice_gioco = giochi.codice_gioco
     WHERE codice_utente = $codice_utente";
 
     $ris = $conn->query($query);
