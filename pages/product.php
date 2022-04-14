@@ -3,12 +3,15 @@
 require('../data/session.php');
 require('../data/db.php');
 //connessione al database?
+require('../data/session.php');
 require('../data/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 //GET dell'articolo
 if (isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']);
 else header('location: explore.php');
+
+$_SESSION['codice_gioco'] = $codice_gioco;
 
 //Fetch dei dettagli del gioco
 $query = "SELECT *

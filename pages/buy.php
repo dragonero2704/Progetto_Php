@@ -9,7 +9,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 if(empty($email)) header('location: login.php');
 //connessione al database?
 //GET dell'articolo
-if(isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']); else header('location: explore.php');
+if(isset($_SESSION['codice_gioco'])) $codice_gioco = urldecode($_SESSION['codice_gioco']); else header('location: explore.php');
 
 //trovo l'utente
 
@@ -32,13 +32,6 @@ $inserimento = "INSERT INTO possiede (codice_utente, codice_gioco, data_acquisto
 VALUES ( '" . $dati_utente['codice_utente'] . "', '" . $dati_gioco['codice_gioco'] . "', '" . date("d/m/Y", time()) . "')
 ";
 
-$conferma=false;
-
-if(isset($_POST['confermare']))
-{
-    $conferma = true;
-}
-
 //controllo che il gioco non sia già posseduto
 
 $query = "SELECT *
@@ -56,11 +49,21 @@ if($ris->num_rows != 0)
     header("refresh:3;url=shop.php");
 }
 
+$conferma=false;
+
+if(isset($_POST['confermare']))
+{
+    $conferma = true;
+}
+
+$acquistato = false;
+
 if($conferma)
 {
     $conn->query('SET FOREIGN_KEY_CHECKS=0;');
     $conn->query($inserimento) or die($conn->error);
     $conn->query('SET FOREIGN_KEY_CHECKS=1;');
+    $acquistato = true;
 }
 
 
@@ -87,15 +90,24 @@ if($conferma)
         <?php
             if($attiva)
             {
-                echo '<div class="generalita">
-                <h1>' . $dati_gioco['titolo'] . '</h1>
-                <img src="../media/games/' . $dati_gioco['codice_gioco'] . '/banner.jpg" alt="">
-                </div>
-                <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
-                    <input class="group scalehover mt4 pulsante_acquisto" type="submit" name="confermare" value="ACQUISTA ' . $dati_gioco['prezzo'] . '€">
-                </form>';
+                if($acquistato)
+                {
+                    echo '<h1>Acquisto effettuato con successo</h1>
+                    <br>
+                    <h2>sarai reindirizzato al negozio tra pochi secondi</h2>';
+                    header("refresh:3;url=shop.php");
+                } else {
+                    echo '<div class="generalita">
+                    <h1>' . $dati_gioco['titolo'] . '</h1>
+                    <img src="../media/games/' . $dati_gioco['codice_gioco'] . '/banner.jpg" alt="">
+                    </div>
+                    <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
+                        <input class="group scalehover mt4 pulsante_acquisto" type="submit" name="confermare" value="ACQUISTA ' . $dati_gioco['prezzo'] . '€">
+                    </form>';
+                }
             } else {
-                echo '<h1>Ops, possiedi già questo gioco</h1>
+                echo '<h1>Ooops, possiedi già questo gioco</h1>
+                <br>
                 <h2>sarai reindirizzato al negozio tra pochi secondi</h2>';
             }
         ?>
