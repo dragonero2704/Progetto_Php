@@ -48,10 +48,13 @@ WHERE codice_gioco = $codice_gioco AND codice_utente = '$dati_utente[codice_uten
 $ris = NULL;
 $ris=$conn->query($query);
 
+$attiva=true;
+
 if($ris->num_rows != 0)
 {
-    header("refresh:5;url=shop.php");
     
+    $attiva=false;
+    header("refresh:5;url=shop.php");
 }
 
 if($conferma)
@@ -82,8 +85,11 @@ if($conferma)
     require('../data/menu.php');
     ?>
     <div class="body">
+        <h1><?php echo $dati_gioco['titolo'] ?></h1>
+        <img src="../media/games/<?php echo $dati_gioco['codice_gioco']?>/banner.jpg" alt="">
+        <p><?php echo $dati_gioco['prezzo'] ?>€</p>
         <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-            <input type="submit" name="confermare" value="ACQUISTA">
+            <input type="submit" name="confermare" value="ACQUISTA" <?php if(!$attiva) echo "disabled='disabled'"?>>
         </form>
     </div>
     <?php
