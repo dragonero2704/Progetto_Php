@@ -1,5 +1,5 @@
 <?php
-require('../data/session.php');
+require('../components/session.php');
 $query = array();
 $results = array();
 
@@ -7,7 +7,7 @@ $fieldsearch = array('name', 'software_house', 'genere', 'description');
 $search = isset($_GET['search']) ? urldecode($_GET['search']) : "";
 
 require('../data/db.php');
-require('../data/errorredicrect.php');
+require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
@@ -39,14 +39,14 @@ $result = $conn->query($query) or die($conn->error);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    require('../data/head.php')
+    require('../components/head.php')
     ?>
     <title>Esplora</title>
 </head>
 
 <body>
     <?php
-    require('../data/menu.php');
+    require('../components/menu.php');
     ?>
     <div class="body">
         <!-- search bar -->
@@ -66,7 +66,7 @@ $result = $conn->query($query) or die($conn->error);
             <!-- roba che esce con search -->
             <?php
             while ($row = $result->fetch_assoc()) {
-                echo '<a class="game" href="product.php?game=' . $row['codice_gioco'] . '">
+                echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
                 <div class="img_container">
                     <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
                 </div>
@@ -78,7 +78,7 @@ $result = $conn->query($query) or die($conn->error);
         </div>
     </div>
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
 </body>
 

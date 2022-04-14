@@ -14,7 +14,7 @@ foreach ($userfields as $field) {
 //connessione al database
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require('../data/db.php');
-    require('../data/errorredicrect.php');
+    require('../components/errorredicrect.php');
 
     $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
@@ -110,7 +110,7 @@ caratteri speciali (!?@)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <?php
-    require('../data/head.php');
+    require('../components/head.php');
     ?>
 
     <title>Sign Up</title>
@@ -215,7 +215,7 @@ caratteri speciali (!?@)
         </div>
     </div>
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
 </body>
 <script src="../javascript/psw.js"></script>

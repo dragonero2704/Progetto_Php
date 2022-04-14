@@ -1,9 +1,9 @@
 <?php
 //code
-require('../data/session.php');
+require('../components/session.php');
 //connessione al database
 require('../data/db.php');
-require('../data/errorredicrect.php');
+require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 if (isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
@@ -66,14 +66,14 @@ if (empty($search)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    require('../data/head.php');
+    require('../components/head.php');
     ?>
     <title>Home</title>
 </head>
 
 <body>
     <?php
-    require('../data/menu.php');
+    require('../components/menu.php');
     ?>
     <div class="body">
 
@@ -94,7 +94,7 @@ if (empty($search)) {
             <?php
             if (!empty($games)) {
                 foreach ($games as $game) {
-                    echo '<a class="game" href="product.php?game=' . $game['codice_gioco'] . '">
+                    echo '<a class="game scalehover" href="product.php?game=' . $game['codice_gioco'] . '">
                 <div class="img_container">
                     <img src="../media/games/' . $game['codice_gioco'] . '/preview.jpg" alt=" ">
                 </div>
@@ -109,7 +109,7 @@ if (empty($search)) {
 
     </div>
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
 </body>
 

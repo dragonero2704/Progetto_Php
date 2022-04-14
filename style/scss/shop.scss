@@ -75,14 +75,14 @@
 //     cursor: pointer;
 //     margin: 10px;
 // }
-#menu {
+.filter_menu {
     width: 20%;
     margin-left: 0px;
     position: relative;
 }
 
 @media (max-width:1400px) {
-    #menu {
+    .filter_menu {
         width: 30%;
     }
 }
@@ -96,12 +96,13 @@
     text-align: left;
 }
 
-.checkbox-genere[type="checkbox"]:checked+.sort_order {
+.checkbox-genere:checked+.sort_order {
     background-color: var(--secondary-color);
 }
 
 .shop_flex {
-    @include flex(flex-start, center, nowrap);
+    @include flex(flex-start, flex-start, nowrap);
+    flex-direction: row-reverse;
     padding: 20px;
     // max-width: calc(var(--max-width) + 20px);
     margin: 0 auto;
