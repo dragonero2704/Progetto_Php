@@ -29,7 +29,7 @@ $ris=$conn->query($query);
 $dati_gioco = $ris->fetch_assoc();
 
 $inserimento = "INSERT INTO possiede (codice_utente, codice_gioco, data_acquisto)
-VALUES ( '" . $dati_utente['codice_utente'] . "', '" . $dati_gioco['codice_gioco'] . "', '" . date("d/m/Y", time()) . "')
+VALUES ( '" . $dati_utente['codice_utente'] . "', '" . $dati_gioco['codice_gioco'] . "', '" . date("Y-m-d", time()) . "')
 ";
 
 //controllo che il gioco non sia già posseduto
