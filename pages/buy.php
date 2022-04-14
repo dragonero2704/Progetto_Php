@@ -28,8 +28,6 @@ WHERE codice_gioco = $codice_gioco";
 $ris=$conn->query($query);
 $dati_gioco = $ris->fetch_assoc();
 
-$data_oggi=date("d/m/Y", time());
-
 $inserimento = "INSERT INTO possiede (codice_utente, codice_gioco, data_acquisto)
 VALUES ( '" . $dati_utente['codice_utente'] . "', '" . $dati_gioco['codice_gioco'] . "', '" . date("d/m/Y", time()) . "')
 ";
@@ -39,6 +37,21 @@ $conferma=false;
 if(isset($_POST['confermare']))
 {
     $conferma = true;
+}
+
+//controllo che il gioco non sia già posseduto
+
+$query = "SELECT *
+FROM possiede
+WHERE codice_gioco = $codice_gioco AND codice_utente = '$dati_utente[codice_utente]'";
+
+$ris = NULL;
+$ris=$conn->query($query);
+
+if($ris->num_rows != 0)
+{
+    header("refresh:5;url=shop.php");
+    
 }
 
 if($conferma)
