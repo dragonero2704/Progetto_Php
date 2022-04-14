@@ -218,8 +218,7 @@ input {
   height: 100%;
   margin-top: auto;
 }
-
-label {
+.input_container label {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -228,10 +227,9 @@ label {
   text-transform: capitalize;
   z-index: 1;
 }
-
-input:focus + label,
-input:active + label,
-input:not(:placeholder-shown) + label {
+.input_container input:focus + label,
+.input_container input:active + label,
+.input_container input:not(:placeholder-shown) + label {
   top: 20% !important;
   left: 17px !important;
   font-size: 13px !important;
@@ -529,26 +527,40 @@ input[type=search] {
   font-size: 16px;
 }
 
-#menuButton {
-  background-color: black;
-  color: white;
-  padding: 5px 5px;
-  border: solid black 2px;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  margin: 10px;
-}
-
 #menu {
-  width: 10%;
+  width: 20%;
   margin-left: 0px;
   position: relative;
 }
 
-.bottone {
-  margin: 5px;
+@media (max-width: 1400px) {
+  #menu {
+    width: 30%;
+  }
+}
+.sort_order {
+  display: block;
   cursor: pointer;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.checkbox-genere[type=checkbox]:checked + .sort_order {
+  background-color: var(--secondary-color);
+}
+
+.shop_flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  padding: 20px;
+  margin: 0 auto;
+}
+.shop_flex .result {
+  max-width: none;
 }
 
 .errorbox {
@@ -586,14 +598,6 @@ input[type=search] {
   height: 400px;
   margin: 40px;
 }
-.product .product_content .separator {
-  display: block;
-  position: relative;
-  height: 2px;
-  width: 100%;
-  margin: 10px 0px;
-  background-color: var(--separator);
-}
 .product .product_content * {
   text-align: center;
   margin: 10px 0;
@@ -622,6 +626,14 @@ input[type=search] {
   .product .product_content {
     width: 60%;
   }
+}
+
+.separator {
+  display: block;
+  position: relative;
+  height: 2px;
+  width: 100%;
+  background-color: var(--separator);
 }
 
 .mt1 {

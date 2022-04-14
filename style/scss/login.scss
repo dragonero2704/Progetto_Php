@@ -55,24 +55,22 @@ input {
         // height: 20px;
         margin-top: auto;
     }
-}
-
-label {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 15px;
-    transition: all 0.1s linear;
-    text-transform: capitalize;
-    z-index: 1;
-}
-
-input:focus+label,
-input:active+label,
-input:not(:placeholder-shown)+label {
-    top: 20% !important;
-    left: 17px !important;
-    font-size: 13px !important;
+    label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 15px;
+        transition: all 0.1s linear;
+        text-transform: capitalize;
+        z-index: 1;
+    }
+    input:focus+label,
+    input:active+label,
+    input:not(:placeholder-shown)+label {
+        top: 20% !important;
+        left: 17px !important;
+        font-size: 13px !important;
+    }
 }
 
 input:-webkit-autofill,

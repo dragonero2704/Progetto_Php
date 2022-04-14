@@ -16,19 +16,11 @@
         width: 20%;
         height: 400px;
         margin: 40px;
-        .separator {
-            display: block;
-            position: relative;
-            height: 2px;
-            width: 100%;
-            margin: 10px 0px;
-            background-color: var(--separator);
-        }
         * {
             text-align: center;
             margin: 10px 0;
         }
-        .voice_flex{
+        .voice_flex {
             @include flex(center, space-between, nowrap);
         }
     }
@@ -53,3 +45,11 @@
     }
 }
 
+.separator {
+    display: block;
+    position: relative;
+    height: 2px;
+    width: 100%;
+    // margin: 10px 0px;
+    background-color: var(--separator);
+}
