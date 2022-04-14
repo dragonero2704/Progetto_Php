@@ -53,7 +53,7 @@ $attiva=true;
 if($ris->num_rows != 0)
 {
     $attiva=false;
-    header("refresh:5;url=shop.php");
+    header("refresh:3;url=shop.php");
 }
 
 if($conferma)
@@ -84,13 +84,21 @@ if($conferma)
     require('../data/menu.php');
     ?>
     <div class="body">
-        <div class="generalita">
-            <h1><?php echo $dati_gioco['titolo'] ?></h1>
-            <img src="../media/games/<?php echo $dati_gioco['codice_gioco']?>/banner.jpg" alt="">
-        </div>
-        <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-            <input class="group scalehover mt4 pulsante_acquisto" type="submit" name="confermare" value="ACQUISTA <?php echo $dati_gioco['prezzo'] ?>€" <?php if(!$attiva) echo "disabled='disabled'"?>>
-        </form>
+        <?php
+            if($attiva)
+            {
+                echo '<div class="generalita">
+                <h1>' . $dati_gioco['titolo'] . '</h1>
+                <img src="../media/games/' . $dati_gioco['codice_gioco'] . '/banner.jpg" alt="">
+                </div>
+                <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
+                    <input class="group scalehover mt4 pulsante_acquisto" type="submit" name="confermare" value="ACQUISTA ' . $dati_gioco['prezzo'] . '€">
+                </form>';
+            } else {
+                echo '<h1>Ops, possiedi già questo gioco</h1>
+                <h2>sarai reindirizzato al negozio tra pochi secondi</h2>';
+            }
+        ?>
     </div>
     <?php
     require('../data/footer.php');
