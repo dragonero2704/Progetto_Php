@@ -34,9 +34,20 @@ $inserimento = "INSERT INTO possiede (codice_utente, codice_gioco, data_acquisto
 VALUES ( '" . $dati_utente['codice_utente'] . "', '" . $dati_gioco['codice_gioco'] . "', '" . date("d/m/Y", time()) . "')
 ";
 
-$conn->query('SET FOREIGN_KEY_CHECKS=0;');
-$conn->query($inserimento) or die($conn->error);
-$conn->query('SET FOREIGN_KEY_CHECKS=1;');
+$conferma=false;
+
+if(isset($_POST['confermare']))
+{
+    $conferma = true;
+}
+
+if($conferma)
+{
+    $conn->query('SET FOREIGN_KEY_CHECKS=0;');
+    $conn->query($inserimento) or die($conn->error);
+    $conn->query('SET FOREIGN_KEY_CHECKS=1;');
+}
+
 
 ?>
 
@@ -58,6 +69,9 @@ $conn->query('SET FOREIGN_KEY_CHECKS=1;');
     require('../data/menu.php');
     ?>
     <div class="body">
+        <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+            <input type="submit" name="confermare" value="ACQUISTA">
+        </form>
     </div>
     <?php
     require('../data/footer.php');
