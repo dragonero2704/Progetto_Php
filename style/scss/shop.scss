@@ -1,3 +1,4 @@
+@use './components/utils.scss' as *;
 .evidenza {
     width: 100%;
     // margin: auto;
@@ -66,24 +67,46 @@
     font-size: 16px;
 }
 
-#menuButton {
-    background-color: black;
-    color: white;
-    padding: 5px 5px;
-    border: solid black 2px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    margin: 10px;
-}
-
+// #menuButton {
+//     background-color: black;
+//     color: white;
+//     padding: 5px 5px;
+//     border: solid black 2px;
+//     border-radius: 8px;
+//     cursor: pointer;
+//     margin: 10px;
+// }
 #menu {
-    width: 10%;
+    width: 20%;
     margin-left: 0px;
     position: relative;
 }
 
-.bottone {
-    margin: 5px;
+@media (max-width:1400px) {
+    #menu {
+        width: 30%;
+    }
+}
+
+.sort_order {
+    display: block;
     cursor: pointer;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.checkbox-genere[type="checkbox"]:checked+.sort_order {
+    background-color: var(--secondary-color);
+}
+
+.shop_flex {
+    @include flex(flex-start, center, nowrap);
+    padding: 20px;
+    // max-width: calc(var(--max-width) + 20px);
+    margin: 0 auto;
+    .result {
+        max-width: none;
+    }
 }

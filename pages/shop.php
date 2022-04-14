@@ -65,29 +65,11 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 
 
         <!-- barra di selezione tipo di ordine -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#menuButton").click(function() {
-                    $("#menu").slideToggle();
-                });
-            });
-        </script>
-        <!-- eventuale chiusura </head>, apertura <body> -->
-        <button id="menuButton">Ordina per:</button>
-        <div id="menu" style="display:none;">
-            <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-                <input class="bottone" type="submit" value="titolo" name="metodo">
-                <input class="bottone" type="submit" value="prezzo" name="metodo">
-                <input class="bottone" type="submit" value="pegi" name="metodo">
-            </form>
-        </div>
-
 
         <?php
-
-        if (isset($_POST['metodo']) && !empty($_POST['metodo'])) {
-            $metodo = $_POST['metodo'];
+        
+        if (isset($_GET['metodo']) and !empty($_GET['metodo'])) {
+            $metodo = $_GET['metodo'];
             $trova_giochi = "
             SELECT *
             FROM giochi
@@ -101,20 +83,65 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
         $ris = $conn->query($trova_giochi) or die($conn->connect_error);
         ?>
 
-        <div class="result">
-            <!-- roba che esce con search -->
-            <?php
-            while ($row = $ris->fetch_assoc()) {
-                echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
+
+        <div class="shop_flex mt3">
+            <div class="result m0">
+                <!-- roba che esce con search -->
+                <?php
+                while ($row = $ris->fetch_assoc()) {
+                    echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
                 <div class="img_container">
                     <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
                 </div>
                 <h2>' . $row['titolo'] . '</h2>
                 <div class="pricetag">' . $row['prezzo'] . ' €</div>
             </a>';
-            }
-            ?>
+                }
+                ?>
+            </div>
+            <div id="menu">
+                <h2 class="mb3">Ordina per...</h2>
+                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
+                    <input class="sort_order backglow" type="submit" value="titolo" name="metodo">
+                    <div class="separator"></div>
+                    <input class="sort_order backglow" type="submit" value="prezzo" name="metodo">
+                    <div class="separator"></div>
+                    <input class="sort_order backglow" type="submit" value="pegi" name="metodo">
+                </form>
+                <h2 class="mt3 mb3">Filtra generi...</h2>
+                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get" style="display: block;">
+                    <?php
+                        $query = "SELECT *
+                        FROM genere";
+                        $ris = $conn->query($query);
+                        while ($row = $ris->fetch_assoc()) {
+                            $genere = $row['genere'];
+                            echo "<input type='checkbox' name='generi[]' id='$genere-id' class='checkbox-genere hidden'>
+                            <label for='$genere-id' class='sort_order backglow'>$genere</label>
+                    <div class='separator'></div>
+                    ";
+                        }
+                    ?>
+                    
+                </form>
+
+            </div>
         </div>
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+        <!-- <script>
+            $(document).ready(function() {
+                $("#menuButton").click(function() {
+                    $("#menu").slideToggle();
+                });
+            });
+        </script> -->
+        <!-- eventuale chiusura </head>, apertura <body> -->
+        <!-- <button id="menuButton">Ordina per:</button> -->
+
+
+
+        
     </div>
 
     <?php
