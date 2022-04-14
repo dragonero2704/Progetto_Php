@@ -1,0 +1,22 @@
+.generalita {
+    margin:auto;
+    position: relative;
+    width: 60%;
+    h1{
+        text-align: center;
+    }
+}
+
+.pulsante_acquisto{
+    padding: 20px 40px;
+    background-color: var(--secondary-color);
+    width: 80%;
+    transition: 0.2s linear;
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    font-size: 16px;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+}

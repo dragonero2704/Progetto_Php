@@ -52,7 +52,6 @@ $attiva=true;
 
 if($ris->num_rows != 0)
 {
-    
     $attiva=false;
     header("refresh:5;url=shop.php");
 }
@@ -85,11 +84,12 @@ if($conferma)
     require('../data/menu.php');
     ?>
     <div class="body">
-        <h1><?php echo $dati_gioco['titolo'] ?></h1>
-        <img src="../media/games/<?php echo $dati_gioco['codice_gioco']?>/banner.jpg" alt="">
-        <p><?php echo $dati_gioco['prezzo'] ?>€</p>
+        <div class="generalita">
+            <h1><?php echo $dati_gioco['titolo'] ?></h1>
+            <img src="../media/games/<?php echo $dati_gioco['codice_gioco']?>/banner.jpg" alt="">
+        </div>
         <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-            <input type="submit" name="confermare" value="ACQUISTA" <?php if(!$attiva) echo "disabled='disabled'"?>>
+            <input class="group scalehover mt4 pulsante_acquisto" type="submit" name="confermare" value="ACQUISTA <?php echo $dati_gioco['prezzo'] ?>€" <?php if(!$attiva) echo "disabled='disabled'"?>>
         </form>
     </div>
     <?php
