@@ -58,7 +58,7 @@ if(isset($_POST['confermare']))
 
 $acquistato = false;
 
-if($conferma)
+if($conferma && $attiva)
 {
     $conn->query('SET FOREIGN_KEY_CHECKS=0;');
     $conn->query($inserimento) or die($conn->error);

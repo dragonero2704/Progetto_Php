@@ -85,7 +85,7 @@ while ($row = $ris->fetch_assoc()) {
                     <div class="voice_flex"><span>Pegi:</span><span><?php echo $gamedata['pegi'];?></span></div>
                     <div class="separator"></div>
                     <div class="voice_flex"><span>Genere:</span><span><?php foreach(array_keys($generi) as $key){echo $key.' ';}?></span></div>
-
+                    <div class="separator"></div>
                     <div class="separator"></div>
 
 
