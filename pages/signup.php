@@ -14,7 +14,7 @@ foreach ($userfields as $field) {
 //connessione al database
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require('../data/db.php');
-    require('../data/errorredicrect.php');
+    require('../components/errorredicrect.php');
 
     $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
@@ -110,7 +110,7 @@ caratteri speciali (!?@)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <?php
-    require('../data/head.php');
+    require('../components/head.php');
     ?>
 
     <title>Sign Up</title>
@@ -170,26 +170,26 @@ caratteri speciali (!?@)
                 </div>
                 <div class="err<?php if (!isset($error['data_nascita'])) echo ' hidden'; ?>"><?php if (isset($error['data_nascita'])) echo $error['data_nascita'] ?></div>
                 <div class="input_container">
-                    <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
+                    <input type="date" id="data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
                     <label for="data_nascita">Data di nascita</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['nazionalita'])) echo ' hidden'; ?>"><?php if (isset($error['nazionalita'])) echo $error['nazionalita'] ?></div>
                 <div class="input_container">
-                    <input type="text" id=nazionalita" name="nazionalita" value="<?php echo $userdata['nazionalita']; ?>" placeholder=" ">
+                    <input type="text" id="nazionalita" name="nazionalita" value="<?php echo $userdata['nazionalita']; ?>" placeholder=" ">
                     <label for="nazionalita">nazionalita</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['telefono'])) echo ' hidden'; ?>"><?php if (isset($error['telefono'])) echo $error['telefono'] ?></div>
                 <div class="input_container">
-                    <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder=" " pattern="^{2}\d{3}\d{3}\d{4}">
+                    <input type="tel" id="telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder=" " pattern="^{2}\d{3}\d{3}\d{4}">
                     <label for="telefono no-txt-transform">Numero di telefono</label>
                 </div>
 
                 <div class="err<?php if (!isset($error['email_recupero'])) echo ' hidden'; ?>"><?php if (isset($error['email_recupero'])) echo $error['email_recupero'] ?></div>
                 <div class="input_container mb2">
-                    <input type="email" id=email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder=" ">
-                    <label for="email_recupero">Email recupero</label>
+                    <input type="email" id="email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder=" ">
+                    <label for="email_recupero no-txt-transform">Email recupero</label>
                 </div>
 
 
@@ -215,7 +215,7 @@ caratteri speciali (!?@)
         </div>
     </div>
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
 </body>
 <script src="../javascript/psw.js"></script>

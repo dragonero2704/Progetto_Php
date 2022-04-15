@@ -1,8 +1,8 @@
 <?php
 //code
-require('../data/session.php');
+require('../components/session.php');
 require('../data/db.php');
-require('../data/errorredicrect.php');
+require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 
@@ -42,11 +42,11 @@ $ris = NULL;
 $ris=$conn->query($query);
 
 $attiva=true;
-
+$refreshtime = 3;
 if($ris->num_rows != 0)
 {
     $attiva=false;
-    header("refresh:3;url=shop.php");
+    header("refresh:$refreshtime;url=shop.php");
 }
 
 $conferma=false;
@@ -77,14 +77,14 @@ if($conferma && $attiva)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    require('../data/head.php')
+    require('../components/head.php')
     ?>
     <title><?php echo $dati_gioco['titolo'] ?></title>
 </head>
 
 <body>
     <?php
-    require('../data/menu.php');
+    require('../components/menu.php');
     ?>
     <div class="body">
         <?php
@@ -94,27 +94,43 @@ if($conferma && $attiva)
                 {
                     echo '<h1>Acquisto effettuato con successo</h1>
                     <br>
-                    <h2>sarai reindirizzato al negozio tra pochi secondi</h2>';
+                    <h2>sarai reindirizzato al negozio tra <span id="refreshseconds">' . $refreshtime . '</span></h2>
+                    <script>
+                    let el = document.getElementById("refreshseconds")
+                        setInterval(function() {
+                        let number = parseInt(el.innerHTML)
+                        el.innerHTML = number - 1
+                    }, 1000)
+                </script>';
                     header("refresh:3;url=shop.php");
                 } else {
                     echo '<div class="generalita">
-                    <h1>' . $dati_gioco['titolo'] . '</h1>
+                    <h1 class="mb3 mt8">Acquista - ' . $dati_gioco['titolo'] . '</h1>
                     <img src="../media/games/' . $dati_gioco['codice_gioco'] . '/banner.jpg" alt="">
-                    </div>
                     <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
                         <input class="group scalehover mt4 pulsante_acquisto" type="submit" name="confermare" value="ACQUISTA ' . $dati_gioco['prezzo'] . '€">
-                    </form>';
+                    </form>
+                    </div>
+                    ';
                 }
             } else {
                 echo '<h1>Ooops, possiedi già questo gioco</h1>
                 <br>
-                <h2>sarai reindirizzato al negozio tra pochi secondi</h2>';
+                <h2>sarai reindirizzato al negozio tra <span id="refreshseconds">' . $refreshtime . '</span></h2>
+                    <script>
+                    let el = document.getElementById("refreshseconds")
+                        setInterval(function() {
+                        let number = parseInt(el.innerHTML)
+                        el.innerHTML = number - 1
+                    }, 1000)
+                </script>';
             }
         ?>
     </div>
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
+    <option value=""></option>
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 <?php
 //code
-require('../data/session.php');
+require('../components/session.php');
 require('../data/db.php');
-require('../data/errorredicrect.php');
+require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
@@ -17,14 +17,14 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    require('../data/head.php')
+    require('../components/head.php')
     ?>
     <title>Shop</title>
 </head>
 
 <body>
     <?php
-    require('../data/menu.php');
+    require('../components/menu.php');
     ?>
     <div class="body">
 
@@ -65,88 +65,70 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 
 
         <!-- barra di selezione tipo di ordine -->
-
-        <?php
-        
-        if (isset($_GET['metodo']) and !empty($_GET['metodo'])) {
-            $metodo = $_GET['metodo'];
-            $trova_giochi = "
-            SELECT *
-            FROM giochi
-            ORDER BY $metodo";
-        } else {
-            $trova_giochi = "
-            SELECT *
-            FROM giochi";
-        }
-
-        $ris = $conn->query($trova_giochi) or die($conn->connect_error);
-        ?>
-
-
-        <div class="shop_flex mt3">
-            <div class="result m0">
-                <!-- roba che esce con search -->
-                <?php
-                while ($row = $ris->fetch_assoc()) {
-                    echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
-                <div class="img_container">
-                    <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
-                </div>
-                <h2>' . $row['titolo'] . '</h2>
-                <div class="pricetag">' . $row['prezzo'] . ' €</div>
-            </a>';
-                }
-                ?>
-            </div>
-            <div id="menu">
-                <h2 class="mb3">Ordina per...</h2>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
-                    <input class="sort_order backglow" type="submit" value="titolo" name="metodo">
+        <div class="shop_flex mt19 mb19">
+            <div class="filter_menu">
+                <h2 class=" mb3">Ordina per...</h2>
+                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get" onchange="update_ordine(this.children)" onload="update_ordine(this.children)">
+                    <input class='checkbox-genere hidden' type="radio" value="titolo" name="metodo" id="titolo-id" checked>
+                    <label for='titolo-id' class='sort_order backglow'>titolo</label>
                     <div class="separator"></div>
-                    <input class="sort_order backglow" type="submit" value="prezzo" name="metodo">
+                    <input class='checkbox-genere hidden' type="radio" value="prezzo" name="metodo" id="prezzo-id">
+                    <label for='prezzo-id' class='sort_order backglow'>prezzo</label>
                     <div class="separator"></div>
-                    <input class="sort_order backglow" type="submit" value="pegi" name="metodo">
+                    <input class='checkbox-genere hidden' type="radio" value="pegi" name="metodo" id="pegi-id">
+                    <label for='pegi-id' class='sort_order backglow'>pegi</label>
                 </form>
                 <h2 class="mt3 mb3">Filtra generi...</h2>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get" style="display: block;">
+
+                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get" style="display: block;" onchange="update_generi(this.children)" onload="update_generi(this.children)">
                     <?php
-                        $query = "SELECT *
+                    $query = "SELECT *
                         FROM genere";
-                        $ris = $conn->query($query);
-                        while ($row = $ris->fetch_assoc()) {
-                            $genere = $row['genere'];
-                            echo "<input type='checkbox' name='generi[]' id='$genere-id' class='checkbox-genere hidden'>
+                    $ris = $conn->query($query);
+                    while ($row = $ris->fetch_assoc()) {
+                        $genere = $row['genere'];
+                        echo "<input type='checkbox' name='generi[]' id='$genere-id' class='checkbox-genere hidden' value='$genere'>
                             <label for='$genere-id' class='sort_order backglow'>$genere</label>
                     <div class='separator'></div>
                     ";
-                        }
+                    }
                     ?>
-                    
+
                 </form>
 
+
+            </div>
+            <div class="result m0">
+                <!-- roba che esce con search -->
+                <?php
+                
+                    $trova_giochi = "
+            SELECT *
+            FROM giochi
+            ORDER BY titolo";
+                
+
+                $ris = $conn->query($trova_giochi) or die($conn->connect_error);
+                while ($row = $ris->fetch_assoc()) {
+                    echo '<a class="game scalehover" href="product.php?game=' . $row['codice_gioco'] . '">
+                        <div class="img_container">
+                            <img src="../media/games/' . $row['codice_gioco'] . '/preview.jpg" alt=" ">
+                        </div>
+                        <h2>' . $row['titolo'] . '</h2>
+                        <div class="pricetag">' . $row['prezzo'] . ' €</div>
+                        </a>';
+                }
+                ?>
             </div>
         </div>
-
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-        <!-- <script>
-            $(document).ready(function() {
-                $("#menuButton").click(function() {
-                    $("#menu").slideToggle();
-                });
-            });
-        </script> -->
-        <!-- eventuale chiusura </head>, apertura <body> -->
-        <!-- <button id="menuButton">Ordina per:</button> -->
-
-
-
-        
     </div>
 
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
+
+
 </body>
+<script src="../javascript/shop.js"></script>
 
 </html>

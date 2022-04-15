@@ -9,7 +9,7 @@ if (isset($_POST["password"])) $password = $_POST["password"];
 
 //connessione al database per verificare le credenziali
 require('../data/db.php');
-require('../data/errorredicrect.php');
+require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
 $account_exist = "
@@ -53,7 +53,7 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-    require('../data/head.php')
+    require('../components/head.php')
     ?>
     <title>Login</title>
 </head>
@@ -97,7 +97,7 @@ $conn->close();
 
 
     <?php
-    require('../data/footer.php');
+    require('../components/footer.php');
     ?>
 </body>
 

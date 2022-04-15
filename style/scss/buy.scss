@@ -1,16 +1,17 @@
 .generalita {
-    margin:auto;
+    margin: auto;
     position: relative;
-    width: 60%;
-    h1{
+    max-width: var(--max-width);
+    width: 100%;
+    h1 {
         text-align: center;
     }
 }
 
-.pulsante_acquisto{
+.pulsante_acquisto {
     padding: 20px 40px;
     background-color: var(--secondary-color);
-    width: 80%;
+    width: 100%;
     transition: 0.2s linear;
     text-align: center;
     display: block;

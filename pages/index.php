@@ -1,5 +1,5 @@
 <?php
-    require('../data/session.php');
+    require('../components/session.php');
     if(isset($email)){
         header("location: library.php?theme=default");
     }else{

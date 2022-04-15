@@ -33,4 +33,4 @@
 }
 */
 
-ScrollReveal.reveal('.reveal')
+ScrollReveal().reveal('.game')

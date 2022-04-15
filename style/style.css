@@ -380,7 +380,7 @@ input[type=search] {
 
 .result {
   max-width: calc(var(--max-width));
-  width: fit-content;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -491,7 +491,7 @@ input[type=search] {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.9));
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.7));
 }
 .evidenza .content {
   position: fixed;
@@ -501,8 +501,8 @@ input[type=search] {
   padding: 20px 40px;
   max-width: 700px;
   z-index: 5;
-  background-color: white;
   border-radius: 20px;
+  color: #cecece;
 }
 .evidenza .content * {
   position: relative;
@@ -528,14 +528,14 @@ input[type=search] {
   font-size: 16px;
 }
 
-#menu {
+.filter_menu {
   width: 20%;
   margin-left: 0px;
   position: relative;
 }
 
 @media (max-width: 1400px) {
-  #menu {
+  .filter_menu {
     width: 30%;
   }
 }
@@ -548,15 +548,16 @@ input[type=search] {
   text-align: left;
 }
 
-.checkbox-genere[type=checkbox]:checked + .sort_order {
+.checkbox-genere:checked + .sort_order {
   background-color: var(--secondary-color);
 }
 
 .shop_flex {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: nowrap;
+  flex-direction: row-reverse;
   padding: 20px;
   margin: 0 auto;
 }
@@ -1247,6 +1248,39 @@ input[type=search] {
     margin-left: 180px !important;
   }
 }
+.mt20 {
+  margin-top: 200px !important;
+}
+
+.mb20 {
+  margin-bottom: 200px !important;
+}
+
+.mr20 {
+  margin-right: 200px !important;
+}
+
+.ml20 {
+  margin-left: 200px !important;
+}
+
+@media (max-width: 768px) {
+  .mt20 {
+    margin-top: 190px !important;
+  }
+
+  .mb20 {
+    margin-bottom: 190px !important;
+  }
+
+  .mr20 {
+    margin-right: 190px !important;
+  }
+
+  .ml20 {
+    margin-left: 190px !important;
+  }
+}
 .m0 {
   margin: 0;
 }
@@ -1335,13 +1369,14 @@ h5 {
 }
 
 .no-txt-transform {
-  text-transform: none;
+  text-transform: none !important;
 }
 
 .generalita {
   margin: auto;
   position: relative;
-  width: 60%;
+  max-width: var(--max-width);
+  width: 100%;
 }
 .generalita h1 {
   text-align: center;
@@ -1350,7 +1385,7 @@ h5 {
 .pulsante_acquisto {
   padding: 20px 40px;
   background-color: var(--secondary-color);
-  width: 80%;
+  width: 100%;
   transition: 0.2s linear;
   text-align: center;
   display: block;
