@@ -62,7 +62,7 @@ $result = $conn->query($query) or die($conn->error);
             </div>
         </form>
 
-        <div class="result mt3">
+        <div class="result mt3 mb3">
             <!-- roba che esce con search -->
             <?php
             while ($row = $result->fetch_assoc()) {

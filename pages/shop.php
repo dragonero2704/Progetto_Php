@@ -65,7 +65,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 
 
         <!-- barra di selezione tipo di ordine -->
-        <div class="shop_flex mt19 mb19">
+        <div class="shop_flex mt19 mb5">
             <div class="filter_menu">
                 <h2 class=" mb3">Ordina per...</h2>
                 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get" onchange="update_ordine(this.children)" onload="update_ordine(this.children)">
