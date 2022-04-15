@@ -56,3 +56,4 @@ while ($row = $ris->fetch_assoc()) {
                         <div class="pricetag">' . $row['prezzo'] . ' €</div>
             </a>';
 }
+?>

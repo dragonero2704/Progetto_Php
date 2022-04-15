@@ -491,7 +491,7 @@ input[type=search] {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.9));
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.7));
 }
 .evidenza .content {
   position: fixed;
@@ -1369,7 +1369,7 @@ h5 {
 }
 
 .no-txt-transform {
-  text-transform: none;
+  text-transform: none !important;
 }
 
 .generalita {

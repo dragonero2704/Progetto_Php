@@ -18,4 +18,6 @@
     <!-- FontAwesome icons -->
     <script src="https://kit.fontawesome.com/632d3ab13d.js" crossorigin="anonymous"></script>
     <!-- Scrollreveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
     ';
+

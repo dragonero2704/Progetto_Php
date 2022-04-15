@@ -76,10 +76,13 @@ if (empty($search)) {
     require('../components/menu.php');
     ?>
     <div class="body">
+        
 
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
-            <div class="search_wrapper">
-                <div class="search_container mt8">
+        
+            <div class="search_wrapper mt8">
+            <h1 class="mauto mb3">La tua libreria</h1>
+                <div class="search_container">
                     <input type="search" name="search" class="search" id="" placeholder="Search..." value="<?php echo htmlentities($search) ?>">
                     <div class="searchbutton">
                         <input type="submit" value="">
@@ -112,5 +115,13 @@ if (empty($search)) {
     require('../components/footer.php');
     ?>
 </body>
+<script>
+    ScrollReveal().reveal('.game', {
+            easing: 'cubic-bezier(.215,.61,.355,1)',
+            // distance: '100px'
+            duration: 800,
+            distance: '1000px',
+        });
 
+</script>
 </html>

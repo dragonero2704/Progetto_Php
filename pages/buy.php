@@ -130,6 +130,7 @@ if($conferma)
     <?php
     require('../components/footer.php');
     ?>
+    <option value=""></option>
 </body>
 
 </html>

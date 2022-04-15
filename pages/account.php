@@ -2,7 +2,7 @@
 require('../components/session.php');
 require('../data/db.php');
 require('../components/errorredicrect.php');
-
+if (empty($email)) header('location: login.php');
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
 $sql = "
@@ -21,16 +21,21 @@ if ($ris->num_rows > 0) {
 if (isset($userdata['codice_utente'])) $codice = $userdata['codice_utente'];
 else $codice = "";
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = array();
-    $fields = array();
+    $fields = array('nickname', 'nome', 'cognome', 'data_nascita', 'nazionalita', 'telefono', 'email_recupero');
     $error = array();
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) $data[$field] = $_POST[$field];
+        else $data[$field] = '';
+    }
+
     $cartella_upload = "../media/account/";
     $img = $codice . ".jpg";
 
     if (!empty(trim($_FILES["upload"]["name"]))) {
-
+        $tipi_consentiti = array('png', 'jpg', 'jpeg');
         if (!is_uploaded_file($_FILES["upload"]["tmp_name"]) or $_FILES["upload"]["error"] > 0) {
             $error['file'] = 'Si sono verificati problemi nella procedura di upload!';
         }
@@ -40,11 +45,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!is_writable($cartella_upload)) {
             $error['file'] = "La cartella in cui fare l'upload non ha i permessi!";
         }
-        if (!move_uploaded_file($_FILES["upload"]["tmp_name"], $cartella_upload . $img)) {
-            $error['file'] = 'Ops qualcosa è andato storto nella procedura di upload!';
+        $file_extension = explode('.', $_FILES["upload"]["name"]);
+        $file_extension = $file_extension[count($file_extension) - 1];
+
+        echo $file_extension;
+
+        if (!in_array($file_extension, $tipi_consentiti)) {
+            $error['file'] = "Il file non è tra i tipi consentiti";
+        }
+        if (empty($error['file'])) {
+            if (!move_uploaded_file($_FILES["upload"]["tmp_name"], $cartella_upload . $img)) {
+                $error['file'] = 'Ops qualcosa è andato storto nella procedura di upload!';
+            }
         }
     }
+
+    foreach ($fields as $field) {
+        if ($data[$field] != $userdata[$field]) {
+            $update = "UPDATE account
+            SET $field = '" . $data[$field] . "'
+            WHERE email = '$email'";
+            $conn->query($update);
+        }
+    }
+    $ris = $conn->query($sql) or die($conn->error);
+
+    if ($ris->num_rows > 0) {
+        $ris = $ris->fetch_assoc();
+        $userdata = $ris;
+    }
 }
+
+
 
 $defaultpath = '../media/account/defaultuser.jpg';
 if (file_exists("../media/account/$codice.jpg")) {
@@ -75,14 +107,13 @@ if (file_exists("../media/account/$codice.jpg")) {
     ?>
     <div class="body">
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
-
             <div class="login_container mauto">
                 <h1 class="mb3">Personalizza il tuo account</h1>
+                <div class="err<?php if (!isset($error['file'])) echo ' hidden'; ?>"><?php if (isset($error['file'])) echo $error['file'] ?></div>
                 <div class="profilepic_container mb2">
                     <img src="<?php echo $path ?>" alt="../media/account/defaultuser.jpg">
                     <label for="uploadfile">Sfoglia...</label>
-
-                    <input type="file" name="upload" id="uploadfile" class="hidden">
+                    <input type="file" name="upload" id="uploadfile" class="hidden" onchange="">
                 </div>
                 <div class="input_container mb3">
                     <input type="email" id="email" value="<?php echo $userdata['email']; ?>" placeholder=" " disabled aria-hidden="true">
@@ -105,30 +136,30 @@ if (file_exists("../media/account/$codice.jpg")) {
                 </div>
 
                 <div class="input_container mb2">
-                    <input type="date" id=data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
-                    <label for="data_nascita">Data di nascita</label>
+                    <input type="date" id="data_nascita" name="data_nascita" value="<?php echo $userdata['data_nascita']; ?>" placeholder=" ">
+                    <label for="data_nascita" class="no-txt-transform">Data di nascita</label>
                 </div>
 
                 <div class="input_container mb2">
-                    <input type="text" id=nazionalita" name="nazionalita" value="<?php echo $userdata['nazionalita']; ?>" placeholder=" ">
+                    <input type="text" id="nazionalita" name="nazionalita" value="<?php echo $userdata['nazionalita']; ?>" placeholder=" ">
                     <label for="nazionalita">nazionalita</label>
                 </div>
 
                 <div class="input_container mb2">
-                    <input type="tel" id=telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder=" " pattern="^{2}\d{3}\d{3}\d{4}">
-                    <label for="telefono">numero di telefono</label>
+                    <input type="tel" id="telefono" name="telefono" value="<?php echo $userdata['telefono']; ?>" placeholder=" " pattern="^{2}\d{3}\d{3}\d{4}">
+                    <label for="telefono" class="no-txt-transform">Numero di telefono</label>
                 </div>
 
                 <div class="input_container mb2">
-                    <input type="email" id=email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder=" ">
-                    <label for="email_recupero">Email recupero</label>
+                    <input type="email" id="email_recupero" name="email_recupero" value="<?php echo $userdata['email_recupero']; ?>" placeholder=" ">
+                    <label for="email_recupero" class="no-txt-transform">Email recupero</label>
                 </div>
 
                 <div class="submitbtn backglow mb2">
                     <input type="submit" class="" value="Salva" name="save">
                 </div>
                 <div class="submitbtn backglow">
-                    <input type="submit" class="" value="Scarta" name="Cancel"> 
+                    <input type="reset" class="" value="Scarta" name="Cancel">
                 </div>
 
             </div>
@@ -138,9 +169,5 @@ if (file_exists("../media/account/$codice.jpg")) {
     require('../components/footer.php');
     ?>
 </body>
-
-<script>
-    //async update
-</script>
 
 </html>
