@@ -5,6 +5,8 @@ require('../components/session.php');
 require('../data/db.php');
 require('../components/errorredicrect.php');
 
+if(empty($email)) header('location: login.php');
+
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 if (isset($_SESSION['nickname'])) $nickname = $_SESSION['nickname'];
 else $nickname = "";
