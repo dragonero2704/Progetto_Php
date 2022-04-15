@@ -94,8 +94,8 @@ while ($row = $ris->fetch_assoc()) {
                 </div>
 
             </div>
-            <div class="description">
-                <h3>Descrizione</h3>
+            <div class="description mt3">
+                <h2>Descrizione</h2>
                 <p class="txtjustify"> <?php
                                         echo $gamedata['descrizione'];
                                         ?> </p>
