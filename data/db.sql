@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `email` char(50) NOT NULL,
   `password` char(200) NOT NULL,
-  `codice_utente` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `codice_utente` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nickname` char(50) NOT NULL,
   `nome` char(50) DEFAULT NULL,
   `cognome` char(50) DEFAULT NULL,
@@ -39,19 +39,19 @@ CREATE TABLE IF NOT EXISTS `account` (
 DELETE FROM `account`;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
-	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 0000000004, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
-	('asdasd@asd.com', '$2y$10$Bf/XkMM4RnCaYN3OWgAELO1IhU95C5LUoYE7Tk02Ed81yWB6RPnde', 0000000009, 'sium', '', '', '', '', '0000-00-00', ''),
-	('grazieperiltuosaldosteam@gmail.com', '$2y$10$DI.KrBMpzzAJsPNWsYd20OjrdKsdBBNedMidzf/osQYw2hBzH/pEi', 0000000007, 'yuukigerma', 'Riccardo', 'Cavenati', '', 'yuukigerma@gmail.com', '2019-01-01', 'Sburroland'),
-	('roberto.rudi04@gmail.com', '$2y$10$Zq8feZiFPC8O88lt8WypjezO1uw9sH7GnbuWIBpceGJ885BO0IgM6', 0000000001, 'dragonero2704', 'Roberto', 'Rudi', '3926043632', '', '2004-09-27', 'Italia'),
-	('sessopazzo@gmail.com', '$2y$10$aVTaHsEMS9UshpkHMBj4EOe1Z3kgAZakj91FHVtU2/n9PCYytQRly', 0000000005, 'cocksucker69', 'dio', 'cane', '', '', '2001-09-11', 'Siria');
+	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 4, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
+	('asdasd@asd.com', '$2y$10$Bf/XkMM4RnCaYN3OWgAELO1IhU95C5LUoYE7Tk02Ed81yWB6RPnde', 9, 'sium', '', '', '', '', '0000-00-00', ''),
+	('grazieperiltuosaldosteam@gmail.com', '$2y$10$DI.KrBMpzzAJsPNWsYd20OjrdKsdBBNedMidzf/osQYw2hBzH/pEi', 7, 'yuukigerma', 'Riccardo', 'Cavenati', '', 'yuukigerma@gmail.com', '2019-01-01', 'Sburroland'),
+	('roberto.rudi04@gmail.com', '$2y$10$Zq8feZiFPC8O88lt8WypjezO1uw9sH7GnbuWIBpceGJ885BO0IgM6', 1, 'dragonero2704', 'Roberto', 'Rudi', '3926043632', '', '2004-09-27', 'Italia'),
+	('sessopazzo@gmail.com', '$2y$10$aVTaHsEMS9UshpkHMBj4EOe1Z3kgAZakj91FHVtU2/n9PCYytQRly', 5, 'cocksucker69', 'dio', 'cane', '', '', '2001-09-11', 'Siria');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.aiuta
 DROP TABLE IF EXISTS `aiuta`;
 CREATE TABLE IF NOT EXISTS `aiuta` (
-  `codice_utente` int(10) unsigned zerofill NOT NULL,
+  `codice_utente` int(10) unsigned NOT NULL,
   `risolto` char(50) NOT NULL DEFAULT '',
-  `codice_account` int(10) unsigned zerofill NOT NULL,
+  `codice_account` int(10) unsigned NOT NULL,
   PRIMARY KEY (`codice_utente`,`codice_account`),
   KEY `codice_account` (`codice_account`),
   KEY `codice_utente` (`codice_utente`),
@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `aiuta` (
 DELETE FROM `aiuta`;
 /*!40000 ALTER TABLE `aiuta` DISABLE KEYS */;
 INSERT INTO `aiuta` (`codice_utente`, `risolto`, `codice_account`) VALUES
-	(0000000004, 'no', 0000000001),
-	(0000000006, 'si', 0000000002);
+	(4, 'no', 1),
+	(6, 'si', 2);
 /*!40000 ALTER TABLE `aiuta` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.appartiene
@@ -215,11 +215,11 @@ INSERT INTO `possiede` (`codice_utente`, `codice_gioco`, `data_acquisto`) VALUES
 -- Dump della struttura di tabella php_gamestore.recensione
 DROP TABLE IF EXISTS `recensione`;
 CREATE TABLE IF NOT EXISTS `recensione` (
-  `codice_recensione` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `codice_recensione` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `testo` text NOT NULL DEFAULT ' ',
-  `valutazione` int(2) unsigned zerofill DEFAULT 00,
-  `codice_gioco` int(10) unsigned zerofill NOT NULL,
-  `codice_utente` int(10) unsigned zerofill NOT NULL,
+  `valutazione` int(2) unsigned DEFAULT 0,
+  `codice_gioco` int(10) unsigned NOT NULL,
+  `codice_utente` int(10) unsigned NOT NULL,
   PRIMARY KEY (`codice_recensione`),
   KEY `FK_recensione_giochi` (`codice_gioco`),
   KEY `FK_recensione_account` (`codice_utente`),

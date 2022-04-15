@@ -15,7 +15,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../media/loghi/logo.jpg" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="../media/loghi/logo.jpg" type="image/x-icon"> -->
     <?php
     require('../components/head.php')
     ?>
@@ -29,11 +29,14 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
     <div class="body">
         <div class="poster">
             <div class="poster__img">
-                <img src="../media/loghi/logo.jpg" alt="">
+                <img src="../media/images/banner.jpg" alt="">
             </div>
             <div class="poster__content">
-                <h1><b>BENVENUTO NEL PHP GAMESTORE</b></h1>
-                <p>Scopri i nuovi giochi esplorando il sito, e se non l'hai già fatto crea un account, così potrai acquistare e giocare i tuoi giochi preferiti</p>
+                <h1><b>Benvenuto su Unreal!</b></h1>
+                <p>Scopri i nuovi giochi esplorando il sito, e se non l'hai già fatto crea un account, così potrai acquistare e giocare i tuoi giochi preferiti.</p>
+                <a href="./pages/login.php" class="button scalehover">Login</a>
+                <a href="./pages/signup.php" class="button scalehover mt1">Registrati</a>
+
             </div>
         </div>
     </div>

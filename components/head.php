@@ -4,10 +4,14 @@
     // custom css
     if (basename($_SERVER["PHP_SELF"]) === 'index.php'){
         echo'<!-- my css -->
-            <link rel="stylesheet" href="./style/style.css">';
+            <link rel="stylesheet" href="./style/style.css">
+    <link rel="shortcut icon" href="./media/loghi/logo.png" type="image/x-icon">
+    ';
     }else{
         echo '<!-- my css -->
-        <link rel="stylesheet" href="../style/style.css">';
+        <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../media/loghi/logo.png" type="image/x-icon">
+    ';
     }
     //link che non cambiano a seconda della posizione della pagina
     echo '
