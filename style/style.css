@@ -584,7 +584,7 @@ input[type=search] {
 .product {
   position: relative;
   margin: 0 auto;
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width));
   width: 100%;
   height: auto;
 }
@@ -627,6 +627,9 @@ input[type=search] {
   }
   .product .product_content {
     width: 60%;
+  }
+  .product .description {
+    padding: 0 20px;
   }
 }
 
@@ -1326,6 +1329,10 @@ h5 {
 
 .txtcenter {
   text-align: center;
+}
+
+.txtjustify {
+  text-align: justify;
 }
 
 .scalehover:hover,

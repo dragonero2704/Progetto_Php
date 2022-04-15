@@ -18,9 +18,6 @@ if ($ris->num_rows > 0) {
     $userdata = $ris;
 }
 
-if (isset($userdata['codice_utente'])) $codice = $userdata['codice_utente'];
-else $codice = "";
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = array();
     $fields = array('nickname', 'nome', 'cognome', 'data_nascita', 'nazionalita', 'telefono', 'email_recupero');
@@ -32,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $cartella_upload = "../media/account/";
-    $img = $codice . ".jpg";
+    $img = $codice_utente . ".jpg";
 
     if (!empty(trim($_FILES["upload"]["name"]))) {
         $tipi_consentiti = array('png', 'jpg', 'jpeg');
@@ -47,8 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         $file_extension = explode('.', $_FILES["upload"]["name"]);
         $file_extension = $file_extension[count($file_extension) - 1];
-
-        echo $file_extension;
 
         if (!in_array($file_extension, $tipi_consentiti)) {
             $error['file'] = "Il file non è tra i tipi consentiti";
@@ -65,7 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $update = "UPDATE account
             SET $field = '" . $data[$field] . "'
             WHERE email = '$email'";
-            $conn->query($update);
+
+            if ($field == 'nickname') {
+                if (empty($data[$field])) {
+                    $error[$field] = 'Il nickname non può essere vuoto';
+                } else {
+                    $_SESSION[$field] = $data[$field];
+                    $nickname = $data[$field];
+                }
+            }
+
+            if (empty($error[$field]))
+                $conn->query($update);
         }
     }
     $ris = $conn->query($sql) or die($conn->error);
@@ -79,8 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 $defaultpath = '../media/account/defaultuser.jpg';
-if (file_exists("../media/account/$codice.jpg")) {
-    $path = "../media/account/$codice.jpg";
+if (file_exists("../media/account/$codice_utente.jpg")) {
+    $path = "../media/account/$codice_utente.jpg";
 } else {
     $path = $defaultpath;
 }
@@ -98,7 +104,7 @@ if (file_exists("../media/account/$codice.jpg")) {
     <?php
     require('../components/head.php')
     ?>
-    <title>Account</title>
+    <title>Account -<?php echo $nickname ?></title>
 </head>
 
 <body>

@@ -22,6 +22,7 @@ if (empty($search)) {
     WHERE codice_utente = $codice_utente";
 
     $ris = $conn->query($query);
+    error_reporting(E_ALL ^ E_WARNING);
     if ($ris->num_rows > 0) {
         $games = array();
 
@@ -57,7 +58,7 @@ if (empty($search)) {
         }
     }
 }
-
+error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE html>

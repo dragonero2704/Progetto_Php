@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+require('../data/db.php');
+require('../components/errorredicrect.php');
 $error = array();
 $userdata = array();
 
@@ -10,21 +11,17 @@ foreach ($userfields as $field) {
     if (isset($_POST[$field])) $userdata[$field] = $_POST[$field];
     else $userdata[$field] = "";
 }
+$conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
 //connessione al database
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require('../data/db.php');
-    require('../components/errorredicrect.php');
-
-    $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno,$conn->connect_error);
-
     //controlli
     //campi essenziali lasciati vuoti
-    if(empty($userdata['email'])) $error['email'] = 'Inserire una email';
-    if(empty($userdata['password'])) $error['password'] = 'Inserire una password';
-    if(empty($userdata['nickname'])) $error['nickname'] = 'Inserire un nickname';
+    if (empty($userdata['email'])) $error['email'] = 'Inserire una email';
+    if (empty($userdata['password'])) $error['password'] = 'Inserire una password';
+    if (empty($userdata['nickname'])) $error['nickname'] = 'Inserire un nickname';
 
-    
+
     //------------------------------------------------------------------------------------------------------
     //controllo email
     $email = $userdata['email'];
@@ -80,16 +77,15 @@ caratteri speciali (!?@)
 
         $query = "SELECT codice_utente
         FROM account
-        WHERE email = '".$userdata['email']."'";
+        WHERE email = '" . $userdata['email'] . "'";
         $ris = $conn->query($query);
         $codice_utente = $ris->fetch_assoc()['codice_utente'];
-        $conn->close();
 
         $error['ok'] = 'ok';
 
         $_SESSION['email'] = $userdata['email'];
         $_SESSION['nickname'] = $userdata['nickname'];
-        $_SESSION['cocice_utente'] = $codice_utente;
+        $_SESSION['codice_utente'] = $codice_utente;
         $refreshtime = 5;
         header("refresh: $refreshtime; URL=../index.php");
     }
@@ -133,20 +129,20 @@ caratteri speciali (!?@)
                 <div class="err<?php if (!isset($error['email'])) echo ' hidden'; ?>"><?php if (isset($error['email'])) echo $error['email'] ?></div>
 
                 <div class="input_container">
-                    <input type="email" id="email" name="email" value="<?php echo $userdata['email']; ?>" placeholder=" " >
+                    <input type="email" id="email" name="email" value="<?php echo $userdata['email']; ?>" placeholder=" ">
                     <label for="email">email*</label>
                 </div>
                 <div class="err<?php if (!isset($error['password'])) echo ' hidden'; ?>"><?php if (isset($error['password'])) echo $error['password'] ?></div>
                 <div class="input_container">
 
-                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder=" " >
+                    <input type="password" maxlength="20" name="password" id="password" value="<?php echo $userdata['password']; ?>" placeholder=" ">
                     <label for="password">password*</label>
                     <span id="eye" class="mr3">Show</span>
 
                 </div>
                 <div class="err<?php if (!isset($error['confermapassword'])) echo ' hidden'; ?>"><?php if (isset($error['confermapassword'])) echo $error['confermapassword'] ?></div>
                 <div class="input_container">
-                    <input type="password" maxlength="20" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder=" " >
+                    <input type="password" maxlength="20" name="confermapassword" id="confermapassword" value="<?php echo $userdata['confermapassword']; ?>" placeholder=" ">
                     <label for="confermapassword">conferma password*</label>
 
                 </div>
@@ -164,7 +160,7 @@ caratteri speciali (!?@)
                 </div>
                 <div class="err<?php if (!isset($error['nickname'])) echo ' hidden'; ?>"><?php if (isset($error['nickname'])) echo $error['nickname'] ?></div>
                 <div class="input_container">
-                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" " >
+                    <input type="text" id="nickname" name="nickname" value="<?php echo $userdata['nickname']; ?>" placeholder=" ">
                     <label for="nickname">nickname*</label>
 
                 </div>

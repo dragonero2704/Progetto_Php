@@ -41,8 +41,6 @@ if (!empty($email) && isset($email)) {
     }
 }
 
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>

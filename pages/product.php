@@ -10,7 +10,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 if (isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']);
 else header('location: explore.php');
 
-$_SESSION['codice_gioco'] = $codice_gioco;
+if (empty($codice_utente)) header('location: login.php');
 
 //Fetch dei dettagli del gioco
 $query = "SELECT *
@@ -31,16 +31,7 @@ $generi = array();
 while ($row = $ris->fetch_assoc()) {
     $generi[$row['genere']] = $row['descrizione'];
 }
-//Fetch software house
-// $query = "SELECT sviluppato.software_house, nome, telefono, email, nazionalita
-// FROM sviluppato JOIN software_house ON sviluppato.software_house = software_house.codice_software_house
-// WHERE codice_gioco = $codice_gioco";
 
-// $ris = $conn->query($query) or erredirect($conn->errno, $conn->error);
-// $software_house = array();
-// while ($row = $ris->fetch_assoc()) {
-//     $software_house[$row['codice_software_house']] = $row;
-// }
 
 ?>
 
@@ -77,18 +68,38 @@ while ($row = $ris->fetch_assoc()) {
                         ?>
                     </h2>
                     <div class="separator"></div>
-                    <a href="buy.php?game=<?php echo $codice_gioco; ?>" class="button">Acquista ora - <?php echo $gamedata['prezzo'];?>€</a>
-                    <div class="separator"></div>
-                    <div class="voice_flex"><span>Sviluppatore:</span><span><?php echo $gamedata['nome'];?></span></div>
-                    <div class="separator"></div>
-                    <div class="voice_flex"><span>Pegi:</span><span><?php echo $gamedata['pegi'];?></span></div>
-                    <div class="separator"></div>
-                    <div class="voice_flex"><span>Genere:</span><span><?php foreach(array_keys($generi) as $key){echo $key.' ';}?></span></div>
+                    <?php
+                    //controllo se l'utente ha già il gioco
+                    $query = "SELECT codice_gioco
+                                FROM possiede
+                                WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
+                    if ($conn->query($query)->num_rows > 0) {
+                        //l'utente ha già il gioco
+                        echo '<a href="library.php" class="button">Nella libreria</a>';
+                    } else {
+                        //l'utente non ha il gioco
+                        echo '<a href="buy.php?game=' . $codice_gioco . '" class="button">Acquista ora - ' . $gamedata['prezzo'] . '€</a>';
+                    }
+                    ?>
 
                     <div class="separator"></div>
-
-
+                    <div class="voice_flex"><span>Sviluppatore:</span><span><?php echo $gamedata['nome']; ?></span></div>
+                    <div class="separator"></div>
+                    <div class="voice_flex"><span>Pegi:</span><span><?php echo $gamedata['pegi']; ?></span></div>
+                    <div class="separator"></div>
+                    <div class="voice_flex"><span>Genere:</span><span><?php foreach (array_keys($generi) as $key) {
+                                                                            echo $key . ' ';
+                                                                        } ?></span></div>
+                    <div class="separator"></div>
                 </div>
+
+            </div>
+            <div class="description">
+                <h3>Descrizione</h3>
+                <p class="txtjustify"> <?php
+                                        echo $gamedata['descrizione'];
+                                        ?> </p>
+
             </div>
 
         </div>
