@@ -27,8 +27,7 @@ if (isset($_POST['confermare'])) {
     $refreshtime = 3;
     header("refresh:$refreshtime; url=library.php");
     $inserimento = "INSERT INTO possiede (codice_utente, codice_gioco, data_acquisto)
-VALUES ( '" . $codice_utente . "', '" . $codice_gioco . "', '" . date("Y-m-d", time()) . "')
-";
+    VALUES ( '" . $codice_utente . "', '" . $codice_gioco . "', '" . date("Y-m-d", time()) . "')";
 } else {
     //la pagina è stata chiamata col metodo GET da product.php
     $conferma = false;

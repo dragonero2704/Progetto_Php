@@ -14,6 +14,7 @@ if (isset($email)) {
                 <a href="../index.php" class="menu_voice backglow">Home</a>
                 <a href="./explore.php" class="menu_voice backglow">esplora</a>
                 <a href="./shop.php" class="menu_voice backglow">Negozio</a>
+                <a href="./help.php" class="menu_voice backglow">Aiuto</a>
             </div>';
     if (basename($_SERVER['PHP_SELF']) === 'account.php') {
         echo '<a href="./logout.php" class="right menu_voice backglow">Logout</a>
@@ -28,6 +29,7 @@ if (isset($email)) {
                 <a href="../index.php" class="menu_voice backglow">Home</a>
                 <a href="./explore.php" class="menu_voice backglow">esplora</a>
                 <a href="./shop.php" class="menu_voice backglow">Negozio</a>
+                <a href="./help.php" class="menu_voice backglow">Aiuto</a>
             </div>
 
             <a href="./login.php" class="right menu_voice backglow">Login</a>
