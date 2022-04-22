@@ -1477,3 +1477,24 @@ h5 {
 .no-txt-transform {
   text-transform: none !important;
 }
+
+.create_form {
+  width: 80%;
+  margin: auto;
+  height: fit-content;
+  padding: 10px;
+}
+
+.m10 {
+  margin: 5px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.generalita {
+  margin: auto;
+  position: relative;
+  width: fit-content;
+}

@@ -81,8 +81,7 @@ if(isset($_POST["messaggio"]))
             WHERE codice_utente = '$cod'";
             $tmp = $conn->query($sql);
             $tmp = $tmp->fetch_assoc();
-            $nome = $tmp["nome"] . " " . $tmp["cognome"];
-            if(empty($nome) or $nome == " ") $nome = "anonimo";
+            $nome = $tmp["nickname"];
             echo '
                 <div class="generalita">
                 <h1 class="mb3 mt8">' . $nome . '</h1>

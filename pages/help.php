@@ -49,23 +49,23 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
         <?php
         if(isset($email) && !empty($email))
         {
-            echo '<div>
+            echo '<div class = "create_form">
             <form action="'. htmlentities($_SERVER['PHP_SELF']) .'" method="post">
-            <div class="input_container">
+            <div class="input_container m10">
                 <input type="text" name="titolo" id="titolo" placeholder=" " required>
                 <label for="titolo">titolo</label>
             </div>
-            <div class="input_container">
+            <div class="input_container m10">
                 <input type=text" name="descrizione" id="descrizione" placeholder=" " required>
                 <label for="descrizione">descrizione</label>
             </div>
-            <div class="submitbtn backglow">
+            <div class="submitbtn backglow m10">
                 <input type="submit" class="" value="crea" name="crea">
             </div>
             </form>
             </div>';
         }else{
-            echo "<h1>registrati per chiedere aiuto</h1>";
+            echo '<h1 class = "centered" >registrati per chiedere aiuto</h1>';
         }
         while ($dati_discussione = $ris->fetch_assoc()) {
             $cod = $dati_discussione["creatore"];
@@ -74,17 +74,16 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
             WHERE codice_utente = '$cod'";
             $tmp = $conn->query($sql);
             $tmp = $tmp->fetch_assoc();
-            $nome = $tmp["nome"] . " " . $tmp["cognome"];
-            if(empty($nome) or $nome == " ") $nome = "anonimo";
+            $nome = $tmp["nickname"];
             echo '
-                <a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
                 <div class="generalita">
-                <h1 class="mb3 mt8">' . $dati_discussione["titolo"] . '</h1>
-                <p>'.$dati_discussione["descrizione"].'</p>
-                <p>'.$nome.'</p>
-                <p>'.$dati_discussione["data_creazione"].'</p>
-                </div>
+                <a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
+                <h2 class="mb3 mt8 centered">' . $dati_discussione["titolo"] . '</h1>
+                <p class = "centered">'.$dati_discussione["descrizione"].'</p>
+                <p class = "centered">'.$nome.'</p>
+                <p class = "centered">'.$dati_discussione["data_creazione"].'</p>
                 </a>
+                </div>
                 ';
         }
         ?>
