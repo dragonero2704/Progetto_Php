@@ -21,7 +21,7 @@ USE `php_gamestore`;
 CREATE TABLE IF NOT EXISTS `account` (
   `email` char(50) NOT NULL,
   `password` char(200) NOT NULL,
-  `codice_utente` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `codice_utente` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nickname` char(50) NOT NULL,
   `nome` char(50) DEFAULT NULL,
   `cognome` char(50) DEFAULT NULL,
@@ -36,11 +36,11 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- Dump dei dati della tabella php_gamestore.account: ~5 rows (circa)
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
-	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 0000000004, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
-	('asdasd@asd.com', '$2y$10$Bf/XkMM4RnCaYN3OWgAELO1IhU95C5LUoYE7Tk02Ed81yWB6RPnde', 0000000009, 'sium', '', '', '', '', '0000-00-00', ''),
-	('grazieperiltuosaldosteam@gmail.com', '$2y$10$DI.KrBMpzzAJsPNWsYd20OjrdKsdBBNedMidzf/osQYw2hBzH/pEi', 0000000007, 'yuukigerma', 'Riccardo', 'Cavenati', '', 'yuukigerma@gmail.com', '2019-01-01', 'Sburroland'),
-	('roberto.rudi04@gmail.com', '$2y$10$Zq8feZiFPC8O88lt8WypjezO1uw9sH7GnbuWIBpceGJ885BO0IgM6', 0000000001, 'dragonero2704', 'Roberto', 'Rudi', '3926043632', '', '2004-09-27', 'Italia'),
-	('sessopazzo@gmail.com', '$2y$10$aVTaHsEMS9UshpkHMBj4EOe1Z3kgAZakj91FHVtU2/n9PCYytQRly', 0000000005, 'cocksucker69', 'dio', 'cane', '', '', '2001-09-11', 'Siria');
+	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 4, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
+	('asdasd@asd.com', '$2y$10$Bf/XkMM4RnCaYN3OWgAELO1IhU95C5LUoYE7Tk02Ed81yWB6RPnde', 9, 'sium', '', '', '', '', '0000-00-00', ''),
+	('grazieperiltuosaldosteam@gmail.com', '$2y$10$DI.KrBMpzzAJsPNWsYd20OjrdKsdBBNedMidzf/osQYw2hBzH/pEi', 7, 'yuukigerma', 'Riccardo', 'Cavenati', '', 'yuukigerma@gmail.com', '2019-01-01', 'Sburroland'),
+	('roberto.rudi04@gmail.com', '$2y$10$Zq8feZiFPC8O88lt8WypjezO1uw9sH7GnbuWIBpceGJ885BO0IgM6', 1, 'dragonero2704', 'Roberto', 'Rudi', '3926043632', '', '2004-09-27', 'Italia'),
+	('sessopazzo@gmail.com', '$2y$10$aVTaHsEMS9UshpkHMBj4EOe1Z3kgAZakj91FHVtU2/n9PCYytQRly', 5, 'cocksucker69', 'dio', 'cane', '', '', '2001-09-11', 'Siria');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.appartiene
@@ -76,13 +76,14 @@ CREATE TABLE IF NOT EXISTS `discussione` (
   PRIMARY KEY (`codice_discussione`),
   KEY `codice_creatore` (`creatore`),
   CONSTRAINT `codice_creatore` FOREIGN KEY (`creatore`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.discussione: ~2 rows (circa)
+-- Dump dei dati della tabella php_gamestore.discussione: ~4 rows (circa)
 /*!40000 ALTER TABLE `discussione` DISABLE KEYS */;
 INSERT INTO `discussione` (`data_creazione`, `codice_discussione`, `titolo`, `creatore`, `descrizione`) VALUES
 	('2022-04-22', 1, 'cambiare immagine', 9, 'ho un problema nel cambiare la mia immagine profilo'),
-	('2022-02-22', 2, 'stocazzo', 5, 'vi voglio stocazzare');
+	('2022-04-22', 7, 'quando finiremo questo lavoro?', 1, 'voglio capire quanto ci vorrà per completare questo e porre fine alla sofferenza'),
+	('2022-04-22', 8, 'dadsadaw', 1, 'jfaisjdfgoiqjsgiohnsioghsaoigns');
 /*!40000 ALTER TABLE `discussione` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.genere
@@ -206,9 +207,10 @@ CREATE TABLE IF NOT EXISTS `possiede` (
   CONSTRAINT `codice_utente__` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.possiede: ~7 rows (circa)
+-- Dump dei dati della tabella php_gamestore.possiede: ~8 rows (circa)
 /*!40000 ALTER TABLE `possiede` DISABLE KEYS */;
 INSERT INTO `possiede` (`codice_utente`, `codice_gioco`, `data_acquisto`) VALUES
+	(1, 11, '2022-04-22'),
 	(1, 13, '2022-04-14'),
 	(1, 14, '2022-04-14'),
 	(1, 15, '2022-04-14'),

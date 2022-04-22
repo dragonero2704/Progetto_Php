@@ -34,8 +34,8 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
             <div class="poster__content">
                 <h1><b>Benvenuto su Unreal!</b></h1>
                 <p>Scopri i nuovi giochi esplorando il sito, e se non l'hai già fatto crea un account, così potrai acquistare e giocare i tuoi giochi preferiti.</p>
-                <a href="./pages/login.php" class="button scalehover">Login</a>
-                <a href="./pages/signup.php" class="button scalehover mt1">Registrati</a>
+                <a href="login.php" class="button scalehover">Login</a>
+                <a href="signup.php" class="button scalehover mt1">Registrati</a>
 
             </div>
         </div>
