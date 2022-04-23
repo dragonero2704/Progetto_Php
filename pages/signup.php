@@ -8,7 +8,7 @@ $userdata = array();
 $userfields = array('email', 'password', 'confermapassword', 'nome', 'cognome', 'nickname', 'nazionalita', 'data_nascita', 'telefono', 'email_recupero');
 
 foreach ($userfields as $field) {
-    if (isset($_POST[$field])) $userdata[$field] = $_POST[$field];
+    if (isset($_POST[$field])) $userdata[$field] = trim($_POST[$field]);
     else $userdata[$field] = "";
 }
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
@@ -55,8 +55,9 @@ caratteri speciali (!?@)
             return '';
         }
     }
-    if (!empty($userdata['password']) and !empty(Validate($userdata['password'])))
-        $error['password'] = Validate($userdata['password']);
+    $validatation_error = Validate($userdata['password']);
+    if (!empty($userdata['password']) and !empty($validatation_error))
+        $error['password'] = $validatation_error;
 
     //controllo password
     if ($userdata['password'] !== $userdata['confermapassword']) {

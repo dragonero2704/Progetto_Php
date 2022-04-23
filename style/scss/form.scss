@@ -1,15 +1,15 @@
-.create_form{
+.create_form {
     width: 80%;
     margin: auto;
     height: fit-content;
     padding: 10px;
 }
 
-.m10{
+.m10 {
     margin: 5px;
 }
 
-.centered{
+.centered {
     text-align: center;
 }
 
@@ -18,7 +18,7 @@
     position: relative;
     width: fit-content;
     max-width: 80%;
-    flex:content;
+    flex: content;
     flex-wrap: wrap;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -27,13 +27,13 @@
     word-wrap: break-word
 }
 
-.sopra:hover{
+.sopra:hover {
     transform: scale(1.2);
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-.contorno{
+.contorno {
     border: 2px solid var(--separator);
     border-radius: 20px;
 }
@@ -42,11 +42,11 @@
     margin: auto;
     position: relative;
     width: 60%;
-    flex:content;
+    flex: content;
     flex-wrap: wrap;
     margin-bottom: 10px;
     margin-top: 10px;
     padding: 10px;
-    word-wrap: break-word
+    word-wrap: break-word;
     height: fit-content;
 }

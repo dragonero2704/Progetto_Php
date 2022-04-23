@@ -15,12 +15,12 @@ if (isset($_GET["codice_discussione"]))
 } else {
     $codice_discussione = $_SESSION["codice_discussione"];
 }
-
+//fetch di tutti i messaggi riguardanti una discussione
 $sql ="SELECT *
 FROM messaggio
 WHERE codice_discussione = '$codice_discussione'";
 
-$ris = $conn->query($sql);
+$discussione = $conn->query($sql);
 
 if(isset($_POST["messaggio"]))
 {
@@ -74,7 +74,7 @@ if(isset($_POST["messaggio"]))
             </div>';
         }
 
-        while ($dati_messaggio = $ris->fetch_assoc()) {
+        while ($dati_messaggio = $discussione->fetch_assoc()) {
             $cod = $dati_messaggio["codice_utente"];
             $sql = "SELECT *
             FROM account
@@ -94,7 +94,6 @@ if(isset($_POST["messaggio"]))
     <?php
     require('../components/footer.php');
     ?>
-    <option value=""></option>
 </body>
 
 </html>

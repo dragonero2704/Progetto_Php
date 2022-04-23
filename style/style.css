@@ -692,6 +692,19 @@ input[type=search] {
   background-color: var(--separator);
 }
 
+.dot {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  border: 2px solid var(--text-color);
+  border-radius: 100%;
+  margin-right: 5px;
+}
+
+.dot.star {
+  background-color: var(--text-color);
+}
+
 .generalita {
   margin: auto;
   position: relative;

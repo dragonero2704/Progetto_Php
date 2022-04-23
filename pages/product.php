@@ -96,11 +96,66 @@ while ($row = $ris->fetch_assoc()) {
             </div>
             <div class="description mt3">
                 <h2>Descrizione</h2>
-                <p class="txtjustify"> <?php
-                                        echo $gamedata['descrizione'];
-                                        ?> </p>
-
+                <p class="txtjustify"> <?php echo $gamedata['descrizione']; ?> </p>
             </div>
+            <!-- Sezione recensioni -->
+            <div>
+                <h2 class="mt5 mb2">Recensioni</h2>
+                
+                <!-- Recensione dell'utente loggato -->
+                <?php
+                    $query = "SELECT * 
+                    FROM recensione 
+                    WHERE codice_gioco = '$codice_gioco' AND codice_utente = $codice_utente";
+                    $recensione = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                    if($recensione){
+                        //l'utente ha già fatto una recensione, mostrala
+                    }else{
+                        //l'utente non ha ancora fatto una recensione, creare il box in cui può scriverla
+                    }
+
+                ?>
+                <!-- prova -->
+                <div>
+                    <h3>dragonero <span class="dot star"></span><span class="dot star"></span><span class="dot star"></span><span class="dot star"></span><span class="dot star"></span></h3>
+                    <p class="txtjustify">Bel gioco, 8/10</p>
+                    <div class="separator"></div>
+                </div>
+                <!-- prova -->
+
+
+                <?php
+                //fetch delle recensioni degli altri utenti
+                $query = "SELECT * 
+                FROM recensione 
+                WHERE codice_gioco = '$codice_gioco' AND codice_utente <> $codice_utente";
+                $recensioni = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                while($recensione = $recensioni->fetch_assoc()){
+                    $query = "SELECT * 
+                    FROM account
+                    WHERE codice_utente = '". $recensione['codice_utente']. "'";
+                    $tmp = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                    $tmp = $tmp->fetch_assoc();
+                    $tmp_nick = $tmp['nickname'];
+                    echo "<div>
+                    <h3>$tmp_nick";
+                    //  ciclo per la valutazione
+                    $stelle = $recensione['valutazione'];
+                    for ($i=0; $i < $stelle; $i++) { 
+                        echo"<span class='dot star'></span>";
+                    }
+                    $stelle_rimanenti = $stelle - $i;
+                    for ($i=0; $i < $$stelle_rimanenti; $i++) { 
+                        echo"<span class='dot'></span>";
+                    }
+                    echo "</h3>
+                    <p class='txtjustify'>".$recensione['testo']."</p>
+                    <div class='separator'></div>
+                </div>";
+                }
+                ?>
+            </div>
+
 
         </div>
     </div>
