@@ -2,7 +2,7 @@
 require('../components/session.php');
 require('../data/db.php');
 require('../components/errorredicrect.php');
-if (empty($email)) header('location: login.php');
+if (empty($email)) die(header('location: login.php'));
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
 $sql = "

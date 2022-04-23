@@ -66,6 +66,10 @@
     margin-right: 5px;
 }
 
+h3 .dot:nth-child(1) {
+    margin-left: 10px;
+}
+
 .dot.star {
     background-color: var(--text-color);
 }

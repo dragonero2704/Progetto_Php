@@ -8,9 +8,9 @@ require('../components/errorredicrect.php');
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 //GET dell'articolo
 if (isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']);
-else header('location: explore.php');
+else die(header('location: explore.php'));
 
-if (empty($codice_utente)) header('location: login.php');
+if (empty($codice_utente)) die(header('location: login.php'));
 
 //Fetch dei dettagli del gioco
 $query = "SELECT *
@@ -100,15 +100,15 @@ while ($row = $ris->fetch_assoc()) {
 
             </div>
             <!-- Sezione recensioni -->
-            <div class="description mt5">
+            <div class="description mt5 mb5">
                 <h2 class="mb2">Recensioni</h2>
                 
                 <!-- Recensione dell'utente loggato -->
                 <?php
-                    $query = "SELECT * 
+                    $sql = "SELECT * 
                     FROM recensione 
-                    WHERE codice_gioco = '$codice_gioco' AND codice_utente = $codice_utente";
-                    $recensione = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                    WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
+                    $recensione = $conn->query($sql) or erredirect($conn->errno+200, $conn->error);
                     if($recensione){
                         //l'utente ha già fatto una recensione, mostrala
                     }else{
@@ -118,42 +118,45 @@ while ($row = $ris->fetch_assoc()) {
                 ?>
                 <!-- ----------------------------- -->
                 <!-- prova -->
-                <div>
+                <!-- <div>
                     <h3>dragonero <span class="dot star"></span><span class="dot star"></span><span class="dot star"></span><span class="dot star"></span><span class="dot star"></span></h3>
                     <p class="txtjustify">Bel gioco, 8/10</p>
                     <div class="separator"></div>
-                </div>
+                </div> -->
                 <!-- prova -->
 
 
                 <?php
                 //fetch delle recensioni degli altri utenti
-                $query = "SELECT * 
-                FROM recensione 
-                WHERE codice_gioco = '$codice_gioco' AND codice_utente <> $codice_utente";
-                $recensioni = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                $sql = "SELECT * 
+                FROM recensione
+                WHERE codice_gioco = $codice_gioco AND codice_utente != $codice_utente";
+
+                $recensioni = $conn->query($sql) or erredirect($conn->errno+300, $conn->error);
+
                 while($recensione = $recensioni->fetch_assoc()){
                     $query = "SELECT * 
                     FROM account
-                    WHERE codice_utente = '". $recensione['codice_utente']. "'";
+                    WHERE codice_utente = ". $recensione['codice_utente'];
                     $tmp = $conn->query($query) or erredirect($conn->errno, $conn->error);
                     $tmp = $tmp->fetch_assoc();
                     $tmp_nick = $tmp['nickname'];
-                    echo "<div>
-                    <h3>$tmp_nick";
+                    echo "<div class='mt3 mb3'>
+                    <h3>$tmp_nick ";
                     //  ciclo per la valutazione
                     $stelle = $recensione['valutazione'];
                     for ($i=0; $i < $stelle; $i++) { 
                         echo"<span class='dot star'></span>";
                     }
-                    $stelle_rimanenti = $stelle - $i;
-                    for ($i=0; $i < $$stelle_rimanenti; $i++) { 
+                    $stelle_rimanenti = 5 - $stelle;
+                    for ($i=0; $i < $stelle_rimanenti; $i++) { 
                         echo"<span class='dot'></span>";
                     }
-                    echo "</h3>
+                    echo "
                     <p class='txtjustify'>".$recensione['testo']."</p>
-                    <div class='separator'></div>
-                </div>";
+                    
+                </div>
+                <div class='separator'></div>";
                 }
                 ?>
             </div>

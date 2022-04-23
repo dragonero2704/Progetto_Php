@@ -43,7 +43,7 @@ WHERE codice_gioco = $codice_gioco";
 
 if ($conferma) {
     $conn->query('SET FOREIGN_KEY_CHECKS=0;');
-    $conn->query($inserimento) or die($conn->error);
+    $conn->query($inserimento) or erredirect($conn->errno,$conn->error);
     $conn->query('SET FOREIGN_KEY_CHECKS=1;');
     $acquistato = true;
 }
