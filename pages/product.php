@@ -116,6 +116,7 @@ while ($row = $ris->fetch_assoc()) {
                     }
 
                 ?>
+                <!-- ----------------------------- -->
                 <!-- prova -->
                 <div>
                     <h3>dragonero <span class="dot star"></span><span class="dot star"></span><span class="dot star"></span><span class="dot star"></span><span class="dot star"></span></h3>
