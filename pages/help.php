@@ -76,9 +76,9 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
             $tmp = $tmp->fetch_assoc();
             $nome = $tmp["nickname"];
             echo '
-                <div class="generalita">
+                <div class="generalita sopra">
                 <a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
-                <h2 class="mb3 mt8 centered">' . $dati_discussione["titolo"] . '</h1>
+                <h2 class = "centered">' . $dati_discussione["titolo"] . '</h1>
                 <p class = "centered">'.$dati_discussione["descrizione"].'</p>
                 <p class = "centered">'.$nome.'</p>
                 <p class = "centered">'.$dati_discussione["data_creazione"].'</p>

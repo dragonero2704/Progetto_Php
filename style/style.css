@@ -1497,4 +1497,36 @@ h5 {
   margin: auto;
   position: relative;
   width: fit-content;
+  max-width: 80%;
+  flex: content;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  transition: 0.3s linear;
+  word-wrap: break-word;
+}
+
+.sopra:hover {
+  transform: scale(1.2);
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.contorno {
+  border: 2px solid var(--separator);
+  border-radius: 20px;
+}
+
+.messaggio {
+  margin: auto;
+  position: relative;
+  width: 60%;
+  flex: content;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  word-wrap: break-word;
+  height: fit-content;
 }

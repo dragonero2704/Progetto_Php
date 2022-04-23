@@ -83,9 +83,9 @@ if(isset($_POST["messaggio"]))
             $tmp = $tmp->fetch_assoc();
             $nome = $tmp["nickname"];
             echo '
-                <div class="generalita">
-                <h1 class="mb3 mt8">' . $nome . '</h1>
-                <p>'.$dati_messaggio["testo"].'</p>
+                <div class="messaggio contorno">
+                <h2 class="centered">' . $nome . '</h1>
+                <p class="centered">'.$dati_messaggio["testo"].'</p>
                 </div>
                 ';
         }
