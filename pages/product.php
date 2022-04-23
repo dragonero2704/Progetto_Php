@@ -97,10 +97,11 @@ while ($row = $ris->fetch_assoc()) {
             <div class="description mt3">
                 <h2>Descrizione</h2>
                 <p class="txtjustify"> <?php echo $gamedata['descrizione']; ?> </p>
+
             </div>
             <!-- Sezione recensioni -->
-            <div>
-                <h2 class="mt5 mb2">Recensioni</h2>
+            <div class="description mt5">
+                <h2 class="mb2">Recensioni</h2>
                 
                 <!-- Recensione dell'utente loggato -->
                 <?php
