@@ -32,7 +32,7 @@ if (empty($generi)) {
     $generi_string = $generi_string . ')';
 
 
-    $query = "SELECT *
+    $query = "SELECT DISTINCT *
         FROM appartiene JOIN giochi ON appartiene.codice_gioco = giochi.codice_gioco
         WHERE appartiene.genere IN $generi_string
     ";
