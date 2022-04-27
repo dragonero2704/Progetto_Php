@@ -10,7 +10,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 if (isset($_GET['game'])) $codice_gioco = urldecode($_GET['game']);
 else die(header('location: explore.php'));
 
-if (empty($codice_utente)) die(header('location: login.php'));
+// if (empty($codice_utente)) die(header('location: login.php'));
 
 //Fetch dei dettagli del gioco
 $query = "SELECT *
@@ -32,16 +32,16 @@ while ($row = $ris->fetch_assoc()) {
     $generi[$row['genere']] = $row['descrizione'];
 }
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    if(isset($_POST['delete'])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['delete'])) {
         // l'utente vuole cancellare la sua recesione
-    }else{
+    } else {
         $fields = array_keys($_POST);
         $data = array();
         $error = array();
-        foreach($fields as $field){
+        foreach ($fields as $field) {
             echo $field;
-            if(isset($_POST[$field])) $data[$field] = $_POST[$field];
+            if (isset($_POST[$field])) $data[$field] = $_POST[$field];
             else $data[$field] = "";
         }
     }
@@ -85,11 +85,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <div class="separator"></div>
                     <?php
                     //controllo se l'utente ha già il gioco
-                    $query = "SELECT codice_gioco
+                    $possiede = -1;
+                    if (!empty($codice_utente)) {
+                        $query = "SELECT codice_gioco
                                 FROM possiede
                                 WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
-                    $possiede = $conn->query($query) or erredirect($conn->errno, $conn->error);
-                    $possiede = $possiede->num_rows;
+                        $possiede = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                        $possiede = $possiede->num_rows;
+                    }
+
                     if ($possiede > 0) {
                         //l'utente ha già il gioco
                         echo '<a href="library.php" class="button">Nella libreria</a>';
@@ -121,7 +125,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
                 <!-- Recensione dell'utente loggato, se possiede il gioco -->
                 <?php
-                if ($possiede > 0) {
+                if ($possiede > 0 and !empty($codice_utente)) {
                     // echo '<h2 class="mb2">La tua recensione</h2>';
 
                     $sql = "SELECT * 
@@ -191,9 +195,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
                 <?php
                 //fetch delle recensioni degli altri utenti
-                $sql = "SELECT * 
-                FROM recensione
-                WHERE codice_gioco = $codice_gioco AND codice_utente != $codice_utente";
+                if (!empty($codice_utente)) {
+                    $sql = "SELECT * 
+                    FROM recensione
+                    WHERE codice_gioco = $codice_gioco AND codice_utente != $codice_utente";
+                }else{
+                    $sql = "SELECT * 
+                    FROM recensione
+                    WHERE codice_gioco = $codice_gioco";
+                }
+
 
                 $recensioni = $conn->query($sql) or erredirect($conn->errno + 300, $conn->error);
                 if ($recensioni->num_rows > 0) {
