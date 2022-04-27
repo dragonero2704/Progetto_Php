@@ -17,7 +17,7 @@ footer {
 .cc {
     position: relative;
     grid-column: 1 / #{$colonne +1};
-    grid-row: #{$righe - 1};
+    grid-row: #{$righe};
     text-align: center;
     margin: auto 0;
     opacity: .5;

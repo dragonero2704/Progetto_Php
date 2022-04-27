@@ -38,8 +38,10 @@ class Particle {
     draw() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+            // ctx.fillStyle = '#ffffff'
         ctx.fill();
+        // console.log(document.documentElement.style.getPropertyValue('--text-color'))
     }
 
     update() {
@@ -91,7 +93,8 @@ function init() {
         let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
         let directionx = (Math.random() * 5) - 2.5;
         let directiony = (Math.random() * 5) - 2.5;
-        let color = '#ffffff'
+        // let color = '#ffffff'
+        let color = getComputedStyle(document.documentElement).getPropertyValue('--text-color');
 
         particlesArray.push(new Particle(x, y, directionx, directiony, size, color))
     }
@@ -117,7 +120,9 @@ function connect() {
 
             if (distance < maxd) {
                 opacityvalue = 1 - (distance / (canvas.width * canvas.height / 25))
-                ctx.strokeStyle = `rgb(255,255,255, ${opacityvalue})`;
+                let rgbstring = getComputedStyle(document.documentElement).getPropertyValue('--text-color');
+                rgbstring = rgbstring.substring(0, rgbstring.length - 1);
+                ctx.strokeStyle = `${rgbstring}, ${opacityvalue})`;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);

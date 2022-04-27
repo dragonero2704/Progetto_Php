@@ -14,7 +14,7 @@
     .product_content {
         position: relative;
         width: 20%;
-        height: 400px;
+        height: fit-content;
         margin: 40px;
         * {
             text-align: center;
@@ -70,6 +70,42 @@ h3 .dot:nth-child(1) {
     margin-left: 10px;
 }
 
-.dot.star {
+.stars_container_review {
+    @include flex(center, flex-start, nowrap);
+    flex-direction: row-reverse;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    padding-left: 0;
+}
+
+.dot.star,
+input.star:checked~label.dot {
     background-color: var(--text-color);
+}
+
+.testo_recensione {
+    position: relative;
+    display: block;
+    border: 2px solid var(--separator);
+    padding: 10px;
+    height: 250px;
+    input,
+    textarea {
+        width: 100%;
+        height: 100%;
+        text-align: start;
+        resize: none;
+        background-color: transparent;
+        color: var(--text-color);
+        outline: none;
+        border: none
+    }
+}
+
+.submit_flex {
+    @include flex(center, space-between, nowrap);
+    .submitbtn {
+        width: 100% !important;
+    }
 }

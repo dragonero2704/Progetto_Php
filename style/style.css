@@ -27,17 +27,17 @@ html {
 }
 :root {
   --secondary-color: #10638c;
-  --text-color: rgb(0, 0, 0);
-  --separator: rgb(71, 71, 71);
-  --background-color: rgb(255, 255, 255);
+  --text-color: #444;
+  --separator: #474747;
+  --background-color: #ffffff;
   --max-width: 1400px;
   --err-color: #ff5b5b;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --text-color: #444;
-    --background-color: rgb(206, 206, 206);
+    --text-color: rgb(68, 68, 68);
+    --background-color: #cecece;
     --secondary-color: #198ec8;
   }
 }
@@ -554,7 +554,7 @@ footer {
 .cc {
   position: relative;
   grid-column: 1/6;
-  grid-row: 2;
+  grid-row: 3;
   text-align: center;
   margin: auto 0;
   opacity: 0.5;
@@ -606,6 +606,26 @@ i.fa-github:focus::after {
   height: 100%;
 }
 
+.fullvw {
+  width: 100vw;
+}
+
+.fullvh {
+  height: 100vh;
+}
+
+.fullw {
+  width: 100%;
+}
+
+.fullh {
+  height: 100%;
+}
+
+.pos-rel {
+  position: relative;
+}
+
 .search_wrapper {
   padding: 0 20px;
   max-width: var(--max-width);
@@ -632,7 +652,7 @@ input[type=search] {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin: 0 auto;
   padding: 0;
@@ -846,7 +866,7 @@ input[type=search] {
 .product .product_content {
   position: relative;
   width: 20%;
-  height: 400px;
+  height: fit-content;
   margin: 40px;
 }
 .product .product_content * {
@@ -903,8 +923,50 @@ h3 .dot:nth-child(1) {
   margin-left: 10px;
 }
 
-.dot.star {
+.stars_container_review {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row-reverse;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  padding-left: 0;
+}
+
+.dot.star,
+input.star:checked ~ label.dot {
   background-color: var(--text-color);
+}
+
+.testo_recensione {
+  position: relative;
+  display: block;
+  border: 2px solid var(--separator);
+  padding: 10px;
+  height: 250px;
+}
+.testo_recensione input,
+.testo_recensione textarea {
+  width: 100%;
+  height: 100%;
+  text-align: start;
+  resize: none;
+  background-color: transparent;
+  color: var(--text-color);
+  outline: none;
+  border: none;
+}
+
+.submit_flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.submit_flex .submitbtn {
+  width: 100% !important;
 }
 
 .generalita {
@@ -934,6 +996,7 @@ h3 .dot:nth-child(1) {
 .poster {
   position: relative;
   height: auto;
+  color: #cecece !important;
 }
 
 .poster__img {
@@ -1694,6 +1757,10 @@ h5 {
   text-transform: none !important;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .create_form {
   width: 80%;
   margin: auto;
@@ -1721,12 +1788,6 @@ h5 {
   padding: 10px;
   transition: 0.3s linear;
   word-wrap: break-word;
-}
-
-.sopra:hover {
-  transform: scale(1.2);
-  margin-top: 30px;
-  margin-bottom: 30px;
 }
 
 .contorno {

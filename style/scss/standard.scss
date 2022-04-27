@@ -31,17 +31,17 @@ $blu: #31108c;
 $azzurro-chiaro: #198ec8;
 :root {
     --secondary-color: #{$azzurro};
-    --text-color: rgb(0, 0, 0);
-    --separator: rgb(71, 71, 71);
-    --background-color: rgb(255, 255, 255);
+    --text-color: #444;
+    --separator: #474747;
+    --background-color: #ffffff;
     --max-width: 1400px;
     --err-color: #ff5b5b;
 }
 
 @media (prefers-color-scheme: light) {
      :root {
-        --text-color: #444;
-        --background-color: rgb(206, 206, 206);
+        --text-color: rgb(68, 68, 68);
+        --background-color: #cecece;
         --secondary-color: #{$azzurro-chiaro};
     }
 }

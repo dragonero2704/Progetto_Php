@@ -5,7 +5,8 @@ require('../components/errorredicrect.php');
 $error = array();
 $userdata = array();
 
-$userfields = array('email', 'password', 'confermapassword', 'nome', 'cognome', 'nickname', 'nazionalita', 'data_nascita', 'telefono', 'email_recupero');
+// $userfields = array('email', 'password', 'confermapassword', 'nome', 'cognome', 'nickname', 'nazionalita', 'data_nascita', 'telefono', 'email_recupero');
+$userfields = array_keys($_POST);
 
 foreach ($userfields as $field) {
     if (isset($_POST[$field])) $userdata[$field] = trim($_POST[$field]);

@@ -32,6 +32,21 @@ while ($row = $ris->fetch_assoc()) {
     $generi[$row['genere']] = $row['descrizione'];
 }
 
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    if(isset($_POST['delete'])){
+        // l'utente vuole cancellare la sua recesione
+    }else{
+        $fields = array_keys($_POST);
+        $data = array();
+        $error = array();
+        foreach($fields as $field){
+            echo $field;
+            if(isset($_POST[$field])) $data[$field] = $_POST[$field];
+            else $data[$field] = "";
+        }
+    }
+}
+
 
 ?>
 
@@ -73,7 +88,9 @@ while ($row = $ris->fetch_assoc()) {
                     $query = "SELECT codice_gioco
                                 FROM possiede
                                 WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
-                    if ($conn->query($query)->num_rows > 0) {
+                    $possiede = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                    $possiede = $possiede->num_rows;
+                    if ($possiede > 0) {
                         //l'utente ha già il gioco
                         echo '<a href="library.php" class="button">Nella libreria</a>';
                     } else {
@@ -101,21 +118,66 @@ while ($row = $ris->fetch_assoc()) {
             </div>
             <!-- Sezione recensioni -->
             <div class="description mt5 mb5">
-                <h2 class="mb2">Recensioni</h2>
-                
-                <!-- Recensione dell'utente loggato -->
+
+                <!-- Recensione dell'utente loggato, se possiede il gioco -->
                 <?php
+                if ($possiede > 0) {
+                    // echo '<h2 class="mb2">La tua recensione</h2>';
+
                     $sql = "SELECT * 
                     FROM recensione 
                     WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
-                    $recensione = $conn->query($sql) or erredirect($conn->errno+200, $conn->error);
-                    if($recensione){
-                        //l'utente ha già fatto una recensione, mostrala
-                    }else{
-                        //l'utente non ha ancora fatto una recensione, creare il box in cui può scriverla
+                    $recensione = $conn->query($sql) or erredirect($conn->errno + 200, $conn->error);
+
+                    echo "<div class='separator'></div>
+                    <div class='mb2 mt2'>
+                        <h2 class='mb1'>La tua recensione</h2>
+                        <form action='" . htmlentities($_SERVER['PHP_SELF']) . "?game=$codice_gioco' method='post'>
+                            <div class='stars_container_review mb1'>
+                                <input class='hidden star' type='radio' name='star' id='star1' value='5'>
+                                <label class='dot pointer' for='star1'></label>
+    
+                                <input class='hidden star' type='radio' name='star' id='star2' value='4'>
+                                <label class='dot pointer' for='star2'></label>
+    
+                                <input class='hidden star' type='radio' name='star' id='star3' value='3'>
+                                <label class='dot pointer' for='star3'></label>
+    
+                                <input class='hidden star' type='radio' name='star' id='star4' value='2'>
+                                <label class='dot pointer' for='star4'></label>
+    
+                                <input class='hidden star' type='radio' name='star' id='star5' value='1'>
+                                <label class='dot pointer' for='star5'></label>
+                            </div>
+                            <div class='testo_recensione mb1'>
+                            <textarea name='testo_recensione' id='' cols='30' rows='10' placeholder='Scrivi la tua recensione...' maxlength='10000' required></textarea>
+                            </div>
+
+                            <div class='submit_flex'>
+                                <div class='submitbtn backglow'>
+                                    <input type='submit' class='' value='Invia'>
+                                </div>
+                                <div class='submitbtn backglow ml1'>
+                                    <input type='reset' class='' value='Annulla'>
+                                </div>";
+                    if ($recensione->num_rows == 0) {
+                        //l'utente ha già fatto una recensione
+                        echo "<div class='submitbtn backglow ml1'>
+                                    <input type='submit' class='' value='Elimina recensione' name='delete'>
+                                </div>
+";
                     }
 
+                    echo "
+                            </div>
+                        </form>
+                        
+    
+                    </div>";
+                }
                 ?>
+
+                <div class="separator"></div>
                 <!-- ----------------------------- -->
                 <!-- prova -->
                 <!-- <div>
@@ -125,6 +187,7 @@ while ($row = $ris->fetch_assoc()) {
                 </div> -->
                 <!-- prova -->
 
+                <h2 class="mb2 mt2">Recensioni di altri utenti</h2>
 
                 <?php
                 //fetch delle recensioni degli altri utenti
@@ -132,32 +195,36 @@ while ($row = $ris->fetch_assoc()) {
                 FROM recensione
                 WHERE codice_gioco = $codice_gioco AND codice_utente != $codice_utente";
 
-                $recensioni = $conn->query($sql) or erredirect($conn->errno+300, $conn->error);
-
-                while($recensione = $recensioni->fetch_assoc()){
-                    $query = "SELECT * 
+                $recensioni = $conn->query($sql) or erredirect($conn->errno + 300, $conn->error);
+                if ($recensioni->num_rows > 0) {
+                    while ($recensione = $recensioni->fetch_assoc()) {
+                        $query = "SELECT * 
                     FROM account
-                    WHERE codice_utente = ". $recensione['codice_utente'];
-                    $tmp = $conn->query($query) or erredirect($conn->errno, $conn->error);
-                    $tmp = $tmp->fetch_assoc();
-                    $tmp_nick = $tmp['nickname'];
-                    echo "<div class='mt3 mb3'>
+                    WHERE codice_utente = " . $recensione['codice_utente'];
+                        $tmp = $conn->query($query) or erredirect($conn->errno, $conn->error);
+                        $tmp = $tmp->fetch_assoc();
+                        $tmp_nick = $tmp['nickname'];
+                        echo "<div class='mt3 mb3'>
                     <h3>$tmp_nick ";
-                    //  ciclo per la valutazione
-                    $stelle = $recensione['valutazione'];
-                    for ($i=0; $i < $stelle; $i++) { 
-                        echo"<span class='dot star'></span>";
-                    }
-                    $stelle_rimanenti = 5 - $stelle;
-                    for ($i=0; $i < $stelle_rimanenti; $i++) { 
-                        echo"<span class='dot'></span>";
-                    }
-                    echo "
-                    <p class='txtjustify'>".$recensione['testo']."</p>
+                        //  ciclo per la valutazione
+                        $stelle = $recensione['valutazione'];
+                        for ($i = 0; $i < $stelle; $i++) {
+                            echo "<span class='dot star'></span>";
+                        }
+                        $stelle_rimanenti = 5 - $stelle;
+                        for ($i = 0; $i < $stelle_rimanenti; $i++) {
+                            echo "<span class='dot'></span>";
+                        }
+                        echo "
+                    <p class='txtjustify'>" . $recensione['testo'] . "</p>
                     
                 </div>
                 <div class='separator'></div>";
+                    }
+                } else {
+                    echo "<div class='mt3 mb3'><p class='txtcenter'>Non sono presenti altre recensioni per " . $gamedata['titolo'] . "</p></div>";
                 }
+
                 ?>
             </div>
 

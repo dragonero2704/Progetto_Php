@@ -1,3 +1,4 @@
+@import './components/utils.scss';
 $padding:20px;
 .search_wrapper {
     padding: 0 20px;
@@ -23,10 +24,7 @@ input[type="search"] {
 .result {
     max-width: calc(var(--max-width));
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    @include flex(center, flex-start, wrap);
     margin: 0 auto;
     padding: 0;
 }
