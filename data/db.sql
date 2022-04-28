@@ -245,20 +245,22 @@ DROP TABLE IF EXISTS `recensione`;
 CREATE TABLE IF NOT EXISTS `recensione` (
   `codice_recensione` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `testo` text NOT NULL DEFAULT ' ',
-  `valutazione` int(2) unsigned NOT NULL DEFAULT 0,
+  `valutazione` int(2) unsigned NOT NULL,
   `codice_gioco` int(10) unsigned NOT NULL,
   `codice_utente` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`codice_recensione`),
+  PRIMARY KEY (`codice_gioco`,`codice_utente`) USING BTREE,
+  UNIQUE KEY `codice_recensione` (`codice_recensione`),
   KEY `FK_recensione_giochi` (`codice_gioco`),
   KEY `FK_recensione_account` (`codice_utente`),
   CONSTRAINT `FK_recensione_account` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE,
   CONSTRAINT `FK_recensione_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.recensione: ~0 rows (circa)
+-- Dump dei dati della tabella php_gamestore.recensione: ~2 rows (circa)
 DELETE FROM `recensione`;
 /*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
 INSERT INTO `recensione` (`codice_recensione`, `testo`, `valutazione`, `codice_gioco`, `codice_utente`) VALUES
+	(7, 'Gioco molto interessante, se si scannerizza il codice a barre dietro la testa di 47 esce il prezzo al chilo dei pomodori dell\'esselunga', 5, 14, 1),
 	(4, 'Gioco fighissimo, posso bonkare le persone con le assi del cesso', 3, 14, 5);
 /*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
 

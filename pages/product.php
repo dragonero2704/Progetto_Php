@@ -35,14 +35,43 @@ while ($row = $ris->fetch_assoc()) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['delete'])) {
         // l'utente vuole cancellare la sua recesione
+        $deletequey = "DELETE FROM recensione 
+        WHERE codice_utente = $codice_utente AND codice_gioco = $codice_gioco";
+        $conn->query($deletequey) or erredirect($conn->errno, $conn->error);
     } else {
         $fields = array_keys($_POST);
         $data = array();
         $error = array();
         foreach ($fields as $field) {
-            echo $field;
+            // echo $field;
             if (isset($_POST[$field])) $data[$field] = $_POST[$field];
             else $data[$field] = "";
+        }
+
+        if (empty($data['testo_recensione'])) {
+            $error['testo_recensione'] = "Il campo non può essere lasciato vuoto";
+        }
+
+        $data['testo_recensione'] = mysqli_real_escape_string($conn, $data['testo_recensione']);
+
+
+        $sql = "SELECT * 
+                    FROM recensione 
+                    WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
+        $recensione_trovata = $conn->query($sql) or erredirect($conn->errno, $conn->error);
+        if ($recensione_trovata->num_rows > 0) {
+            $updatequery = "UPDATE recensione 
+            SET valutazione = ". $data['star'] . ", testo = '" . $data['testo_recensione'] . "'
+            WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
+            if (empty($error)) {
+                $conn->query($updatequery) or erredirect($conn->errno, $conn->error);
+            }
+        } else {
+            $insertquery = "INSERT INTO recensione (valutazione, testo, codice_gioco, codice_utente)
+        VALUES (" . $data['star'] . ", '" . $data['testo_recensione'] . "',$codice_gioco,$codice_utente)";
+            if (empty($error)) {
+                $conn->query($insertquery) or erredirect($conn->errno, $conn->error);
+            }
         }
     }
 }
@@ -131,30 +160,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $sql = "SELECT * 
                     FROM recensione 
                     WHERE codice_gioco = $codice_gioco AND codice_utente = $codice_utente";
-                    $recensione = $conn->query($sql) or erredirect($conn->errno + 200, $conn->error);
+                    $recensione = $conn->query($sql) or erredirect($conn->errno, $conn->error);
+                    if ($recensione->num_rows > 0) {
+                        $data_recensione = $recensione->fetch_assoc();
+                        $testo = $data_recensione['testo'];
+                        $valutazione = $data_recensione['valutazione'];
+                    } else {
+                        $testo = "";
+                        $valutazione = 1;
+                    }
 
                     echo "<div class='separator'></div>
                     <div class='mb2 mt2'>
                         <h2 class='mb1'>La tua recensione</h2>
                         <form action='" . htmlentities($_SERVER['PHP_SELF']) . "?game=$codice_gioco' method='post'>
-                            <div class='stars_container_review mb1'>
-                                <input class='hidden star' type='radio' name='star' id='star1' value='5'>
-                                <label class='dot pointer' for='star1'></label>
-    
-                                <input class='hidden star' type='radio' name='star' id='star2' value='4'>
-                                <label class='dot pointer' for='star2'></label>
-    
-                                <input class='hidden star' type='radio' name='star' id='star3' value='3'>
-                                <label class='dot pointer' for='star3'></label>
-    
-                                <input class='hidden star' type='radio' name='star' id='star4' value='2'>
-                                <label class='dot pointer' for='star4'></label>
-    
-                                <input class='hidden star' type='radio' name='star' id='star5' value='1'>
-                                <label class='dot pointer' for='star5'></label>
-                            </div>
+                            <div class='stars_container_review mb1'>";
+                    // sezione per mettere le stelle di valutazione
+                    for ($i = 5; $i > 0; $i--) {
+                        echo "<input class='hidden star' type='radio' name='star' id='star$i' value='$i'";
+                        if ($i == $valutazione) {
+                            echo "checked";
+                        }
+                        echo ">
+                                    <label class='dot pointer' for='star$i'></label>";
+                    }
+                    echo "</div>
                             <div class='testo_recensione mb1'>
-                            <textarea name='testo_recensione' id='' cols='30' rows='10' placeholder='Scrivi la tua recensione...' maxlength='10000' required></textarea>
+                            <textarea name='testo_recensione' id='' cols='30' rows='10' placeholder='Scrivi la tua recensione...' required>" . $testo . "</textarea>
                             </div>
 
                             <div class='submit_flex'>
@@ -164,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class='submitbtn backglow ml1'>
                                     <input type='reset' class='' value='Annulla'>
                                 </div>";
-                    if ($recensione->num_rows == 0) {
+                    if ($recensione->num_rows > 0) {
                         //l'utente ha già fatto una recensione
                         echo "<div class='submitbtn backglow ml1'>
                                     <input type='submit' class='' value='Elimina recensione' name='delete'>
@@ -180,6 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>";
                 }
                 ?>
+
 
                 <div class="separator"></div>
                 <!-- ----------------------------- -->
@@ -199,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $sql = "SELECT * 
                     FROM recensione
                     WHERE codice_gioco = $codice_gioco AND codice_utente != $codice_utente";
-                }else{
+                } else {
                     $sql = "SELECT * 
                     FROM recensione
                     WHERE codice_gioco = $codice_gioco";
@@ -226,7 +259,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         for ($i = 0; $i < $stelle_rimanenti; $i++) {
                             echo "<span class='dot'></span>";
                         }
-                        echo "
+                        echo "</h3>
                     <p class='txtjustify'>" . $recensione['testo'] . "</p>
                     
                 </div>
