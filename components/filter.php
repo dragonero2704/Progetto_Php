@@ -33,8 +33,9 @@ if (empty($generi)) {
 
 
     $query = "SELECT DISTINCT *
-        FROM appartiene JOIN giochi ON appartiene.codice_gioco = giochi.codice_gioco
+        FROM giochi JOIN appartiene ON appartiene.codice_gioco = giochi.codice_gioco
         WHERE appartiene.genere IN $generi_string
+        GROUP BY giochi.codice_gioco
     ";
     if (!empty($ordine)) {
         $query = $query . "\n ORDER BY $ordine";
