@@ -15,6 +15,15 @@ if (isset($_GET["codice_discussione"]))
 } else {
     $codice_discussione = $_SESSION["codice_discussione"];
 }
+
+if(isset($_POST["elimina"])){
+    if($_POST["elimina"]){
+        $trova = intval(urldecode($_GET["codice_messaggio"]));
+        $elimina="DELETE FROM messaggio WHERE codice_messaggio='$trova'";
+        $conn->query($elimina);
+    }
+}
+
 //fetch di tutti i messaggi riguardanti una discussione
 $sql ="SELECT *
 FROM messaggio
@@ -82,8 +91,16 @@ if(isset($_POST["messaggio"]))
             $tmp = $conn->query($sql);
             $tmp = $tmp->fetch_assoc();
             $nome = $tmp["nickname"];
-            echo '
-                <div class="messaggio contorno">
+            $mail = $tmp["email"];
+            $codice_messaggio = $dati_messaggio["codice_messaggio"];
+            echo '<div class="messaggio contorno">';
+            if($mail==$email)
+                {
+                    echo'<form class="eliminare" action="'.$_SERVER['PHP_SELF'].'?codice_messaggio='. $codice_messaggio.'" method="post">
+                    <input type="submit" class="meno" name="elimina" value="true">
+                    </form>';
+                }
+                echo'
                 <h2 class="centered">' . $nome . '</h1>
                 <p class="centered">'.$dati_messaggio["testo"].'</p>
                 </div>

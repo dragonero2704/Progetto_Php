@@ -49,3 +49,23 @@
     word-wrap: break-word;
     height: fit-content;
 }
+
+.eliminare{
+    position: relative;
+    width: 50px;
+    height: 50px;
+    z-index: 500;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.meno{
+    display: block;
+    width: 30px;
+    height: 3px;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid black;
+    margin: auto;
+  }
