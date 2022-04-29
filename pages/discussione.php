@@ -70,7 +70,7 @@ if(isset($_POST["messaggio"]))
         <?php
         if(isset($email) && !empty($email))
         {
-            echo '<div>
+            echo '<div class="barra_messaggio">
             <form action="'. htmlentities($_SERVER['PHP_SELF']) .'" method="post">
             <div class="input_container">
                 <input type="text" name="messaggio" id="titolo" placeholder=" " required>

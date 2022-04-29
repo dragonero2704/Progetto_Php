@@ -1833,3 +1833,16 @@ h5 {
 .centrato {
   margin: auto;
 }
+
+.sopra:hover {
+  transform: scale(1.1);
+}
+
+.barra_messaggio {
+  position: fixed;
+  width: 100%;
+  z-index: 3000;
+  background-color: lightgray;
+  height: fit-content;
+  margin-top: 77vh;
+}
