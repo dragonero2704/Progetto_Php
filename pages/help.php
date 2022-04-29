@@ -131,7 +131,7 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
 
                 if($mail==$email)
                 {
-                    echo'<form class="eliminare centrato" action="'.$_SERVER['PHP_SELF'].'?d='. $codice_discussione.'" method="post">
+                    echo'<form class="eliminare mauto" action="'.$_SERVER['PHP_SELF'].'?d='. $codice_discussione.'" method="post">
                     <input type="submit" class="meno" name="elimina" value="true">
                     </form>';
                 }
