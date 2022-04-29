@@ -6,10 +6,36 @@ require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
-$sql ="SELECT *
-FROM discussione";
+if(isset($_GET['search']) and !empty($_GET['search']))
+{    
+    $search = urldecode($_GET['search']);
+}else{
+    $search = " ";
+}
+
+if(isset($search) and !empty($search) and $search!=" "){
+    $sql = "SELECT*
+        FROM discussione
+        WHERE titolo LIKE '%$search%' OR descrizione LIKE '%$search%'";
+}else{
+    $sql ="SELECT *
+        FROM discussione";
+}
+
+if(isset($_POST["elimina"])){
+    if($_POST["elimina"]){
+        $trova = intval(urldecode($_GET["codice_discussione"]));
+        $elimina_messaggi="DELETE FROM messaggio WHERE codice_discussione='$trova'";
+        $elimina_discussione="DELETE FROM discussione WHERE codice_discussione='$trova'";
+        $conn->query('SET FOREIGN_KEY_CHECKS=0;');
+        $conn->query($elimina_messaggi);
+        $conn->query($elimina_discussione);
+        $conn->query('SET FOREIGN_KEY_CHECKS=1;');
+    }
+}
 
 $ris = $conn->query($sql);
+
 if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
 {
     $sql = "SELECT *
@@ -67,24 +93,48 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
         }else{
             echo '<h1 class = "centered" >registrati per chiedere aiuto</h1>';
         }
+        ?>
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
+            <div class="search_wrapper">
+                <div class="search_container">
+                    <input type="search" name="search" class="search" id="" placeholder="Search..." value="<?php echo htmlentities($search) ?>">
+                    <div class="searchbutton">
+                        <input type="submit" value="">
+                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <?php
         while ($dati_discussione = $ris->fetch_assoc()) {
             $cod = $dati_discussione["creatore"];
+            $codice_discussione = $dati_discussione["codice_discussione"];
+            
             $sql="SELECT *
             FROM account
             WHERE codice_utente = '$cod'";
+           
             $tmp = $conn->query($sql);
             $tmp = $tmp->fetch_assoc();
             $nome = $tmp["nickname"];
+            $mail = $tmp["email"];
             echo '
-                <div class="generalita sopra">
-                <a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
+                <div class="generalita sopra">';
+                echo '<a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
                 <h2 class = "centered">' . $dati_discussione["titolo"] . '</h1>
                 <p class = "centered">'.$dati_discussione["descrizione"].'</p>
                 <p class = "centered">'.$nome.'</p>
                 <p class = "centered">'.$dati_discussione["data_creazione"].'</p>
-                </a>
-                </div>
-                ';
+                </a>';
+
+                if($mail==$email)
+                {
+                    echo'<form class="eliminare centrato" action="'.$_SERVER['PHP_SELF'].'?codice_discussione='. $codice_discussione.'" method="post">
+                    <input type="submit" class="meno" name="elimina" value="true">
+                    </form>';
+                }
+
+                echo'</div>';
         }
         ?>
     </div>
