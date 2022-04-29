@@ -52,22 +52,23 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
                 echo '<h1 class = "mt1" >Crea una nuova discussione</h1>
             <div class = "create_form">
             <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
-            <div class="input_container m10">
+            <div class="input_container mt3">
                 <input type="text" name="titolo" id="titolo" placeholder=" " required>
                 <label for="titolo">titolo</label>
             </div>
-            <div class="input_container m10">
+            <div class="input_container mt3">
                 <input type=text" name="descrizione" id="descrizione" placeholder=" " required>
                 <label for="descrizione">descrizione</label>
             </div>
-            <div class="submitbtn backglow m10">
+            <div class="submitbtn backglow mt3">
                 <input type="submit" class="" value="crea" name="crea">
             </div>
             </form>
             </div>';
             } else {
-                echo '<h1 class = "txtcenter" >registrati per chiedere aiuto</h1>';
+                echo '<h1 class = "mt1" >registrati per chiedere aiuto</h1>';
             }
+            echo '<h1 class = " mt8 mb3" >Discussioni</h1>';
             while ($dati_discussione = $ris->fetch_assoc()) {
                 $cod = $dati_discussione["creatore"];
                 $sql = "SELECT *
@@ -77,14 +78,16 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
                 $tmp = $tmp->fetch_assoc();
                 $nome = $tmp["nickname"];
                 echo '
+                <div class="separator"></div>
                 <div class="generalita sopra">
-                <a href="discussione.php?codice_discussione=' . $dati_discussione["codice_discussione"] . '">
+                <a href="discussione.php?d=' . $dati_discussione["codice_discussione"] . '">
                 <h2 class = "centered">' . $dati_discussione["titolo"] . '</h1>
                 <p class = "centered">' . $dati_discussione["descrizione"] . '</p>
                 <p class = "centered">' . $nome . '</p>
                 <p class = "centered">' . $dati_discussione["data_creazione"] . '</p>
                 </a>
                 </div>
+                
                 ';
             }
             ?>

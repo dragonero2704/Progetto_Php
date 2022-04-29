@@ -1775,10 +1775,6 @@ h5 {
   height: fit-content;
 }
 
-.m10 {
-  margin: 5px;
-}
-
 .generalita {
   margin: auto;
   position: relative;
@@ -1824,8 +1820,7 @@ h5 {
   width: 30px;
   height: 3px;
   cursor: pointer;
-  background-color: black;
+  background-color: var(--separator);
   border-radius: 5px 0 0 5px;
-  border: 1px solid black;
   margin: auto;
 }
