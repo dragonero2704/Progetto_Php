@@ -24,7 +24,7 @@ if(isset($search) and !empty($search) and $search!=" "){
 
 if(isset($_POST["elimina"])){
     if($_POST["elimina"]){
-        $trova = intval(urldecode($_GET["codice_discussione"]));
+        $trova = intval(urldecode($_GET["d"]));
         $elimina_messaggi="DELETE FROM messaggio WHERE codice_discussione='$trova'";
         $elimina_discussione="DELETE FROM discussione WHERE codice_discussione='$trova'";
         $conn->query('SET FOREIGN_KEY_CHECKS=0;');
@@ -79,15 +79,15 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
                 echo '<h1 class = "mt1" >Crea una nuova discussione</h1>
             <div class = "create_form">
             <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
-            <div class="input_container m10">
+            <div class="input_container mt3">
                 <input type="text" name="titolo" id="titolo" placeholder=" " required>
                 <label for="titolo">titolo</label>
             </div>
-            <div class="input_container m10">
+            <div class="input_container mt3">
                 <input type=text" name="descrizione" id="descrizione" placeholder=" " required>
                 <label for="descrizione">descrizione</label>
             </div>
-            <div class="submitbtn backglow m10">
+            <div class="submitbtn backglow mt3">
                 <input type="submit" class="" value="crea" name="crea">
             </div>
             </form>
@@ -131,7 +131,7 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
 
                 if($mail==$email)
                 {
-                    echo'<form class="eliminare centrato" action="'.$_SERVER['PHP_SELF'].'?codice_discussione='. $codice_discussione.'" method="post">
+                    echo'<form class="eliminare mauto" action="'.$_SERVER['PHP_SELF'].'?d='. $codice_discussione.'" method="post">
                     <input type="submit" class="meno" name="elimina" value="true">
                     </form>';
                 }
