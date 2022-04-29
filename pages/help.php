@@ -50,7 +50,7 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
     $inserimento = "INSERT INTO discussione (creatore, data_creazione, titolo, descrizione)
     VALUES ( '" . $codice_utente . "', '" . $data . "', '" . $titolo . "', '" . $descrizione . "')";
     $conn->query($inserimento);
-    header("location:".$_SERVER['PHP_SELF']."");
+    header("location:" . $_SERVER['PHP_SELF'] . "");
 }
 ?>
 
@@ -72,11 +72,13 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
     require('../components/menu.php');
     ?>
     <div class="body">
-        <?php
-        if(isset($email) && !empty($email))
-        {
-            echo '<div class = "create_form">
-            <form action="'. htmlentities($_SERVER['PHP_SELF']) .'" method="post">
+        <div class="max-container">
+            <?php
+
+            if (isset($email) && !empty($email)) {
+                echo '<h1 class = "mt1" >Crea una nuova discussione</h1>
+            <div class = "create_form">
+            <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
             <div class="input_container m10">
                 <input type="text" name="titolo" id="titolo" placeholder=" " required>
                 <label for="titolo">titolo</label>

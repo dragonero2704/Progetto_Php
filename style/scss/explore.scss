@@ -24,7 +24,7 @@ input[type="search"] {
 .result {
     max-width: calc(var(--max-width));
     width: 100%;
-    @include flex(center, flex-start, wrap);
+    @include flex(center, center, wrap);
     margin: 0 auto;
     padding: 0;
 }

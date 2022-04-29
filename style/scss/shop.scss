@@ -102,7 +102,7 @@
 }
 
 .shop_flex {
-    @include flex(flex-start, flex-start, nowrap);
+    @include flex(flex-start, center, nowrap);
     flex-direction: row-reverse;
     padding: 20px;
     // max-width: calc(var(--max-width) + 20px);
