@@ -6,12 +6,11 @@ require('../components/errorredicrect.php');
 
 $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($conn->connect_errno, $conn->connect_error);
 
-$sql ="SELECT *
+$sql = "SELECT *
 FROM discussione";
 
 $ris = $conn->query($sql);
-if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
-{
+if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
     $sql = "SELECT *
     FROM account
     WHERE email = '$email'";
@@ -24,7 +23,7 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
     $inserimento = "INSERT INTO discussione (creatore, data_creazione, titolo, descrizione)
     VALUES ( '" . $codice_utente . "', '" . $data . "', '" . $titolo . "', '" . $descrizione . "')";
     $conn->query($inserimento);
-    header("location:".$_SERVER['PHP_SELF']."");
+    header("location:" . $_SERVER['PHP_SELF'] . "");
 }
 ?>
 
@@ -46,11 +45,13 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
     require('../components/menu.php');
     ?>
     <div class="body">
-        <?php
-        if(isset($email) && !empty($email))
-        {
-            echo '<div class = "create_form">
-            <form action="'. htmlentities($_SERVER['PHP_SELF']) .'" method="post">
+        <div class="max-container">
+            <?php
+
+            if (isset($email) && !empty($email)) {
+                echo '<h1 class = "mt1" >Crea una nuova discussione</h1>
+            <div class = "create_form">
+            <form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
             <div class="input_container m10">
                 <input type="text" name="titolo" id="titolo" placeholder=" " required>
                 <label for="titolo">titolo</label>
@@ -64,29 +65,31 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
             </div>
             </form>
             </div>';
-        }else{
-            echo '<h1 class = "centered" >registrati per chiedere aiuto</h1>';
-        }
-        while ($dati_discussione = $ris->fetch_assoc()) {
-            $cod = $dati_discussione["creatore"];
-            $sql="SELECT *
+            } else {
+                echo '<h1 class = "txtcenter" >registrati per chiedere aiuto</h1>';
+            }
+            while ($dati_discussione = $ris->fetch_assoc()) {
+                $cod = $dati_discussione["creatore"];
+                $sql = "SELECT *
             FROM account
             WHERE codice_utente = '$cod'";
-            $tmp = $conn->query($sql);
-            $tmp = $tmp->fetch_assoc();
-            $nome = $tmp["nickname"];
-            echo '
+                $tmp = $conn->query($sql);
+                $tmp = $tmp->fetch_assoc();
+                $nome = $tmp["nickname"];
+                echo '
                 <div class="generalita sopra">
-                <a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
+                <a href="discussione.php?codice_discussione=' . $dati_discussione["codice_discussione"] . '">
                 <h2 class = "centered">' . $dati_discussione["titolo"] . '</h1>
-                <p class = "centered">'.$dati_discussione["descrizione"].'</p>
-                <p class = "centered">'.$nome.'</p>
-                <p class = "centered">'.$dati_discussione["data_creazione"].'</p>
+                <p class = "centered">' . $dati_discussione["descrizione"] . '</p>
+                <p class = "centered">' . $nome . '</p>
+                <p class = "centered">' . $dati_discussione["data_creazione"] . '</p>
                 </a>
                 </div>
                 ';
-        }
-        ?>
+            }
+            ?>
+        </div>
+
     </div>
     <?php
     require('../components/footer.php');
