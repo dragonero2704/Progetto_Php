@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.4.21-MariaDB - mariadb.org binary distribution
+-- Versione server:              10.4.22-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            11.3.0.6295
 -- --------------------------------------------------------
@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   UNIQUE KEY `codice_utente` (`codice_utente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.account: ~6 rows (circa)
-DELETE FROM `account`;
+-- Dump dei dati della tabella php_gamestore.account: ~4 rows (circa)
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`email`, `password`, `codice_utente`, `nickname`, `nome`, `cognome`, `telefono`, `email_recupero`, `data_nascita`, `nazionalita`) VALUES
 	('andrea.mattavelli@liceobanfi.eu', '$2y$10$slPTO035Jn.UWb33DYNDC.4ZJWuzpj3Ma27fSs6YbstStFcUKJEcS', 4, 'andreji12', 'Andrea', 'Mattavelli', '', '', '2004-09-20', 'Italia'),
@@ -56,18 +55,39 @@ CREATE TABLE IF NOT EXISTS `appartiene` (
   CONSTRAINT `FK_appartiene_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Relazione N a N tra gioco e genere';
 
--- Dump dei dati della tabella php_gamestore.appartiene: ~8 rows (circa)
-DELETE FROM `appartiene`;
+-- Dump dei dati della tabella php_gamestore.appartiene: ~30 rows (circa)
 /*!40000 ALTER TABLE `appartiene` DISABLE KEYS */;
 INSERT INTO `appartiene` (`codice_gioco`, `genere`) VALUES
 	(6, 'Avventura'),
+	(7, 'Avventura'),
+	(11, 'Avventura'),
+	(13, 'Avventura'),
 	(14, 'Avventura'),
+	(15, 'Avventura'),
+	(16, 'Avventura'),
+	(17, 'Avventura'),
+	(20, 'Avventura'),
+	(21, 'Avventura'),
+	(23, 'Avventura'),
 	(6, 'Fantascienza'),
+	(9, 'Fantascienza'),
 	(22, 'Fantascienza'),
+	(10, 'Open World'),
 	(16, 'Open World'),
+	(20, 'Open World'),
+	(10, 'Prima Persona'),
+	(24, 'Prima Persona'),
+	(23, 'RPG'),
 	(6, 'Sparatutto'),
+	(7, 'Sparatutto'),
+	(9, 'Sparatutto'),
+	(18, 'Sparatutto'),
+	(19, 'Sparatutto'),
 	(6, 'Strategico'),
-	(25, 'Strategico');
+	(22, 'Strategico'),
+	(24, 'Strategico'),
+	(25, 'Strategico'),
+	(22, 'Terza Persona');
 /*!40000 ALTER TABLE `appartiene` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.discussione
@@ -83,8 +103,7 @@ CREATE TABLE IF NOT EXISTS `discussione` (
   CONSTRAINT `codice_creatore` FOREIGN KEY (`creatore`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.discussione: ~9 rows (circa)
-DELETE FROM `discussione`;
+-- Dump dei dati della tabella php_gamestore.discussione: ~6 rows (circa)
 /*!40000 ALTER TABLE `discussione` DISABLE KEYS */;
 INSERT INTO `discussione` (`data_creazione`, `codice_discussione`, `titolo`, `creatore`, `descrizione`) VALUES
 	('2022-04-22', 1, 'cambiare immagine', 9, 'ho un problema nel cambiare la mia immagine profilo'),
@@ -104,18 +123,17 @@ CREATE TABLE IF NOT EXISTS `genere` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Dump dei dati della tabella php_gamestore.genere: ~9 rows (circa)
-DELETE FROM `genere`;
 /*!40000 ALTER TABLE `genere` DISABLE KEYS */;
 INSERT INTO `genere` (`genere`, `descrizione`) VALUES
-	('Avventura', NULL),
-	('Fantascienza', NULL),
+	('Avventura', 'vivi un\'avventura completando la storia ed esplorando il mondo'),
+	('Fantascienza', 'esplora un mondo futuristico'),
 	('Open World', 'Mappa aperta da esplorare'),
 	('Prima Persona', 'Il giocatore vede il mondo con gli occhi del protagonista'),
 	('RPG', 'Role Play Game'),
-	('Sparatutto', NULL),
-	('Strategico', NULL),
+	('Sparatutto', 'divertiti a combattere con vari tipi di arma'),
+	('Strategico', 'usa le tue capacità gestionali per vincere'),
 	('Survival', 'Il giocatore accumola risorse e crea strumenti per soppravvivere e progredire'),
-	('Terza Persona', NULL);
+	('Terza Persona', 'visuale in terza persona');
 /*!40000 ALTER TABLE `genere` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.giochi
@@ -135,7 +153,6 @@ CREATE TABLE IF NOT EXISTS `giochi` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.giochi: ~18 rows (circa)
-DELETE FROM `giochi`;
 /*!40000 ALTER TABLE `giochi` DISABLE KEYS */;
 INSERT INTO `giochi` (`codice_gioco`, `titolo`, `descrizione`, `prezzo`, `pegi`, `software_house`) VALUES
 	(6, 'Battlefront 2', 'Metti alla prova la tua padronanza di blaster, spada laser e potere della Forza online e offline in STAR WARS™ Battlefront™ II: Celebration Edition.', 39.99, '12', 5),
@@ -172,8 +189,7 @@ CREATE TABLE IF NOT EXISTS `messaggio` (
   CONSTRAINT `codice__utente` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.messaggio: ~4 rows (circa)
-DELETE FROM `messaggio`;
+-- Dump dei dati della tabella php_gamestore.messaggio: ~2 rows (circa)
 /*!40000 ALTER TABLE `messaggio` DISABLE KEYS */;
 INSERT INTO `messaggio` (`codice_utente`, `codice_discussione`, `testo`, `codice_messaggio`) VALUES
 	(1, 15, 'gfk', 11),
@@ -189,12 +205,49 @@ CREATE TABLE IF NOT EXISTS `motivazione_pegi` (
   CONSTRAINT `FK_motivazione_pegi_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Dump dei dati della tabella php_gamestore.motivazione_pegi: ~2 rows (circa)
-DELETE FROM `motivazione_pegi`;
+-- Dump dei dati della tabella php_gamestore.motivazione_pegi: ~40 rows (circa)
 /*!40000 ALTER TABLE `motivazione_pegi` DISABLE KEYS */;
 INSERT INTO `motivazione_pegi` (`codice_gioco`, `motivazione`) VALUES
+	(6, 'online'),
+	(6, 'paura'),
+	(6, 'violenza'),
+	(7, 'linguaggio scurrile'),
+	(7, 'online'),
+	(7, 'violenza'),
+	(9, 'linguaggio scurrile'),
+	(9, 'paura di fare schifo'),
+	(9, 'violenza'),
+	(10, 'online'),
+	(10, 'violenza'),
 	(11, 'Linguaggio scurrile'),
-	(11, 'Violenza');
+	(11, 'Violenza'),
+	(13, 'linguaggio scurrile'),
+	(13, 'violenza'),
+	(14, 'linguaggio scurrile'),
+	(14, 'violenza'),
+	(15, 'linguaggio scurrile'),
+	(15, 'violenza'),
+	(16, 'violenza'),
+	(17, 'linguaggio scurrile'),
+	(17, 'sesso'),
+	(17, 'violenza'),
+	(18, 'discriminazione'),
+	(18, 'ideologie estreme'),
+	(18, 'utilizzo di sostanze stupefacenti'),
+	(18, 'violenza'),
+	(19, 'linguaggio scurrile'),
+	(19, 'sesso'),
+	(19, 'utilizzo sostanze stupefacenti'),
+	(19, 'violenza'),
+	(20, 'violenza'),
+	(21, 'linguaggio scurrile'),
+	(21, 'sesso'),
+	(21, 'violenza'),
+	(22, 'violenza'),
+	(23, 'linguaggio scurrile'),
+	(23, 'violenza'),
+	(24, 'utilizzo di soldi'),
+	(25, 'online');
 /*!40000 ALTER TABLE `motivazione_pegi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella php_gamestore.pegi
@@ -205,8 +258,7 @@ CREATE TABLE IF NOT EXISTS `pegi` (
   PRIMARY KEY (`pegi`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Dump dei dati della tabella php_gamestore.pegi: ~0 rows (circa)
-DELETE FROM `pegi`;
+-- Dump dei dati della tabella php_gamestore.pegi: ~6 rows (circa)
 /*!40000 ALTER TABLE `pegi` DISABLE KEYS */;
 INSERT INTO `pegi` (`pegi`, `descrizione`) VALUES
 	(' 0', 'Adatto a tutti'),
@@ -230,8 +282,7 @@ CREATE TABLE IF NOT EXISTS `possiede` (
   CONSTRAINT `codice_utente__` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.possiede: ~0 rows (circa)
-DELETE FROM `possiede`;
+-- Dump dei dati della tabella php_gamestore.possiede: ~9 rows (circa)
 /*!40000 ALTER TABLE `possiede` DISABLE KEYS */;
 INSERT INTO `possiede` (`codice_utente`, `codice_gioco`, `data_acquisto`) VALUES
 	(1, 11, '2022-04-22'),
@@ -261,7 +312,6 @@ CREATE TABLE IF NOT EXISTS `recensione` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.recensione: ~0 rows (circa)
-DELETE FROM `recensione`;
 /*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
 /*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
 
@@ -276,8 +326,7 @@ CREATE TABLE IF NOT EXISTS `software_house` (
   PRIMARY KEY (`codice_software_house`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.software_house: ~0 rows (circa)
-DELETE FROM `software_house`;
+-- Dump dei dati della tabella php_gamestore.software_house: ~6 rows (circa)
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
 INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `email`, `nazionalita`) VALUES
 	(1, 'Rockstar Games', '+122346759476', 'rockstar.games@gmail.com', 'svedese'),
@@ -299,12 +348,27 @@ CREATE TABLE IF NOT EXISTS `sviluppato` (
   CONSTRAINT `FK_sviluppato_software_house` FOREIGN KEY (`software_house`) REFERENCES `software_house` (`codice_software_house`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Relazione N a N tra gioco e software house';
 
--- Dump dei dati della tabella php_gamestore.sviluppato: ~0 rows (circa)
-DELETE FROM `sviluppato`;
+-- Dump dei dati della tabella php_gamestore.sviluppato: ~18 rows (circa)
 /*!40000 ALTER TABLE `sviluppato` DISABLE KEYS */;
 INSERT INTO `sviluppato` (`codice_gioco`, `software_house`) VALUES
+	(6, 5),
+	(7, 1),
+	(9, 1),
+	(10, 1),
 	(11, 4),
-	(19, 2);
+	(13, 2),
+	(14, 2),
+	(15, 2),
+	(16, 5),
+	(17, 3),
+	(18, 4),
+	(19, 2),
+	(20, 2),
+	(21, 3),
+	(22, 6),
+	(23, 2),
+	(24, 6),
+	(25, 1);
 /*!40000 ALTER TABLE `sviluppato` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
