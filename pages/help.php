@@ -13,6 +13,7 @@ if (isset($_GET['search']) and !empty($_GET['search'])) {
 }
 
 if (isset($search) and !empty($search) and $search != " ") {
+    $search = trim($search);
     $sql = "SELECT*
         FROM discussione
         WHERE titolo LIKE '%$search%' OR descrizione LIKE '%$search%'";
