@@ -97,15 +97,15 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
         }
         ?>
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
-            <div class="search_wrapper">
-                <div class="search_container">
-                    <input type="search" name="search" class="search" id="" placeholder="Search..." value="<?php echo htmlentities($search) ?>">
+            
+                <div class="search_container mt3 mb3">
+                    <input type="search" name="search" class="search " id="" placeholder="Search..." value="<?php echo htmlentities($search) ?>">
                     <div class="searchbutton">
                         <input type="submit" value="">
                         <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                     </div>
                 </div>
-            </div>
+            
         </form>
         <?php
         while ($dati_discussione = $ris->fetch_assoc()) {

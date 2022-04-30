@@ -94,7 +94,7 @@ if (isset($_POST["messaggio"])) {
                 $codice_messaggio = $dati_messaggio["codice_messaggio"];
                 echo '<div class="messaggio contorno">';
                 if ($mail == $email) {
-                    echo '<form class="eliminare" action="' . htmlentities($_SERVER['PHP_SELF']) . '?codice_messaggio=' . $codice_messaggio . '" method="post">
+                    echo '<form class="eliminare" action="' . htmlentities($_SERVER['PHP_SELF']) . '?codice_messaggio=' . $codice_messaggio . '&d='.$codice_discussione.'" method="post">
                     <input type="submit" class="meno" name="elimina" value="true">
                     </form>';
                 }
