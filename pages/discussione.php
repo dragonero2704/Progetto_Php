@@ -73,10 +73,9 @@ if (isset($_POST["messaggio"])) {
                 <h1 class=' mt3'>Unisciti alla conversazione</h1>
                 <div>
             <form action='" . htmlentities($_SERVER["PHP_SELF"]) . "?d=$codice_discussione' method='post'>
-            <div class='input_container mt3'>
-                <input type='text' name='messaggio' id='titolo' placeholder=' ' required>
-                <label for='titolo'>messaggio</label>
-            </div>
+            <div class='textarea_container mt3'>
+<textarea name='messaggio' id='' cols='30' rows='10' placeholder='Scrivi il tuo messaggio...' required></textarea>
+</div>
             <div class='submitbtn backglow mt3'>
                 <input type='submit' class='' value='invia' name='invia'>
             </div>

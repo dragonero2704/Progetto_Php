@@ -9,7 +9,7 @@ $conn = new mysqli($dbhost, $dbusername, $dbpassword, $dbname) or erredirect($co
 if (isset($_GET['search']) and !empty($_GET['search'])) {
     $search = urldecode($_GET['search']);
 } else {
-    $search = " ";
+    $search = "";
 }
 
 if (isset($search) and !empty($search) and $search != " ") {
@@ -77,7 +77,7 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
 
                 <div class="search_container mt3 mb3">
-                    <input type="search" name="search" class="search " id="" placeholder="Search..." value="<?php echo htmlentities($search) ?>">
+                    <input type="search" name="search" class="search " id="" placeholder="Search..." value="<?php if(!empty($search)) echo htmlentities($search); ?>">
                     <div class="searchbutton">
                         <input type="submit" value="">
                         <i class="fa-solid fa-magnifying-glass fa-lg"></i>
