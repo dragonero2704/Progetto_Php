@@ -66,7 +66,7 @@ if (isset($_POST["messaggio"])) {
     require('../components/menu.php');
     ?>
     <div class="body">
-        <div class="max-container">
+        <div class="max-container mb3">
             <?php
             if (isset($email) && !empty($email)) {
                 echo "
@@ -115,3 +115,9 @@ if (isset($_POST["messaggio"])) {
 </body>
 
 </html>
+
+<?php
+
+    
+
+?>

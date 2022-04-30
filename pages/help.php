@@ -71,7 +71,7 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
     require('../components/menu.php');
     ?>
     <div class="body">
-        <div class="max-container">
+        <div class="max-container mb3">
             <h1 class="mt8">Discussioni</h1>
             <?php if (!empty($email)) echo "<h3 class='mt1 mb3'><a href='#scriviticket'>Chiedi aiuto</a></h3>"; ?>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
