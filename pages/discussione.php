@@ -69,13 +69,15 @@ if (isset($_POST["messaggio"])) {
         <div class="max-container">
             <?php
             if (isset($email) && !empty($email)) {
-                echo "<div>
+                echo "
+                <h1 class=' mt3'>Unisciti alla conversazione</h1>
+                <div>
             <form action='" . htmlentities($_SERVER["PHP_SELF"]) . "?d=$codice_discussione' method='post'>
-            <div class='input_container'>
+            <div class='input_container mt3'>
                 <input type='text' name='messaggio' id='titolo' placeholder=' ' required>
                 <label for='titolo'>messaggio</label>
             </div>
-            <div class='submitbtn backglow'>
+            <div class='submitbtn backglow mt3'>
                 <input type='submit' class='' value='invia' name='invia'>
             </div>
             </form>
