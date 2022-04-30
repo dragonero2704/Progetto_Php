@@ -122,7 +122,7 @@ if(isset($_POST["titolo"]) && isset($_POST["descrizione"]))
             $mail = $tmp["email"];
             echo '
                 <div class="generalita sopra">';
-                echo '<a href="discussione.php?codice_discussione='.$dati_discussione["codice_discussione"].'">
+                echo '<a href="discussione.php?d='.$dati_discussione["codice_discussione"].'">
                 <h2 class = "centered">' . $dati_discussione["titolo"] . '</h1>
                 <p class = "centered">'.$dati_discussione["descrizione"].'</p>
                 <p class = "centered">'.$nome.'</p>
