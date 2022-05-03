@@ -121,7 +121,7 @@ header:focus {
 @media (max-width:768px) {
     .menu {
         position: absolute;
-        left: -100%;
+        left: -110%;
         top: 0px;
         width: 100vw;
         height: 100vh;
@@ -137,6 +137,11 @@ header:focus {
             text-align: center;
             font-size: 1.5rem;
         }
+        @media (prefers-color-scheme: light) {
+            .menu_voice{
+                color: #cecece;
+            }
+       }
         .menu_voice:nth-child(1) {
             margin-top: 50px;
         }
@@ -159,6 +164,8 @@ header:focus {
         transform: translateY(-50%);
         transform-origin: right;
         transform: rotate(45deg);
+        background-color: #cecece;
+        border-color: #cecece;
     }
 }
 
@@ -172,6 +179,8 @@ header:focus {
         transform: translateY(-50%);
         transform-origin: right;
         transform: rotate(-45deg);
+        background-color: #cecece;
+        border-color: #cecece;
     }
 }
 
@@ -185,6 +194,8 @@ header:focus {
         transform: translateY(-50%);
         transform-origin: left;
         transform: rotate(-45deg);
+        background-color: #cecece;
+        border-color: #cecece;
     }
 }
 
@@ -198,6 +209,8 @@ header:focus {
         transform: translateY(-50%);
         transform-origin: left;
         transform: rotate(45deg);
+        background-color: #cecece;
+        border-color: #cecece;
     }
 }
 

@@ -139,7 +139,7 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
 </form>
 </div>';
             } else {
-                echo '<h1 class = "centered" >registrati per chiedere aiuto</h1>';
+                echo '<h1 class = "centered mauto" >Registrati per chiedere aiuto</h1>';
             }
             ?>
 
@@ -147,7 +147,6 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
         <?php
         require('../components/footer.php');
         ?>
-        <option value=""></option>
 </body>
 
 </html>

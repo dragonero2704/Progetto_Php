@@ -211,7 +211,7 @@ header:focus {
 @media (max-width: 768px) {
   .menu {
     position: absolute;
-    left: -100%;
+    left: -110%;
     top: 0px;
     width: 100vw;
     height: 100vh;
@@ -228,14 +228,23 @@ header:focus {
     text-align: center;
     font-size: 1.5rem;
   }
+}
+@media (max-width: 768px) and (prefers-color-scheme: light) {
+  .menu .menu_voice {
+    color: #cecece;
+  }
+}
+@media (max-width: 768px) {
   .menu .menu_voice:nth-child(1) {
     margin-top: 50px;
   }
-
+}
+@media (max-width: 768px) {
   .hamburger {
     display: block;
   }
-
+}
+@media (max-width: 768px) {
   .menu.active {
     left: 0;
   }
@@ -250,6 +259,8 @@ header:focus {
     transform: translateY(-50%);
     transform-origin: right;
     transform: rotate(45deg);
+    background-color: #cecece;
+    border-color: #cecece;
   }
 }
 @keyframes span2 {
@@ -262,6 +273,8 @@ header:focus {
     transform: translateY(-50%);
     transform-origin: right;
     transform: rotate(-45deg);
+    background-color: #cecece;
+    border-color: #cecece;
   }
 }
 @keyframes span3 {
@@ -274,6 +287,8 @@ header:focus {
     transform: translateY(-50%);
     transform-origin: left;
     transform: rotate(-45deg);
+    background-color: #cecece;
+    border-color: #cecece;
   }
 }
 @keyframes span4 {
@@ -286,6 +301,8 @@ header:focus {
     transform: translateY(-50%);
     transform-origin: left;
     transform: rotate(45deg);
+    background-color: #cecece;
+    border-color: #cecece;
   }
 }
 @keyframes span1-reverse {
@@ -795,6 +812,7 @@ input[type=search] {
   display: block;
   border-radius: 10px;
   font-size: 16px;
+  color: inherit;
 }
 
 .filter_menu {
@@ -1760,6 +1778,10 @@ h5 {
 
 .pointer {
   cursor: pointer;
+}
+
+.white {
+  color: #cecece;
 }
 
 .max-container {
