@@ -44,8 +44,8 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
     $tmp1 = $tmp1->fetch_assoc();
     $codice_utente = $tmp1["codice_utente"];
     $data = date("Y-m-d", time());
-    $titolo = $_POST["titolo"];
-    $descrizione = $_POST["descrizione"];
+    $titolo = mysqli_real_escape_string($conn, $_POST["titolo"]);
+    $descrizione = mysqli_real_escape_string($conn, $_POST["descrizione"]);
     $inserimento = "INSERT INTO discussione (creatore, data_creazione, titolo, descrizione)
     VALUES ( '" . $codice_utente . "', '" . $data . "', '" . $titolo . "', '" . $descrizione . "')";
     $conn->query($inserimento);
