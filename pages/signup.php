@@ -50,7 +50,7 @@ caratteri speciali (!?@)
         $number    = preg_match('@[0-9]@', $pass);
         $specialChars = preg_match('@[^\w]@', $pass);
         if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pass) < 8) {
-            return 'La password deve contenere almeno 8 caratteri di cui 1 carattere speciale, 1 numero e 1 mauiscola';
+            return 'La password deve contenere almeno 8 caratteri di cui 1 carattere speciale, 1 numero e 1 mauiscola e 1 minuscola';
         } else {
             return '';
         }
