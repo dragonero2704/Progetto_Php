@@ -63,6 +63,7 @@ caratteri speciali (!?@)
     if ($userdata['password'] !== $userdata['confermapassword']) {
         $error['confermapassword'] = 'La password non coincide';
     }
+    $userdata['password'] = mysqli_real_escape_string($conn, $userdata['password']);
     //se alla fine di tutti i controlli l'array error è vuoto, allora la registrazione è andata a buon fine
     if (sizeof($error) === 0) {
         if (!empty($userdata['password'])) $passwordhash = password_hash($userdata['password'], PASSWORD_DEFAULT);
