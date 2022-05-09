@@ -124,7 +124,7 @@ caratteri speciali (!?@)
     </header>
 
     <div class="body">
-        <div class="login_container mauto">
+        <div class="login_container mt5 mauto">
             <h1>Sign up</h1>
             <p class="mt2">Hai già un account? <a class="hoverglow bold inline" href="./login.php">Accedi</a></p>
             <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" autocomplete="off">
