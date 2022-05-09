@@ -66,11 +66,11 @@ if (isset($_POST["messaggio"])) {
     require('../components/menu.php');
     ?>
     <div class="body">
-        <div class="max-container mb3">
+        <div class="max-container group mb3">
             <?php
             if (isset($email) && !empty($email)) {
                 echo "
-                <h1 class=' mt3'>Unisciti alla conversazione</h1>
+                <h1 class='mt3'>Unisciti alla conversazione</h1>
                 <div>
             <form action='" . htmlentities($_SERVER["PHP_SELF"]) . "?d=$codice_discussione' method='post'>
             <div class='textarea_container mt3'>

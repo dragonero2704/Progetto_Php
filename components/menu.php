@@ -39,4 +39,4 @@ if (isset($email)) {
         </header>';
 }
 
-echo '<script src="../javascript/hamburger.js"></script>';
+

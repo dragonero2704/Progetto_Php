@@ -199,7 +199,7 @@ caratteri speciali (!?@)
             </form>
             <?php
             if (isset($error['ok']))
-                echo '<p class="result">Registrazione effettuata con successo. Sarai reindirizzato alla home tra <span id="refreshseconds">' . $refreshtime . '</span>...</p>
+                echo '<p class="result">Registrazione effettuata con successo. Sarai reindirizzato alla home tra <span id="refreshseconds"> ' . $refreshtime . '</span>...</p>
                 <script>
                     let el = document.getElementById("refreshseconds")
                         setInterval(function() {
