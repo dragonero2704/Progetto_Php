@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.4.21-MariaDB - mariadb.org binary distribution
+-- Versione server:              10.4.22-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            11.3.0.6295
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `nazionalita` char(10) NOT NULL,
   PRIMARY KEY (`email`),
   UNIQUE KEY `codice_utente` (`codice_utente`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.account: ~4 rows (circa)
 DELETE FROM `account`;
@@ -56,13 +56,12 @@ CREATE TABLE IF NOT EXISTS `appartiene` (
   CONSTRAINT `FK_appartiene_giochi` FOREIGN KEY (`codice_gioco`) REFERENCES `giochi` (`codice_gioco`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Relazione N a N tra gioco e genere';
 
--- Dump dei dati della tabella php_gamestore.appartiene: ~30 rows (circa)
+-- Dump dei dati della tabella php_gamestore.appartiene: ~29 rows (circa)
 DELETE FROM `appartiene`;
 /*!40000 ALTER TABLE `appartiene` DISABLE KEYS */;
 INSERT INTO `appartiene` (`codice_gioco`, `genere`) VALUES
 	(6, 'Avventura'),
 	(7, 'Avventura'),
-	(11, 'Avventura'),
 	(13, 'Avventura'),
 	(14, 'Avventura'),
 	(15, 'Avventura'),
@@ -103,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `discussione` (
   PRIMARY KEY (`codice_discussione`),
   KEY `codice_creatore` (`creatore`),
   CONSTRAINT `codice_creatore` FOREIGN KEY (`creatore`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.discussione: ~6 rows (circa)
 DELETE FROM `discussione`;
@@ -192,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `messaggio` (
   KEY `codice_utente` (`codice_utente`),
   CONSTRAINT `codice__discussione` FOREIGN KEY (`codice_discussione`) REFERENCES `discussione` (`codice_discussione`) ON UPDATE CASCADE,
   CONSTRAINT `codice__utente` FOREIGN KEY (`codice_utente`) REFERENCES `account` (`codice_utente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella php_gamestore.messaggio: ~2 rows (circa)
 DELETE FROM `messaggio`;
@@ -336,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `software_house` (
   PRIMARY KEY (`codice_software_house`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella php_gamestore.software_house: ~9 rows (circa)
+-- Dump dei dati della tabella php_gamestore.software_house: ~11 rows (circa)
 DELETE FROM `software_house`;
 /*!40000 ALTER TABLE `software_house` DISABLE KEYS */;
 INSERT INTO `software_house` (`codice_software_house`, `nome`, `telefono`, `email`, `nazionalita`) VALUES
