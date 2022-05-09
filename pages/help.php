@@ -139,7 +139,7 @@ if (isset($_POST["titolo"]) && isset($_POST["descrizione"])) {
 </form>
 </div>';
             } else {
-                echo '<h1 class = "centered mauto" >Registrati per chiedere aiuto</h1>';
+                echo '<p class = "centered txtcenter mauto" >Registrati per chiedere aiuto</p>';
             }
             ?>
 
